@@ -6,6 +6,7 @@ namespace Stage0
         {
             Console.WriteLine("I am also here! I am lea");
             Console.WriteLine("I am also here! I am tzipi");
+            Console.WriteLine("I see!");
         }
     }
 }
