@@ -5,17 +5,17 @@ namespace DO;
 /// <summary>
 /// describes the tasks of the enigneersin the company
 /// </summary>
-/// <param name="Description">describes the task</param>
-/// <param name="Nickname">the name that calls the task</param>
+/// <param name="Description">Describes the task</param>
+/// <param name="Nickname">The name that calls the task</param>
 /// <param name="Milestone">?????????????????</param>
-/// <param name="Production">task creation date</param>
-/// <param name="Start">task start date</param>
-/// <param name="EstimatedCompletion">estimated date for completion of the task</param>
-/// <param name="Final">last date for completing the task</param>
-/// <param name="AcualEndNate">actual assignment completion date</param>
-/// <param name="Product">what should come out at the end of the mission</param>
-/// <param name="Remaeks">notes to the engineer</param>
-/// <param name="">identify the engineer assigned to the task</param>
+/// <param name="Production">Task creation date</param>
+/// <param name="Start">Task start date</param>
+/// <param name="EstimatedCompletion">Estimated date for completion of the task</param>
+/// <param name="Final">Last date for completing the task</param>
+/// <param name="AcualEndNate">Actual assignment completion date</param>
+/// <param name="Product">What should come out at the end of the mission</param>
+/// <param name="Remaeks">Notes to the engineer</param>
+/// <param name="Difficulty">Difficulty level of the task</param>
 public record Task
 (
     //מספר מזהה רץ
@@ -29,8 +29,8 @@ public record Task
     DateTime? AcualEndNate,
     string Product,
     string Remaeks,
-    //Engineer
-    //Difficulty
+    //IDEngineer
+    DifficultyEnum Difficulty
 );
     
 
