@@ -16,7 +16,47 @@ public static class Initialization
     /// </summary>
     public static void createEngineer()
     {
-        string[] names = { "Tzipi", "Ayala", "Sara", "Lea", "Rachel", "Rivka", "Yael" };
+    string[] names = {
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Emma",
+    "Frank",
+    "Grace",
+    "Hannah",
+    "Isaac",
+    "Julia",
+    "Kevin",
+    "Linda",
+    "Michael",
+    "Nora",
+    "Oliver",
+    "Penny",
+    "Quincy",
+    "Rachel",
+    "Samuel",
+    "Tina",
+    "Ulysses",
+    "Victoria",
+    "William",
+    "Xander",
+    "Yvonne",
+    "Zachary",
+    "Sophia",
+    "Ethan",
+    "Ava",
+    "Liam",
+    "Mia",
+    "Noah",
+    "Olivia",
+    "Lucas",
+    "Charlotte",
+    "Elijah",
+    "Amelia",
+    "Mason",
+    "Harper"
+        };
         const int minID = 200000000;
         const int maxID = 400000000;
         Random rand = new();
