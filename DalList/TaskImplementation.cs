@@ -10,7 +10,10 @@ public class TaskImplementation : ITask
     /// </summary>
     public int Create(Task item)
     {
-        throw new NotImplementedException();
+        int newId = DataSource.Config.NextTaskId;
+        Task task = item with { ID = newId };
+        DataSource.Tasks.Add(task);
+        return newId;
     }
     /// <summary>
     /// The function delete a task 
