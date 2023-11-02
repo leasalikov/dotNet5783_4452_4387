@@ -11,7 +11,7 @@ public static class Initialization
     private static IEngineer? s_dalEngineer;
     public static IDependence? s_dalDependece;
     public static ITask? s_dalTask;
-    
+
     private static readonly Random s_rand = new();
 
     public static object Dependences { get; private set; }
@@ -67,11 +67,11 @@ public static class Initialization
         const int maxID = 400000000;
         Random rand = new Random();
 
-        for (int i=0; i<names.Length; i++)
+        for (int i = 0; i < names.Length; i++)
         {
             int id = rand.Next(minID, maxID);
             string name = names[i];
-            string email = names[i]+"@gmail.com";
+            string email = names[i] + "@gmail.com";
             EngineerLevelEnum engineerLevel = (EngineerLevelEnum)rand.Next(0, Enum.GetValues(typeof(EngineerLevelEnum)).Length);
             int priceOfHour = 40;
             switch (engineerLevel)
@@ -83,7 +83,7 @@ public static class Initialization
                     priceOfHour = 80;
                     break;
             }
-            Engineer engineer =new Engineer(id,name,email,engineerLevel,priceOfHour);
+            Engineer engineer = new Engineer(id, name, email, engineerLevel, priceOfHour);
         }
     }
 
@@ -119,11 +119,12 @@ public static class Initialization
             //int IDEngineer = Engineers[.ID];
             DifficultyEnum Difficulty = (DifficultyEnum)rand.Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
         }
-        public static void createDependence()
-        {
-            Random rand = new Random();
-            int a = rand.Next(Engineers.Count);
-            int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
-            int idTask = Tasks[rand.Next(Tasks.Count())].ID;
-        }
     }
+    public static void createDependence()
+    {
+        Random rand = new Random();
+        int a = rand.Next(Engineers.Count);
+        int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
+        int idTask = Tasks[rand.Next(Tasks.Count())].ID;
+    }
+}
