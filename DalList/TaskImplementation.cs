@@ -40,7 +40,7 @@ public class TaskImplementation : ITask
         return new List<Task>(DataSource.Tasks);
     }
     /// <summary>
-    /// The function updates the ditals of an task
+    /// The function updates the ditals of a task
     /// </summary>
     public void Update(Task item)
     {

@@ -5,32 +5,48 @@ using System.Collections.Generic;
 
 public class DependenceImplementation : IDependence
 {
+    /// <summary>
+    /// The function creates a new dependence and returns its serial number
+    /// </summary>
     public int Create(Dependence item)
     {
-        foreach (Engineer engineer in DataSource.Engineers)
-            if (engineer.ID == item.ID)
-                throw new Exception($"Engineer whith ID {item.ID} is exist");
-        DataSource.Engineers.Add(item);
-        return item.ID;
+        int newId = DataSource.Config.NextTaskId;
+        Dependence dependence = item with { ID = newId };
+        DataSource.Dependences.Add(dependence);
+        return newId;
     }
-
+    /// <summary>
+    /// The function delete a dependence 
+    /// </summary>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        Dependence dependence = DataSource.Dependences.Find(item => item.ID == id) ??
+           throw new Exception($"Dependence whith ID {id} does not exist");
+        DataSource.Dependences.Remove(dependence);
     }
-
+    /// <summary>
+    /// The function read a dependence and returns him
+    /// </summary>
     public Dependence? Read(int id)
     {
-        throw new NotImplementedException();
+        Dependence? dependence = DataSource.Dependences.Find(item => item.ID == id);
+        return dependence;
     }
-
+    /// <summary>
+    /// The function read all the dependences and returns them
+    /// </summary>
     public List<Dependence> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Dependence>(DataSource.Dependences);
     }
-
+    /// <summary>
+    /// The function updates the ditals of a dependence
+    /// </summary>
     public void Update(Dependence item)
     {
-        throw new NotImplementedException();
+        Dependence dependence = DataSource.Dependences.Find(item1 => item1.ID == item.ID) ??
+           throw new Exception($"Dependence whith ID {item.ID} does not exist");
+        DataSource.Dependences.Remove(dependence);
+        DataSource.Dependences.Add(item);
     }
 }
