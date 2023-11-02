@@ -11,4 +11,10 @@ public record Dependence
     int ID,
     int IDPendingTask,
     int IDPreviousTask
-);
+)
+{
+    public static object count()
+    {
+        throw new NotImplementedException();
+    }
+}

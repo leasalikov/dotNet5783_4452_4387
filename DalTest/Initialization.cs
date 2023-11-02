@@ -4,6 +4,7 @@ using Dal;
 using DalApi;
 using DO;
 using System;
+using System.Threading.Tasks;
 
 public static class Initialization
 {
@@ -12,6 +13,8 @@ public static class Initialization
     public static ITask? s_dalTask;
     
     private static readonly Random s_rand = new();
+
+    public static object Dependences { get; private set; }
 
     /// <summary>
     /// 
@@ -82,5 +85,13 @@ public static class Initialization
             }
             Engineer engineer =new Engineer(id,name,email,engineerLevel,priceOfHour);
         }
+    }
+
+    public static void createDependence()
+    {
+        Random rand = new Random();
+        int a = rand.Next(Engineers.Count);
+        int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
+        int idTask = Tasks[rand.Next(Tasks.Count())].ID;
     }
 }
