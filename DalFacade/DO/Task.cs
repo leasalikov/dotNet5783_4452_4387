@@ -21,16 +21,16 @@ namespace DO;
 public record Task
 (
     int ID,
-    string Description,
-    string Nickname,
+    string? Description,
+    string? Nickname,
     bool Milestone,
     DateTime Production,
     DateTime? Start,
     DateTime EstimatedCompletion,
     DateTime Final,
     DateTime? AcualEndNate,
-    string Product,
-    string Remaeks,
+    string? Product,
+    string? Remaeks,
     int IDEngineer,
     DifficultyEnum Difficulty
 );

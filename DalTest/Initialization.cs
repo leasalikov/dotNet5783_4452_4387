@@ -17,7 +17,7 @@ public static class Initialization
     public static object Dependences { get; private set; }
 
     /// <summary>
-    /// 
+    /// The function creates the array of Engineers
     /// </summary>
     public static void createEngineer()
     {
@@ -86,7 +86,9 @@ public static class Initialization
             Engineer engineer = new Engineer(id, name, email, engineerLevel, priceOfHour);
         }
     }
-
+    /// <summary>
+    /// The function randoms a date between the two dates it got
+    /// </summary>
     public static DateTime createRandomDate(DateTime startDate, DateTime endDate)
     {
         Random rnd = new Random();
@@ -95,7 +97,9 @@ public static class Initialization
         DateTime newDate = startDate + newSpan;
         return newDate;
     }
-
+    /// <summary>
+    /// The function creates the array of Tasks
+    /// </summary>
     public static void createTasks()
     {
         DateTime startDate = new DateTime(2023, 1, 1);
@@ -103,23 +107,25 @@ public static class Initialization
 
         for (int i = 0; i < 100; i++)
         {
-            int id = 0;//?
-            string Description =
-
-
+            int id = 0;
+            string Description = null;
+            string Nickname null;
             bool Milestone = false;
             DateTime Production = createRandomDate(startDate, endDate);
             DateTime? Start = createRandomDate(Production, endDate);
             DateTime EstimatedCompletion = Start.AddMonths(2);
-            DateTime Final = Start.AddMonths(3);
-            DateTime? AcualEndNate = createRandomDate(Start, Final);
-
-            string Product,
-            string Remaeks,
-            //int IDEngineer = Engineers[.ID];
+            DateTime Final = Production.AddMonths(3);
+            DateTime? AcualEndNate = Nullable;//createRandomDate(Start, Final);
+            string Product = null;
+            string Remaeks = null;
+            int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
             DifficultyEnum Difficulty = (DifficultyEnum)rand.Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
         }
+        
     }
+    /// <summary>
+    /// The function creates the array of Dependence
+    /// </summary>
     public static void createDependence()
     {
         Random rand = new Random();
