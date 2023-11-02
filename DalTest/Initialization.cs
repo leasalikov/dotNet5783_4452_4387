@@ -87,11 +87,43 @@ public static class Initialization
         }
     }
 
-    public static void createDependence()
+    public static DateTime createRandomDate(DateTime startDate, DateTime endDate)
     {
-        Random rand = new Random();
-        int a = rand.Next(Engineers.Count);
-        int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
-        int idTask = Tasks[rand.Next(Tasks.Count())].ID;
+        Random rnd = new Random();
+        TimeSpan timeSpan = endDate - startDate;
+        TimeSpan newSpan = new TimeSpan(0, rnd.Next(0, (int)timeSpan.TotalMinutes), 0);
+        DateTime newDate = startDate + newSpan;
+        return newDate;
     }
-}
+
+    public static void createTasks()
+    {
+        DateTime startDate = new DateTime(2023, 1, 1);
+        DateTime endDate = new DateTime(2023, 11, 30);
+
+        for (int i = 0; i < 100; i++)
+        {
+            int id = 0;//?
+            string Description =
+
+
+            bool Milestone = false;
+            DateTime Production = createRandomDate(startDate, endDate);
+            DateTime? Start = createRandomDate(Production, endDate);
+            DateTime EstimatedCompletion = Start.AddMonths(2);
+            DateTime Final = Start.AddMonths(3);
+            DateTime? AcualEndNate = createRandomDate(Start, Final);
+
+            string Product,
+            string Remaeks,
+            //int IDEngineer = Engineers[.ID];
+            DifficultyEnum Difficulty = (DifficultyEnum)rand.Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
+        }
+        public static void createDependence()
+        {
+            Random rand = new Random();
+            int a = rand.Next(Engineers.Count);
+            int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
+            int idTask = Tasks[rand.Next(Tasks.Count())].ID;
+        }
+    }
