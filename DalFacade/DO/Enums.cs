@@ -7,3 +7,9 @@ public enum DifficultyEnum
     Hard,
     VeryHard
 }
+public enum EngineerLevelEnum
+{
+    lowLevel,
+    midLevel,
+    highLevel
+}
