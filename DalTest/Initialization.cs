@@ -109,7 +109,7 @@ public static class Initialization
         {
             int id = 0;
             string Description = null;
-            string Nickname null;
+            string Nickname = null;
             bool Milestone = false;
             DateTime Production = createRandomDate(startDate, endDate);
             DateTime? Start = createRandomDate(Production, endDate);
