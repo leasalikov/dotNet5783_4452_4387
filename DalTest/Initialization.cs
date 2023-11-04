@@ -133,4 +133,11 @@ public static class Initialization
         int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
         int idTask = Tasks[rand.Next(Tasks.Count())].ID;
     }
+
+    public static void DO()
+    {
+
+    }
 }
+
+
