@@ -115,7 +115,7 @@ public static class Initialization
             DateTime? Start = createRandomDate(Production, endDate);
             DateTime EstimatedCompletion = Start.AddMonths(2);
             DateTime Final = Production.AddMonths(3);
-            DateTime? AcualEndNate = Nullable;//createRandomDate(Start, Final);
+            DateTime? AcualEndNate = Null;//createRandomDate(Start, Final);
             string Product = null;
             string Remaeks = null;
             int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
@@ -130,8 +130,8 @@ public static class Initialization
     {
         Random rand = new Random();
         int a = rand.Next(Engineers.Count);
-        int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
-        int idTask = Tasks[rand.Next(Tasks.Count())].ID;
+        int idEngineer = Engineers[rand.Next(DalList.Engineers.Count)].ID;
+        int idTask = Tasks[rand.Next(DalList.Tasks.Count())].ID;
     }
 
     public static void DO()
