@@ -113,9 +113,9 @@ public static class Initialization
             bool Milestone = false;
             DateTime Production = createRandomDate(startDate, endDate);
             DateTime? Start = createRandomDate(Production, endDate);
-            DateTime EstimatedCompletion = Start.AddMonths(2);
+            DateTime EstimatedCompletion = Start.Value.AddMonths(2);
             DateTime Final = Production.AddMonths(3);
-            DateTime? AcualEndNate = Nullable;//createRandomDate(Start, Final);
+            DateTime? AcualEndNate = null;//createRandomDate(Start, Final);
             string Product = null;
             string Remaeks = null;
             int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
