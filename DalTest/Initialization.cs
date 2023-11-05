@@ -16,25 +16,24 @@ public static class Initialization
     private static IEngineer? s_dalEngineer;
     private static readonly Random s_rand = new();
 
-    //public static object Dependences { get; private set; }
     /// <summary>
     /// The function creates the array of Engineers
     /// </summary>
     private static void createEngineer()
     {
+        s_dalEngineer
         string[] names = {
         "Alice","Bob","Charlie","David","Emma","Frank","Grace","Hannah","Isaac","Julia","Kevin","Linda","Michael","Nora","Oliver","Penny","Quincy","Rachel","Samuel","Tina","Ulysses", "Victoria","William", "Xander","Yvonne","Zachary","Sophia","Ethan","Ava","Liam", "Mia", "Noah","Olivia","Lucas","Charlotte","Elijah","Amelia","Mason","Harper","shani"
         };
         const int minID = 200000000;
         const int maxID = 400000000;
-        Random rand = new Random();
 
         for (int i = 0; i < names.Length; i++)
         {
-            int id = rand.Next(minID, maxID);
+            int id = s_rand.Next(minID, maxID);
             string name = names[i];
-            string email = names[i] + "@gmail.com";
-            EngineerLevelEnum engineerLevel = (EngineerLevelEnum)rand.Next(0, Enum.GetValues(typeof(EngineerLevelEnum)).Length);
+            string email = names[i] + "@gmail.com" ;
+            EngineerLevelEnum engineerLevel = (EngineerLevelEnum)s_rand.Next(0, Enum.GetValues(typeof(EngineerLevelEnum)).Length);
             int priceOfHour = 40;
             switch (engineerLevel)
             {
