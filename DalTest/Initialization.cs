@@ -6,16 +6,16 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 public static class Initialization
 {
     private static IEngineer? s_dalEngineer;
     private static IDependence? s_dalDependece;
     private static ITask? s_dalTask;
-
     private static readonly Random s_rand = new();
 
-    public static object Dependences { get; private set; }
+    private static object Dependences { get; private set; }
 
     /// <summary>
     /// The function creates the array of Engineers
@@ -108,7 +108,7 @@ public static class Initialization
 
         for (int i = 0; i < 100; i++)
         {
-            int id = 0;
+
             string Description = null;
             string Nickname = null;
             bool Milestone = false;
@@ -119,10 +119,12 @@ public static class Initialization
             DateTime? AcualEndNate = null;//createRandomDate(Start, Final);
             string Product = null;
             string Remaeks = null;
-            int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
-            DifficultyEnum Difficulty = (DifficultyEnum)rand.Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
+            int IDEngineer = Engineers[s_rand.Next(Engineers.Count)].ID;
+            DifficultyEnum Difficulty = (DifficultyEnum)new Random().Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
+            Task new_task = new(Description, false);
+            s_dalTask!.Create(new_task);
         }
-        
+
     }
     /// <summary>
     /// The function creates the array of Dependence
