@@ -15,7 +15,7 @@ public static class Initialization
     private static ITask? s_dalTask;
     private static readonly Random s_rand = new();
 
-    private static object Dependences { get; private set; }
+    //private static object Dependences { get; private set; }
 
     /// <summary>
     /// The function creates the array of Engineers
@@ -23,46 +23,7 @@ public static class Initialization
     public static void createEngineer()
     {
         string[] names = {
-        "Alice",
-        "Bob",
-        "Charlie",
-        "David",
-        "Emma",
-        "Frank",
-        "Grace",
-        "Hannah",
-        "Isaac",
-        "Julia",
-        "Kevin",
-        "Linda",
-        "Michael",
-        "Nora",
-        "Oliver",
-        "Penny",
-        "Quincy",
-        "Rachel",
-        "Samuel",
-        "Tina",
-        "Ulysses",
-        "Victoria",
-        "William",
-        "Xander",
-        "Yvonne",
-        "Zachary",
-        "Sophia",
-        "Ethan",
-        "Ava",
-        "Liam",
-        "Mia",
-        "Noah",
-        "Olivia",
-        "Lucas",
-        "Charlotte",
-        "Elijah",
-        "Amelia",
-        "Mason",
-        "Harper",
-        "shani"
+        "Alice","Bob","Charlie","David","Emma","Frank","Grace","Hannah","Isaac","Julia","Kevin","Linda","Michael","Nora","Oliver","Penny","Quincy","Rachel","Samuel","Tina","Ulysses", "Victoria","William", "Xander","Yvonne","Zachary","Sophia","Ethan","Ava","Liam", "Mia", "Noah","Olivia","Lucas","Charlotte","Elijah","Amelia","Mason","Harper","shani"
         };
         const int minID = 200000000;
         const int maxID = 400000000;
@@ -121,7 +82,7 @@ public static class Initialization
             string Remaeks = null;
             int IDEngineer = Engineers[s_rand.Next(Engineers.Count)].ID;
             DifficultyEnum Difficulty = (DifficultyEnum)new Random().Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
-            Task new_task = new(Description, false);
+            Tasks new_task = new(Description, false);
             s_dalTask!.Create(new_task);
         }
 
@@ -137,6 +98,13 @@ public static class Initialization
         int idEngineer = DataSource.Engineers[rand.Next(DataSource.Engineers.Count)].ID;
         int idTask = DataSource.Tasks[rand.Next(DataSource.Tasks.Count())].ID;
 
+    }
+    public static void createDependence()
+    {
+        //List<Task> tasks = s_dalTask!.ReadAll();
+        Engineer engineer = Engineers[s_rand.Next(Engineers.Count)];
+        int idEngineer = engineer.ID;
+        int idTask = Tasks[s_rand.Next(Tasks.Count())].ID;
     }
 
     public static void DO()
