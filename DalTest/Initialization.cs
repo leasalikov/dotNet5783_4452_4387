@@ -118,8 +118,9 @@ public static class Initialization
             DateTime? AcualEndNate = null;//createRandomDate(Start, Final);
             string Product = null;
             string Remaeks = null;
-            int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
-            DifficultyEnum Difficulty = (DifficultyEnum)rand.Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
+            List<Engineer> Engineers = new List<Engineer>();//?
+            int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;
+            DifficultyEnum Difficulty = (DifficultyEnum)new Random().Next(0, Enum.GetValues(typeof(DifficultyEnum)).Length);
         }
         
     }
@@ -128,6 +129,7 @@ public static class Initialization
     /// </summary>
     public static void createDependence()
     {
+        List<Engineer> Engineers = new List<Engineer>();//?
         Random rand = new Random();
         int a = rand.Next(Engineers.Count);
         int idEngineer = Engineers[rand.Next(Engineers.Count)].ID;
