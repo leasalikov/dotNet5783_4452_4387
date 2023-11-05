@@ -16,12 +16,12 @@ public static class Initialization
     private static IEngineer? s_dalEngineer;
     private static readonly Random s_rand = new();
 
+
     /// <summary>
     /// The function creates the array of Engineers
     /// </summary>
     private static void createEngineer()
     {
-        s_dalEngineer
         string[] names = {
         "Alice","Bob","Charlie","David","Emma","Frank","Grace","Hannah","Isaac","Julia","Kevin","Linda","Michael","Nora","Oliver","Penny","Quincy","Rachel","Samuel","Tina","Ulysses", "Victoria","William", "Xander","Yvonne","Zachary","Sophia","Ethan","Ava","Liam", "Mia", "Noah","Olivia","Lucas","Charlotte","Elijah","Amelia","Mason","Harper","shani"
         };
@@ -31,9 +31,8 @@ public static class Initialization
         foreach (string name in names)
         {
             int id = s_rand.Next(minID, maxID);
-            string name = names[i];
-            string email = names[i] + "@gmail.com" ;
-            EngineerLevelEnum engineerLevel = (EngineerLevelEnum)s_rand.Next(0, Enum.GetValues(typeof(EngineerLevelEnum)).Length);
+            string email = $"{name}@gmail.com";
+            EngineerLevelEnum engineerLevel = (EngineerLevelEnum)s_rand.Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
             int priceOfHour = 40;
             switch (engineerLevel)
             {
@@ -60,6 +59,7 @@ public static class Initialization
         DateTime newDate = startDate + newSpan;
         return newDate;
     }
+
     /// <summary>
     /// The function creates the array of Tasks
     /// </summary>
@@ -82,6 +82,7 @@ public static class Initialization
         }
 
     }
+
     /// <summary>
     /// The function creates the array of Dependence
     /// </summary>
@@ -112,3 +113,4 @@ public static class Initialization
         s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
     }
 }
+
