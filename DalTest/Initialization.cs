@@ -4,6 +4,7 @@ using Dal;
 using DalApi;
 using DO;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -92,9 +93,12 @@ public static class Initialization
     /// </summary>
     private static void createDependence()
     {
-        int a = s_rand.Next(Engineers.Count);
-        int idEngineer = Engineers[s_rand.Next(Engineers.Count)].ID;
-        int idTask = Tasks[s_rand.Next(Tasks.Count())].ID;
+        List<Task> tasks = s_dalTask.ReadAll();
+
+        int a = rand.Next(DataSource.Engineers.Count);
+        int idEngineer = DataSource.Engineers[rand.Next(DataSource.Engineers.Count)].ID;
+        int idTask = DataSource.Tasks[rand.Next(DataSource.Tasks.Count())].ID;
+
     }
     //private static void create_dependences()
     //{
