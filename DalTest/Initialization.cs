@@ -15,7 +15,6 @@ public static class Initialization
     private static ITask? s_dalTask;
     private static readonly Random s_rand = new();
 
-    //private static object Dependences { get; private set; }
 
     /// <summary>
     /// The function creates the array of Engineers
@@ -104,7 +103,7 @@ public static class Initialization
         //List<Task> tasks = s_dalTask!.ReadAll();
         Engineer engineer = Engineers[s_rand.Next(Engineers.Count)];
         int idEngineer = engineer.ID;
-        int idTask = Tasks[s_rand.Next(Tasks.Count())].ID;
+        int idTask = s_dalTask.Tasks[s_rand.Next(Tasks.Count())].ID;
     }
 
     public static void DO()
