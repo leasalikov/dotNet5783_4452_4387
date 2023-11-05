@@ -4,13 +4,14 @@ using Dal;
 using DalApi;
 using DO;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public static class Initialization
 {
     private static IEngineer? s_dalEngineer;
-    public static IDependence? s_dalDependece;
-    public static ITask? s_dalTask;
+    private static IDependence? s_dalDependece;
+    private static ITask? s_dalTask;
 
     private static readonly Random s_rand = new();
 
@@ -113,9 +114,9 @@ public static class Initialization
             bool Milestone = false;
             DateTime Production = createRandomDate(startDate, endDate);
             DateTime? Start = createRandomDate(Production, endDate);
-            DateTime EstimatedCompletion = Start.AddMonths(2);
+            DateTime EstimatedCompletion = Start.Value.AddMonths(2);
             DateTime Final = Production.AddMonths(3);
-            DateTime? AcualEndNate = Null;//createRandomDate(Start, Final);
+            DateTime? AcualEndNate = null;//createRandomDate(Start, Final);
             string Product = null;
             string Remaeks = null;
             int IDEngineer = Engineers[rand.Next(Engineers.Count)].ID;//?
@@ -128,10 +129,12 @@ public static class Initialization
     /// </summary>
     public static void createDependence()
     {
-        Random rand = new Random();
-        int a = rand.Next(Engineers.Count);
-        int idEngineer = Engineers[rand.Next(DalList.Engineers.Count)].ID;
-        int idTask = Tasks[rand.Next(DalList.Tasks.Count())].ID;
+        List<Task> tasks = s_dalTask.ReadAll();
+
+        int a = rand.Next(DataSource.Engineers.Count);
+        int idEngineer = DataSource.Engineers[rand.Next(DataSource.Engineers.Count)].ID;
+        int idTask = DataSource.Tasks[rand.Next(DataSource.Tasks.Count())].ID;
+
     }
 
     public static void DO()
