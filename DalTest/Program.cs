@@ -1,6 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
+using System.ComponentModel;
 using System.Globalization;
 using System.Reflection.Emit;
 
@@ -32,24 +33,24 @@ namespace DalTest
             string Remaeks = Console.ReadLine()!;
             Console.WriteLine("enter engineer level");
             int Elevel = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Enter date created\n");
+            Console.WriteLine("Enter date created");
             DateTime Production;
             DateTime.TryParse(Console.ReadLine(), out Production);
-            Console.WriteLine("Enter date started\n");
+            Console.WriteLine("Enter date started");
             DateTime Start;
             DateTime.TryParse(Console.ReadLine(), out Start);
-            Console.WriteLine("Enter date of forecast\n");
-            DateTime EstimatedCompletion;
-            DateTime.TryParse(Console.ReadLine(), out EstimatedCompletion);
-            Console.WriteLine("Enter date of deadline\n");
-            DateTime Finul;
-            DateTime.TryParse(Console.ReadLine(), out Finul);
-            Console.WriteLine("Enter date of complete\n");
+            Console.WriteLine("enter a long time that take for the task");
+            int longTime = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter date acual start");
+            DateTime AcualStartNate;
+            DateTime.TryParse(Console.ReadLine(), out AcualStartNate);
+            Console.WriteLine("Enter date of deadline");
+            DateTime deadline;
+            DateTime.TryParse(Console.ReadLine(), out deadline);
+            Console.WriteLine("Enter date of complete");
             DateTime AcualEndNate;
-            DateTime.TryParse(Console.ReadLine(), out _Complete);
-
-            return (new DO.Task(0, Description, Nickname, false, Production, Start, EstimatedCompletion, Finul, AcualEndNate, Product, Remaeks, IDEngineer, (DifficultyEnum)Elevel));
+            DateTime.TryParse(Console.ReadLine(), out AcualEndNate);
+            return (new DO.Task(0, Description, Nickname, false, Production, Start, AcualStartNate, longTime, deadline, AcualEndNate, Product, Remaeks, IDEngineer, (EngineerLevelEnum)Elevel));
         }
         //DO.Task new_task = new(0, null, null, false, Production, Start, EstimatedCompletion, Final, null, null, null, IDEngineer, Difficulty);
 
@@ -114,7 +115,7 @@ namespace DalTest
             name = Console.ReadLine()!;
             Console.WriteLine("Enter email:");
             email = Console.ReadLine()!;
-            Console.WriteLine("Enter level (junior = 0, beginner = 1, expert = 2):");
+            Console.WriteLine("Enter level (Novice = 0, AdvancedBeginner = 1, Competent = 2, Proficient = 3, Expert = 4):");
             level = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter cost per hour:");
             cost_per_houer = Convert.ToInt32(Console.ReadLine());
@@ -154,12 +155,11 @@ namespace DalTest
                         break;
                     case "Delete":
                         Console.WriteLine("enter engineer's id");
-                        s_dalEngineer!.Read(Convert.ToInt32(Console.ReadLine()));
+                        s_dalEngineer!.Delete(Convert.ToInt32(Console.ReadLine()));
                         break;
                     default:
                         Console.WriteLine("you entered worng choose");
                         break;
-
                 }
 
 
@@ -221,10 +221,7 @@ namespace DalTest
                     default:
                         Console.WriteLine("you entered worng choose");
                         break;
-
                 }
-
-
             } while (choose != "Exit");
         }
         public static void general_menue()
@@ -256,10 +253,8 @@ namespace DalTest
         {
             try
             {
-                Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependence);
                 general_menue();
-
-
+                Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependence);
             }
             catch (Exception error)
             {

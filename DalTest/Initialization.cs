@@ -5,6 +5,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -36,11 +37,18 @@ public static class Initialization
             int priceOfHour = 40;
             switch (engineerLevel)
             {
-                case EngineerLevelEnum.midLevel:
+                //AdvancedBeginner, Competent, Proficient, Expert
+                case EngineerLevelEnum.AdvancedBeginner:
                     priceOfHour = 60;
                     break;
-                case EngineerLevelEnum.highLevel:
+                case EngineerLevelEnum.Competent:
                     priceOfHour = 80;
+                    break;
+                case EngineerLevelEnum.Proficient:
+                    priceOfHour = 100;
+                    break;
+                case EngineerLevelEnum.Expert:
+                    priceOfHour = 130;
                     break;
             }
             Engineer new_engineer = new Engineer(id, name, email, engineerLevel, priceOfHour);
@@ -62,24 +70,40 @@ public static class Initialization
     /// <summary>
     /// The function creates the array of Tasks
     /// </summary>
+    //private static void createTasks()
+    //{
+    //    DateTime startDate = new DateTime(2023, 1, 1);
+    //    DateTime endDate = new DateTime(2023, 11, 30);
+    //    List<Engineer> newEngineers = s_dalEngineer.ReadAll();
+
+    //    for (int i = 0; i < 100; i++)
+    //    {
+    //        DateTime Production = createRandomDate(startDate, endDate);
+    //        DateTime? Start = createRandomDate(Production, endDate);
+    //        DateTime AcualStartNate = Start.Value.AddMonths(2);
+    //        int longTime = s_rand.Next(30,250);
+    //        DateTime Final = Production.AddMonths(3);
+    //        int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
+    //        EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
+    //        DO.Task new_task = new(0, null, null, false, Production, Start, AcualStartNate, longTime, Final, null, null, null, IDEngineer, Difficulty);
+    //        s_dalTask!.Create(new_task);
+    //    }
+    //}
     private static void createTasks()
     {
-        DateTime startDate = new DateTime(2023, 1, 1);
+        DateTime startDate = DateTime.Now;
         DateTime endDate = new DateTime(2023, 11, 30);
         List<Engineer> newEngineers = s_dalEngineer.ReadAll();
 
         for (int i = 0; i < 100; i++)
         {
             DateTime Production = createRandomDate(startDate, endDate);
-            DateTime? Start = createRandomDate(Production, endDate);
-            DateTime EstimatedCompletion = Start.Value.AddMonths(2);
-            DateTime Final = Production.AddMonths(3);
+            int longTime = s_rand.Next(30, 250);
             int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
-            DifficultyEnum Difficulty = (DifficultyEnum)new Random().Next(Enum.GetValues(typeof(DifficultyEnum)).Length);
-            DO.Task new_task = new(0, null, null, false, Production, Start, EstimatedCompletion, Final, null, null, null, IDEngineer, Difficulty);
+            EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
+            DO.Task new_task = new(0, null, null, false, Production, null, null, longTime, null, null, null, null, IDEngineer, Difficulty);
             s_dalTask!.Create(new_task);
         }
-
     }
     /// <summary>
     /// The function creates the array of Dependence
