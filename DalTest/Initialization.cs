@@ -59,45 +59,28 @@ public static class Initialization
     /// <summary>
     /// The function randoms a date between the two dates it got
     /// </summary>
-    private static DateTime createRandomDate(DateTime startDate, DateTime endDate)
-    {
-        Random rnd = new Random();
-        TimeSpan timeSpan = endDate - startDate;
-        TimeSpan newSpan = new TimeSpan(0, rnd.Next(0, (int)timeSpan.TotalMinutes), 0);
-        DateTime newDate = startDate + newSpan;
-        return newDate;
-    }
+    //private static DateTime createRandomDate(DateTime startDate, DateTime endDate)
+    //{
+    //    Random rnd = new Random();
+    //    TimeSpan timeSpan = endDate - startDate;
+    //    TimeSpan newSpan = new TimeSpan(0, rnd.Next(0, (int)timeSpan.TotalMinutes), 0);
+    //    DateTime newDate = startDate + newSpan;
+    //    return newDate;
+    //}
+
     /// <summary>
     /// The function creates the array of Tasks
     /// </summary>
-    //private static void createTasks()
-    //{
-    //    DateTime startDate = new DateTime(2023, 1, 1);
-    //    DateTime endDate = new DateTime(2023, 11, 30);
-    //    List<Engineer> newEngineers = s_dalEngineer.ReadAll();
-
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        DateTime Production = createRandomDate(startDate, endDate);
-    //        DateTime? Start = createRandomDate(Production, endDate);
-    //        DateTime AcualStartNate = Start.Value.AddMonths(2);
-    //        int longTime = s_rand.Next(30,250);
-    //        DateTime Final = Production.AddMonths(3);
-    //        int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
-    //        EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
-    //        DO.Task new_task = new(0, null, null, false, Production, Start, AcualStartNate, longTime, Final, null, null, null, IDEngineer, Difficulty);
-    //        s_dalTask!.Create(new_task);
-    //    }
-    //}
+   
     private static void createTasks()
     {
-        DateTime startDate = DateTime.Now;
-        DateTime endDate = new DateTime(2023, 11, 30);
+        DateTime start = DateTime.Today.AddYears(-1);
+        int range = (DateTime.Today.Month - start.Month) + 12 * (DateTime.Today.Year - start.Year);
         List<Engineer> newEngineers = s_dalEngineer.ReadAll();
 
         for (int i = 0; i < 100; i++)
         {
-            DateTime Production = createRandomDate(startDate, endDate);
+            DateTime Production = start.AddMonths(s_rand.Next(range));
             int longTime = s_rand.Next(30, 250);
             int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
             EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
