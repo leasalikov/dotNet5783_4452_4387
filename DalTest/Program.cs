@@ -10,17 +10,26 @@ namespace DalTest
 {
     internal class Program
     {
-
-        private static ITask? s_dalTask = new TaskImplementation();
-        private static IEngineer? s_dalEngineer = new EngineerImplementation();
-        private static IDependence? s_dalDependence = new DependenceImplementation();
+        private static IDal? s_dal = new DalList();
+        static void Main(string[] args)
+        {
+            try
+            {
+                generalMenue();
+                Initialization.Do(s_dal);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+        }
 
         /// <summary>
         /// create new task entity recording to the input data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static DO.Task create_task(int id = 0000)
+        public static DO.Task createTask(int id = 0000)
         {
             Console.WriteLine("enter description");
             string Description = Console.ReadLine()!;
@@ -58,7 +67,7 @@ namespace DalTest
         /// <summary>
         /// managing the task's entity menu.
         /// </summary>
-        public static void task_menu()
+        public static void taskMenu()
         {
             string? choose = null;
             do
@@ -70,23 +79,23 @@ namespace DalTest
                     case "Exit":
                         break;
                     case "Create":
-                        s_dalTask!.Create(create_task());
+                        s_dal.Task!.Create(createTask());
                         break;
                     case "Read":
                         Console.WriteLine("enter task's id");
-                        Console.WriteLine(s_dalTask!.Read(Convert.ToInt32(Console.ReadLine())));
+                        Console.WriteLine(s_dal!.Task.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
-                        foreach (var item in s_dalTask!.ReadAll())
+                        foreach (var item in s_dal.Task.ReadAll())
                             Console.WriteLine(item);
                         break;
                     case "Update":
                         Console.WriteLine("Enter task's id");
-                        s_dalTask!.Update(create_task(Convert.ToInt32(Console.ReadLine())));
+                        s_dal!.Task.Update(createTask(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "Delete":
                         Console.WriteLine("enter task's id");
-                        s_dalTask!.Delete(Convert.ToInt32(Console.ReadLine()));
+                        s_dal!.Task.Delete(Convert.ToInt32(Console.ReadLine()));
                         break;
                     default:
                         Console.WriteLine("you entered worng choose");
@@ -103,7 +112,7 @@ namespace DalTest
         /// </summary>
         /// <returns></returns>
 
-        private static DO.Engineer recept_engineer()
+        private static DO.Engineer createEngineer()
         {
             int id;
             string name;
@@ -127,7 +136,7 @@ namespace DalTest
         /// <summary>
         /// managing the engineer's entity menu.
         /// </summary>
-        public static void engineer_menu()
+        public static void engineerMenu()
         {
             string? choose;
             do
@@ -139,24 +148,24 @@ namespace DalTest
                     case "Exit":
                         break;
                     case "Create":
-                        s_dalEngineer!.Create(recept_engineer());
+                        s_dal!.Engineer.Create(createEngineer());
                         break;
                     case "Read":
                         Console.WriteLine("enter engineer's id");
-                        Console.WriteLine(s_dalEngineer!.Read(Convert.ToInt32(Console.ReadLine())));
+                        Console.WriteLine(s_dal!.Engineer.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
-                        foreach (var item in s_dalEngineer!.ReadAll())
+                        foreach (var item in s_dal!.Engineer.ReadAll())
                         {
                             Console.WriteLine(item);
                         };
                         break;
                     case "Update":
-                        s_dalEngineer!.Update(recept_engineer());
+                        s_dal!.Engineer.Update(createEngineer());
                         break;
                     case "Delete":
                         Console.WriteLine("enter engineer's id");
-                        s_dalEngineer!.Delete(Convert.ToInt32(Console.ReadLine()));
+                        s_dal!.Engineer.Delete(Convert.ToInt32(Console.ReadLine()));
                         break;
                     default:
                         Console.WriteLine("you entered worng choose");
@@ -173,7 +182,7 @@ namespace DalTest
         /// <param name="dept_id"></param>
         /// <returns></returns>
 
-        private static DO.Dependence recept_dependence(int dept_id = 0000)
+        private static DO.Dependence createDependence(int dept_id = 0000)
         {
             int task_id;
             int prev_task_id;
@@ -187,7 +196,7 @@ namespace DalTest
         /// <summary>
         /// managing the dependencer's entity menu.
         /// </summary>
-        public static void dependence_menu()
+        public static void dependenceMenu()
         {
             string? choose;
             do
@@ -199,25 +208,25 @@ namespace DalTest
                     case "Exit":
                         break;
                     case "Create":
-                        s_dalDependence!.Create(recept_dependence());
+                        s_dal!.Dependence.Create(createDependence());
                         break;
                     case "Read":
                         Console.WriteLine("Enter id");
-                        Console.WriteLine(s_dalDependence!.Read(Convert.ToInt32(Console.ReadLine())));
+                        Console.WriteLine(s_dal!.Dependence.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
-                        foreach (var item in s_dalDependence!.ReadAll())
+                        foreach (var item in s_dal!.Dependence.ReadAll())
                         {
                             Console.WriteLine($"id: {item.ID}  task id: {item.ID}  pervious task id: {item.IDPreviousTask}");
                         };
                         break;
                     case "Update":
                         Console.WriteLine("Enter dependence's id");
-                        s_dalDependence!.Update(recept_dependence(Convert.ToInt32(Console.ReadLine())));
+                        s_dal!.Dependence.Update(createDependence(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "Delete":
                         Console.WriteLine("Enter id");
-                        s_dalDependence!.Delete(Convert.ToInt32(Console.ReadLine()));
+                        s_dal!.Dependence.Delete(Convert.ToInt32(Console.ReadLine()));
                         break;
                     default:
                         Console.WriteLine("you entered worng choose");
@@ -225,7 +234,7 @@ namespace DalTest
                 }
             } while (choose != "Exit");
         }
-        public static void general_menue()
+        public static void generalMenue()
         {
             int choose;
             do
@@ -235,13 +244,13 @@ namespace DalTest
                 switch (choose)
                 {
                     case 1:
-                        task_menu();
+                        taskMenu();
                         break;
                     case 2:
-                        engineer_menu();
+                        engineerMenu();
                         break;
                     case 3:
-                        dependence_menu();
+                        dependenceMenu();
                         break;
                     default:
                         break;
@@ -249,18 +258,6 @@ namespace DalTest
 
 
             } while (choose != 0);
-        }
-        static void Main(string[] args)
-        {
-            try
-            {
-                general_menue();
-                Initialization.Do(s_dalTask, s_dalEngineer, s_dalDependence);
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error.ToString());
-            }
         }
     }
 }

@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class DependenceImplementation : IDependence
+internal class DependenceImplementation : IDependence
 {
     /// <summary>
     /// The function creates a new dependence and returns its serial number
@@ -15,6 +15,13 @@ public class DependenceImplementation : IDependence
         DataSource.Dependences.Add(dependence);
         return newId;
     }
+    //public int Create(Dependence item)
+    //{
+    //    int newId = DataSource.Config.NextTaskId;
+    //    Dependence dependence = item with { ID = newId };
+    //    DataSource.Dependences = DataSource.Dependences.Append(dependence).ToList();
+    //    return newId;
+    //}
     /// <summary>
     /// The function delete a dependence 
     /// </summary>

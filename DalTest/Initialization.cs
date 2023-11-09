@@ -6,15 +6,14 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO.Pipes;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 
 public static class Initialization
 {
-    private static ITask? s_dalTask;
-    private static IDependence? s_dalDependence;
-    private static IEngineer? s_dalEngineer;
+    private static IDal? s_dal;
     private static readonly Random s_rand = new();
 
     /// <summary>
@@ -52,21 +51,10 @@ public static class Initialization
                     break;
             }
             Engineer new_engineer = new Engineer(id, name, email, engineerLevel, priceOfHour);
-            s_dalEngineer!.Create(new_engineer);
+            s_dal.Engineer!.Create(new_engineer);
         }
     }
 
-    /// <summary>
-    /// The function randoms a date between the two dates it got
-    /// </summary>
-    //private static DateTime createRandomDate(DateTime startDate, DateTime endDate)
-    //{
-    //    Random rnd = new Random();
-    //    TimeSpan timeSpan = endDate - startDate;
-    //    TimeSpan newSpan = new TimeSpan(0, rnd.Next(0, (int)timeSpan.TotalMinutes), 0);
-    //    DateTime newDate = startDate + newSpan;
-    //    return newDate;
-    //}
 
     /// <summary>
     /// The function creates the array of Tasks
@@ -76,7 +64,7 @@ public static class Initialization
     {
         DateTime start = DateTime.Today.AddYears(-1);
         int range = (DateTime.Today.Month - start.Month) + 12 * (DateTime.Today.Year - start.Year);
-        List<Engineer> newEngineers = s_dalEngineer.ReadAll();
+        List<Engineer> newEngineers = s_dal.Engineer.ReadAll();
 
         for (int i = 0; i < 100; i++)
         {
@@ -85,7 +73,7 @@ public static class Initialization
             int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
             EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
             DO.Task new_task = new(0, null, null, false, Production, null, null, longTime, null, null, null, null, IDEngineer, Difficulty);
-            s_dalTask!.Create(new_task);
+            s_dal!.Task.Create(new_task);
         }
     }
     /// <summary>
@@ -95,7 +83,7 @@ public static class Initialization
     {
         int _next_task;
         int _prev_task;
-        List<DO.Task> newTasks = s_dalTask.ReadAll();
+        List<DO.Task> newTasks = s_dal.Task.ReadAll();
         foreach (var task in newTasks)
         {
             if (newTasks.FindIndex(_task => _task.ID == task.ID) == newTasks.Count - 4)
@@ -105,15 +93,13 @@ public static class Initialization
             {
                 _next_task = newTasks[newTasks.FindIndex(_task => _task.ID == task.ID) + i].ID;
                 Dependence new_Dependence = new(0, _next_task, _prev_task);
-                s_dalDependence!.Create(new_Dependence);
+                s_dal!.Dependence.Create(new_Dependence);
             }
         }
     }
-    public static void Do(ITask? dalTask, IEngineer? dalEngineer, IDependence? dalDependency)
+    public static void Do(IDal? dal)
     {
-        s_dalTask = dalTask ?? throw new Exception("DAL can't be null!");
-        s_dalEngineer = dalEngineer ?? throw new Exception("DAL can't be null!");
-        s_dalDependence = dalDependency ?? throw new Exception("DAL can't be null!");
+        s_dal = dal ?? throw new Exception("DAL can not be null!");
         createEngineer();
         createTasks();
         createDependence();
