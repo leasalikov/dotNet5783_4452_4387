@@ -2,7 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
-
+using System.Linq;
 internal class DependenceImplementation : IDependence
 {
     /// <summary>
@@ -12,7 +12,7 @@ internal class DependenceImplementation : IDependence
     {
         int newId = DataSource.Config.NextTaskId;
         Dependence dependence = item with { ID = newId };
-        DataSource.Dependences.Add(dependence);
+        DataSource.Dependences.Append(dependence).ToList();
         return newId;
     }
     //public int Create(Dependence item)
@@ -54,6 +54,6 @@ internal class DependenceImplementation : IDependence
         Dependence dependence = DataSource.Dependences.Find(item1 => item1.ID == item.ID) ??
            throw new Exception($"Dependence whith ID {item.ID} does not exist");
         DataSource.Dependences.Remove(dependence);
-        DataSource.Dependences.Add(item);
+        DataSource.Dependences.Append(item).ToList();
     }
 }
