@@ -141,7 +141,7 @@ namespace DalTest
             string? choose;
             do
             {
-                Console.WriteLine("Enter method choice: (Exsit, Create,Read,ReadAll, Update, Delete)");
+                Console.WriteLine("Enter method choice: (Esit, Create,Read,ReadAll, Update, Delete)");
                 choose = Console.ReadLine();
                 switch (choose)
                 {
