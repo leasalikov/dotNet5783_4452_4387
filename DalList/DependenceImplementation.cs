@@ -12,7 +12,7 @@ internal class DependenceImplementation : IDependence
     {
         int newId = DataSource.Config.NextTaskId;
         Dependence dependence = item with { ID = newId };
-        DataSource.Dependences.Append(dependence).ToList();
+        DataSource.Dependences.Add(dependence);
         return newId;
     }
     //public int Create(Dependence item)
@@ -27,7 +27,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public void Delete(int id)
     {
-        Dependence dependence = DataSource.Dependences.Find(item => item.ID == id) ??
+        Dependence dependence = DataSource.Dependences.Where(item => item.ID == id).First() ??
            throw new Exception($"Dependence whith ID {id} does not exist");
         DataSource.Dependences.Remove(dependence);
     }
@@ -36,7 +36,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public Dependence? Read(int id)
     {
-        Dependence? dependence = DataSource.Dependences.Find(item => item.ID == id);
+        Dependence? dependence = DataSource.Dependences.Where(item => item.ID == id).First();
         return dependence;
     }
     /// <summary>
@@ -51,9 +51,9 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public void Update(Dependence item)
     {
-        Dependence dependence = DataSource.Dependences.Find(item1 => item1.ID == item.ID) ??
+        Dependence dependence = DataSource.Dependences.Where(item1 => item1.ID == item.ID).First() ??
            throw new Exception($"Dependence whith ID {item.ID} does not exist");
         DataSource.Dependences.Remove(dependence);
-        DataSource.Dependences.Append(item).ToList();
+        DataSource.Dependences.Add(item);
     }
 }

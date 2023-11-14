@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -21,7 +22,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public void Delete(int id)
     {
-        Engineer engineer = DataSource.Engineers.Find(item => item.ID == id)??
+        Engineer engineer = DataSource.Engineers.Where(item => item.ID == id).First() ??
             throw new Exception($"Engineer whith ID {id} does not exist");
         DataSource.Engineers.Remove(engineer);
     }
@@ -30,7 +31,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public Engineer? Read(int id)
     {
-        Engineer? engineer = DataSource.Engineers.Find(item => item.ID == id);
+        Engineer? engineer = DataSource.Engineers.Where(item => item.ID == id).First();
         return engineer;
     }
     /// <summary>
@@ -45,7 +46,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     public void Update(Engineer item)
     {
-        Engineer engineer = DataSource.Engineers.Find(item1 => item1.ID == item.ID) ??
+        Engineer engineer = DataSource.Engineers.Where(item1 => item1.ID == item.ID).First() ??
            throw new Exception($"Engineer whith ID {item.ID} does not exist");
         DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(item);

@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -20,7 +21,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public void Delete(int id)
     {
-        Task task = DataSource.Tasks.Find(item => item.ID == id) ??
+        Task task = DataSource.Tasks.Where(item => item.ID == id).First() ??
            throw new Exception($"Task whith ID {id} does not exist");
         DataSource.Tasks.Remove(task);
     }
@@ -29,7 +30,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public Task? Read(int id)
     {
-        Task? task = DataSource.Tasks.Find(item => item.ID == id);
+        Task? task = DataSource.Tasks.Where(item => item.ID == id).First();
         return task;
     }
     /// <summary>
@@ -44,7 +45,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public void Update(Task item)
     {
-        Task task = DataSource.Tasks.Find(item1 => item1.ID == item.ID) ??
+        Task task = DataSource.Tasks.Where(item1 => item1.ID == item.ID).First() ??
            throw new Exception($"Task whith ID {item.ID} does not exist");
         DataSource.Tasks.Remove(task);
         DataSource.Tasks.Add(item);

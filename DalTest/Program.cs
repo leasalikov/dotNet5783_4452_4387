@@ -182,15 +182,15 @@ namespace DalTest
         /// <param name="dept_id"></param>
         /// <returns></returns>
 
-        private static DO.Dependence createDependence(int dept_id = 0000)
+        private static DO.Dependence createDependence()//int dept_id = 0000
         {
-            int task_id;
-            int prev_task_id;
-            Console.WriteLine("Enter task id:");
-            task_id = Convert.ToInt32(Console.ReadLine());
+            int dept_id;
+            int pending_task_id;
+            Console.WriteLine("Enter Pending IDTask id:");
+            pending_task_id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter pervious task id:");
-            prev_task_id = Convert.ToInt32(Console.ReadLine());
-            return new DO.Dependence(task_id, prev_task_id, dept_id);
+            dept_id = Convert.ToInt32(Console.ReadLine());
+            return new DO.Dependence(pending_task_id, dept_id);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace DalTest
                     case "ReadAll":
                         foreach (var item in s_dal!.Dependence.ReadAll())
                         {
-                            Console.WriteLine($"id: {item.ID}  task id: {item.ID}  pervious task id: {item.IDPreviousTask}");
+                            Console.WriteLine($"task id: {item.IDPendingTask}  pervious task id: {item.IDPreviousTask}");
                         };
                         break;
                     case "Update":
