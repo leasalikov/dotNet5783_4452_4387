@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 
 /// <summary>
 /// describes the tasks of the enigneersin the company

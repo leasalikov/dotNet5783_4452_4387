@@ -15,13 +15,6 @@ internal class DependenceImplementation : IDependence
         DataSource.Dependences.Add(dependence);
         return newId;
     }
-    //public int Create(Dependence item)
-    //{
-    //    int newId = DataSource.Config.NextTaskId;
-    //    Dependence dependence = item with { ID = newId };
-    //    DataSource.Dependences = DataSource.Dependences.Append(dependence).ToList();
-    //    return newId;
-    //}
     /// <summary>
     /// The function delete a dependence 
     /// </summary>
@@ -34,17 +27,30 @@ internal class DependenceImplementation : IDependence
     /// <summary>
     /// The function read a dependence and returns him
     /// </summary>
-    public Dependence? Read(int id)
+    public Dependence? Read(Func<Dependence, bool> filter)
     {
-        Dependence? dependence = DataSource.Dependences.Where(item => item.ID == id).First();
-        return dependence;
+        if (filter != null)
+        {
+            return (Dependence?)(from item in DataSource.Dependences
+                                where filter(item)
+                                select item);
+        }
+        return (Dependence?)(from item in DataSource.Dependences
+                            select item);
     }
     /// <summary>
     /// The function read all the dependences and returns them
     /// </summary>
-    public List<Dependence> ReadAll()
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter)
     {
-        return new List<Dependence>(DataSource.Dependences);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependences
+                    where filter(item)
+                    select item;
+        }
+        return from item in DataSource.Dependences
+                select item;
     }
     /// <summary>
     /// The function updates the ditals of a dependence

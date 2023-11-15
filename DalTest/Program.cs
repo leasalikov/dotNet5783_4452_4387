@@ -62,8 +62,6 @@ namespace DalTest
             DateTime.TryParse(Console.ReadLine(), out AcualEndNate);
             return (new DO.Task(0, Description, Nickname, false, Production, Start, AcualStartNate, longTime, deadline, AcualEndNate, Product, Remaeks, IDEngineer, (EngineerLevelEnum)Elevel));
         }
-        //DO.Task new_task = new(0, null, null, false, Production, Start, EstimatedCompletion, Final, null, null, null, IDEngineer, Difficulty);
-
         /// <summary>
         /// managing the task's entity menu.
         /// </summary>
@@ -83,7 +81,8 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("enter task's id");
-                        Console.WriteLine(s_dal!.Task.Read(Convert.ToInt32(Console.ReadLine())));
+                        Func<DO.Task, bool> filter = t => t.ID == Console.ReadLine();
+                        Console.WriteLine(s_dal!.Task.Read(filter));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal.Task.ReadAll())
@@ -112,7 +111,7 @@ namespace DalTest
         /// </summary>
         /// <returns></returns>
 
-        private static DO.Engineer createEngineer()
+        private static Engineer createEngineer()
         {
             int id;
             string name;
@@ -130,7 +129,6 @@ namespace DalTest
             Console.WriteLine("Enter cost per hour:");
             cost_per_houer = Convert.ToInt32(Console.ReadLine());
             return new Engineer(id, name!, email!, (EngineerLevelEnum)level, cost_per_houer);
-
         }
 
         /// <summary>
@@ -152,7 +150,9 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("enter engineer's id");
-                        Console.WriteLine(s_dal!.Engineer.Read(Convert.ToInt32(Console.ReadLine())));
+                        //Func<DO.Task, bool> filter = t => t.ID == Console.ReadLine();
+                        //Console.WriteLine(s_dal!.Task.Read(filter));
+                        Console.WriteLine(s_dal!.Engineer.Read(Console.ReadLine()));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal!.Engineer.ReadAll())
@@ -182,7 +182,7 @@ namespace DalTest
         /// <param name="dept_id"></param>
         /// <returns></returns>
 
-        private static DO.Dependence createDependence()//int dept_id = 0000
+        private static Dependence createDependence()//int dept_id = 0000
         {
             int dept_id;
             int pending_task_id;
@@ -190,7 +190,7 @@ namespace DalTest
             pending_task_id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter pervious task id:");
             dept_id = Convert.ToInt32(Console.ReadLine());
-            return new DO.Dependence(pending_task_id, dept_id);
+            return new Dependence(0,pending_task_id, dept_id);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("Enter id");
-                        Console.WriteLine(s_dal!.Dependence.Read(Convert.ToInt32(Console.ReadLine())));
+                        Console.WriteLine(s_dal!.Dependence.Read(Console.ReadLine()));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal!.Dependence.ReadAll())
@@ -222,7 +222,7 @@ namespace DalTest
                         break;
                     case "Update":
                         Console.WriteLine("Enter dependence's id");
-                        s_dal!.Dependence.Update(createDependence(Convert.ToInt32(Console.ReadLine())));
+                        s_dal!.Dependence.Update(createDependence!(Console.ReadLine()));
                         break;
                     case "Delete":
                         Console.WriteLine("Enter id");
@@ -255,8 +255,6 @@ namespace DalTest
                     default:
                         break;
                 }
-
-
             } while (choose != 0);
         }
     }
