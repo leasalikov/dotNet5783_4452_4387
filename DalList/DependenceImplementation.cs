@@ -38,20 +38,23 @@ internal class DependenceImplementation : IDependence
         return (Dependence?)(from item in DataSource.Dependences
                             select item);
     }
+    public Dependence? Read(Func<Dependence, bool> filter)
+    {
+        Dependence? dependence = DataSource.Dependences.Where(filter).First();
+        return dependence;
+    }
     /// <summary>
     /// The function read all the dependences and returns them
     /// </summary>
-    public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter)
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence?, bool>? filter = null) //stage 2
     {
-        if (filter != null)
-        {
-            return from item in DataSource.Dependences
-                    where filter(item)
-                    select item;
-        }
-        return from item in DataSource.Dependences
-                select item;
+        if (filter == null)
+            return DataSource.Dependences.Select(item => item);
+        else
+            return DataSource.Dependences.Where(filter);
+
     }
+
     /// <summary>
     /// The function updates the ditals of a dependence
     /// </summary>
