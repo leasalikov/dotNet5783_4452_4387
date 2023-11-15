@@ -39,13 +39,23 @@ internal class DependenceImplementation : IDependence
         Dependence? dependence = DataSource.Dependences.Where(item => item.ID == id).First();
         return dependence;
     }
+    public Dependence? Read(Func<Dependence, bool> filter)
+    {
+        Dependence? dependence = DataSource.Dependences.Where(filter).First();
+        return dependence;
+    }
     /// <summary>
     /// The function read all the dependences and returns them
     /// </summary>
-    public List<Dependence> ReadAll()
+    public IEnumerable<Dependence?> ReadAll(Func<Dependence?, bool>? filter = null) //stage 2
     {
-        return new List<Dependence>(DataSource.Dependences);
+        if (filter == null)
+            return DataSource.Dependences.Select(item => item);
+        else
+            return DataSource.Dependences.Where(filter);
+
     }
+
     /// <summary>
     /// The function updates the ditals of a dependence
     /// </summary>
