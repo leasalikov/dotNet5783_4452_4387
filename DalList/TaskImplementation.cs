@@ -45,14 +45,10 @@ internal class TaskImplementation : ICrud<Task>
     /// </summary>
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        if (filter != null)
-        {
-            return from item in DataSource.Tasks
-                    where filter(item)
-                    select item;
-        }
-        return from item in DataSource.Tasks
-                select item;
+        if (filter == null)
+            return DataSource.Tasks.Select(item => item);
+        else
+            return DataSource.Tasks.Where(filter);
     }
     /// <summary>
     /// The function updates the ditals of a task

@@ -29,17 +29,6 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        if (filter != null)
-        {
-            return (Dependence?)(from item in DataSource.Dependences
-                                where filter(item)
-                                select item);
-        }
-        return (Dependence?)(from item in DataSource.Dependences
-                            select item);
-    }
-    public Dependence? Read(Func<Dependence, bool> filter)
-    {
         Dependence? dependence = DataSource.Dependences.Where(filter).First();
         return dependence;
     }
@@ -52,7 +41,6 @@ internal class DependenceImplementation : IDependence
             return DataSource.Dependences.Select(item => item);
         else
             return DataSource.Dependences.Where(filter);
-
     }
 
     /// <summary>

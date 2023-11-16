@@ -50,7 +50,7 @@ public static class Initialization
                     priceOfHour = 130;
                     break;
             }
-            Task new_engineer = new Task(id, name, email, engineerLevel, priceOfHour);
+            Engineer new_engineer = new Engineer(id, name, email, engineerLevel, priceOfHour);
             s_dal.Engineer!.Create(new_engineer);
         }
     }
@@ -64,7 +64,7 @@ public static class Initialization
     {
         DateTime start = DateTime.Today.AddYears(-1);
         int range = (DateTime.Today.Month - start.Month) + 12 * (DateTime.Today.Year - start.Year);
-        List<Task> newEngineers = (List<Task>)s_dal.Engineer.ReadAll();
+        List<DO.Task> newEngineers = (List<DO.Task>)s_dal.Engineer.ReadAll();
 
         for (int i = 0; i < 100; i++)
         {

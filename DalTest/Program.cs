@@ -182,7 +182,7 @@ namespace DalTest
         /// <param name="dept_id"></param>
         /// <returns></returns>
 
-        private static Dependence createDependence()//int dept_id = 0000
+        private static Dependence createDependence(int id = 0000)
         {
             int dept_id;
             int pending_task_id;
@@ -190,7 +190,7 @@ namespace DalTest
             pending_task_id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter pervious task id:");
             dept_id = Convert.ToInt32(Console.ReadLine());
-            return new Dependence(0,pending_task_id, dept_id);
+            return new Dependence(id, pending_task_id, dept_id);
         }
 
         /// <summary>
@@ -222,7 +222,9 @@ namespace DalTest
                         break;
                     case "Update":
                         Console.WriteLine("Enter dependence's id");
-                        s_dal!.Dependence.Update(createDependence!(Console.ReadLine()));
+                        //s_dal!.Engineer.Update(createEngineer());
+                        //s_dal!.Task.Update(createTask(Convert.ToInt32(Console.ReadLine())));
+                        s_dal!.Dependence.Update(createDependence(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "Delete":
                         Console.WriteLine("Enter id");

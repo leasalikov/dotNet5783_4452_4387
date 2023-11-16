@@ -10,7 +10,7 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// The function creates a new engineer and returns his ID
     /// </summary>
-    public int Create(Task item)
+    public int Create(Engineer item)
     {
         foreach (Task engineer in DataSource.Engineers)
             if (engineer.ID == item.ID)
@@ -30,22 +30,21 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// The function read an engineer and returns him
     /// </summary>
-    public Task? Read(Func<Task, bool> filter)
+    public Engineer? Read(Func<Engineer, bool> filter)
     {
         if (filter != null)
         {
-            return ((Task?)(from item in DataSource.Engineers
+            return from item in DataSource.Engineers
                    where filter(item)
-                   select item));
+                   select item;
         }
-        return ((Task?)(from item in DataSource.Engineers
-               select item));
+        return from item in DataSource.Engineers
+               select item;
     }
-
     /// <summary>
     /// The function read all the engineers and returns them
     /// </summary>
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
         if (filter != null)
         {
@@ -59,7 +58,7 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// The function updates the ditals of an engineer
     /// </summary>
-    public void Update(Task item)
+    public void Update(Engineer item)
     {
         Task engineer = DataSource.Engineers.Where(item1 => item1.ID == item.ID).First() ??
            throw new Exception($"Engineer whith ID {item.ID} does not exist");
