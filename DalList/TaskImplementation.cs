@@ -4,7 +4,7 @@ using DO;
 using System.Collections.Generic;
 using System.Linq;
 
-internal class TaskImplementation : ICrud<Task>
+internal class TaskImplementation : ITask
 {
     /// <summary>
     /// The function creates a new task and returns its serial number
@@ -30,16 +30,14 @@ internal class TaskImplementation : ICrud<Task>
     /// </summary>
     public Task? Read(Func<Task, bool> filter)
     {
-        if (filter != null)
-        {
-            return (Task?)(from item in DataSource.Tasks
-                                where filter(item)
-                                select item);
-        }
-        return (Task?)(from item in DataSource.Tasks
-                        select item);
+        Task? task = DataSource.Tasks.Where(filter).First();
+        return task;
     }
-
+    public Task? Read(int id)
+    {
+        Task? taskFind = DataSource.Tasks.Where(s => s!.ID == id).First();
+        return taskFind != null ? taskFind : null;
+    }
     /// <summary>
     /// The function read all the engineers and returns them
     /// </summary>

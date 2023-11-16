@@ -81,8 +81,7 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("enter task's id");
-                        Func<DO.Task, bool> filter = t => t.ID == Console.ReadLine();
-                        Console.WriteLine(s_dal!.Task.Read(filter));
+                        Console.WriteLine(s_dal!.Task.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal.Task.ReadAll())
@@ -150,9 +149,7 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("enter engineer's id");
-                        //Func<DO.Task, bool> filter = t => t.ID == Console.ReadLine();
-                        //Console.WriteLine(s_dal!.Task.Read(filter));
-                        Console.WriteLine(s_dal!.Engineer.Read(Console.ReadLine()));
+                        Console.WriteLine(s_dal!.Engineer.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal!.Engineer.ReadAll())
@@ -212,7 +209,7 @@ namespace DalTest
                         break;
                     case "Read":
                         Console.WriteLine("Enter id");
-                        Console.WriteLine(s_dal!.Dependence.Read(Console.ReadLine()));
+                        Console.WriteLine(s_dal!.Dependence.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
                         foreach (var item in s_dal!.Dependence.ReadAll())

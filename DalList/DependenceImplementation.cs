@@ -32,6 +32,13 @@ internal class DependenceImplementation : IDependence
         Dependence? dependence = DataSource.Dependences.Where(filter).First();
         return dependence;
     }
+
+    public Dependence? Read(int id)
+    {
+        Dependence? dependenceFind = DataSource.Dependences.Where(s => s!.ID == id).First();
+        return dependenceFind != null ? dependenceFind : null;
+    }
+
     /// <summary>
     /// The function read all the dependences and returns them
     /// </summary>
