@@ -22,7 +22,7 @@ internal class TaskImplementation : ITask
     public void Delete(int id)
     {
         Task task = DataSource.Tasks.Where(item => item.ID == id).First() ??
-           throw new Exception($"Task whith ID {id} does not exist");
+            throw new DalDoesNotExistException($"Task with ID {id} does not exist");
         DataSource.Tasks.Remove(task);
     }
     /// <summary>
@@ -30,12 +30,14 @@ internal class TaskImplementation : ITask
     /// </summary>
     public Task? Read(Func<Task, bool> filter)
     {
-        Task? task = DataSource.Tasks.Where(filter).First();
+        Task task = DataSource.Tasks.Where(filter).First() ??
+            throw new DalDoesNotExistException($"Does not exist");
         return task;
     }
     public Task? Read(int id)
     {
-        Task? taskFind = DataSource.Tasks.Where(s => s!.ID == id).First();
+        Task taskFind = DataSource.Tasks.Where(s => s!.ID == id).First() ??
+            throw new DalDoesNotExistException($"Task with ID {id} does not exist");
         return taskFind;
     }
     /// <summary>
@@ -54,7 +56,7 @@ internal class TaskImplementation : ITask
     public void Update(Task item)
     {
         Task task = DataSource.Tasks.Where(item1 => item1.ID == item.ID).First() ??
-           throw new Exception($"Task whith ID {item.ID} does not exist");
+           throw new DalDoesNotExistException($"Task whith ID {item.ID} does not exist");
         DataSource.Tasks.Remove(task);
         DataSource.Tasks.Add(item);
     }

@@ -21,7 +21,7 @@ internal class DependenceImplementation : IDependence
     public void Delete(int id)
     {
         Dependence dependence = DataSource.Dependences.Where(item => item.ID == id).First() ??
-           throw new Exception($"Dependence whith ID {id} does not exist");
+           throw new DalDoesNotExistException($"Dependence with ID {id} does not exist");
         DataSource.Dependences.Remove(dependence);
     }
     /// <summary>
@@ -29,13 +29,15 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        Dependence? dependence = DataSource.Dependences.Where(filter).First();
+        Dependence dependence = DataSource.Dependences.Where(filter).First() ??
+            throw new DalDoesNotExistException($"Does not exist");
         return dependence;
     }
 
     public Dependence? Read(int id)
     {
-        Dependence? dependenceFind = DataSource.Dependences.Where(s => s!.ID == id).First();
+        Dependence dependenceFind = DataSource.Dependences.Where(s => s!.ID == id).First() ??
+            throw new DalDoesNotExistException($"Dependence with ID {id} does not exist");
         return dependenceFind;
     }
 
@@ -56,7 +58,7 @@ internal class DependenceImplementation : IDependence
     public void Update(Dependence item)
     {
         Dependence dependence = DataSource.Dependences.Where(item1 => item1.ID == item.ID).First() ??
-           throw new Exception($"Dependence whith ID {item.ID} does not exist");
+           throw new DalDoesNotExistException($"Dependence with ID {item.ID} does not exist");
         DataSource.Dependences.Remove(dependence);
         DataSource.Dependences.Add(item);
     }
