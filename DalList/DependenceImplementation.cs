@@ -36,7 +36,7 @@ internal class DependenceImplementation : IDependence
     public Dependence? Read(int id)
     {
         Dependence? dependenceFind = DataSource.Dependences.Where(s => s!.ID == id).First();
-        return dependenceFind != null ? dependenceFind : null;
+        return dependenceFind;
     }
 
     /// <summary>

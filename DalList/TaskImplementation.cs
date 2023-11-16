@@ -36,7 +36,7 @@ internal class TaskImplementation : ITask
     public Task? Read(int id)
     {
         Task? taskFind = DataSource.Tasks.Where(s => s!.ID == id).First();
-        return taskFind != null ? taskFind : null;
+        return taskFind;
     }
     /// <summary>
     /// The function read all the engineers and returns them

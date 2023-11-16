@@ -38,7 +38,7 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(int id)
     {
         Engineer? engineerFind = DataSource.Engineers.Where(s => s!.ID == id).First();
-        return engineerFind != null ? engineerFind : null;
+        return engineerFind;
     }
     /// <summary>
     /// The function read all the engineers and returns them
