@@ -25,7 +25,7 @@ internal class DependenceImplementation : IDependence
         DataSource.Dependences.Remove(dependence);
     }
     /// <summary>
-    /// The function read a dependence and returns him
+    /// The function reads a dependence and returns him
     /// </summary>
     public Dependence? Read(Func<Dependence, bool> filter)
     {
@@ -33,7 +33,9 @@ internal class DependenceImplementation : IDependence
             throw new DalDoesNotExistException($"Does not exist");
         return dependence;
     }
-
+    /// <summary>
+    /// The function reads a dependence according to the id and returns him
+    /// </summary>
     public Dependence? Read(int id)
     {
         Dependence dependenceFind = DataSource.Dependences.Where(s => s!.ID == id).First() ??

@@ -8,7 +8,6 @@ using System.Text.Json.Serialization;
 
 namespace DalTest
 {
-
     internal class Program
     {
         private static IDal? s_dal = new DalList();
@@ -100,8 +99,6 @@ namespace DalTest
                         Console.WriteLine("you entered worng choose");
                         break;
                 }
-
-
             } while (choose != "Exit");
             return;
         }
@@ -232,6 +229,9 @@ namespace DalTest
                 }
             } while (choose != "Exit");
         }
+        /// <summary>
+        /// managing the task's entity menu
+        /// </summary>
         public static void generalMenue()
         {
             int choose;

@@ -36,6 +36,9 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"Does not exist");
         return engineer;
     }
+    /// <summary>
+    /// The function reads a engineer according to the id and returns him
+    /// </summary>
     public Engineer? Read(int id)
     {
         Engineer engineerFind = DataSource.Engineers.Where(s => s!.ID == id).First() ??

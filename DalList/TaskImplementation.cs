@@ -34,6 +34,9 @@ internal class TaskImplementation : ITask
             throw new DalDoesNotExistException($"Does not exist");
         return task;
     }
+    /// <summary>
+    /// The function reads a task according to the id and returns him
+    /// </summary>
     public Task? Read(int id)
     {
         Task taskFind = DataSource.Tasks.Where(s => s!.ID == id).First() ??
