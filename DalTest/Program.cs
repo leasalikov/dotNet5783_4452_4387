@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace DalTest
 {
+
     internal class Program
     {
         private static IDal? s_dal = new DalList();

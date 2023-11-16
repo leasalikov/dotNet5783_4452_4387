@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\DalFacade",
+    "\\DalList",
+    "\\DalTest"
   ],
-  "SelectedNode": "\\C:\\Users\\leasa\\source\\repos\\leasalikov\\dotNet5783_4452_4387.git",
+  "SelectedNode": "\\DalTest\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
