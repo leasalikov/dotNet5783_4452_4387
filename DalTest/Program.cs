@@ -138,7 +138,7 @@ namespace DalTest
             string? choose;
             do
             {
-                Console.WriteLine("Enter method choice: (Esit, Create,Read,ReadAll, Update, Delete)");
+                Console.WriteLine("Enter method choice: (Exit, Create, Read, ReadAll, Update, Delete)");
                 choose = Console.ReadLine();
                 switch (choose)
                 {
@@ -219,8 +219,6 @@ namespace DalTest
                         break;
                     case "Update":
                         Console.WriteLine("Enter dependence's id");
-                        //s_dal!.Engineer.Update(createEngineer());
-                        //s_dal!.Task.Update(createTask(Convert.ToInt32(Console.ReadLine())));
                         s_dal!.Dependence.Update(createDependence(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "Delete":
