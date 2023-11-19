@@ -10,7 +10,7 @@ internal class DependenceImplementation : IDependence
     /// </summary>
     public int Create(Dependence item)
     {
-        int newId = DataSource.Config.NextTaskId;
+        int newId = DataSource.Config.NextDependenceId;
         Dependence dependence = item with { ID = newId };
         DataSource.Dependences.Add(dependence);
         return newId;
