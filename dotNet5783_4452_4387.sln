@@ -16,9 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{CCAB7EE1-6B0E-4A3C-B5EB-E578C039CE51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{7B04726D-0246-46D2-A578-7C6336930F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{7B04726D-0246-46D2-A578-7C6336930F6D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{14EA74FE-652E-4408-9C8A-27BBDB1D38DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{15A04091-A7DF-4F50-81AC-8991C3B2986C}"
 	ProjectSection(SolutionItems) = preProject
 		xml\data-config.xml = xml\data-config.xml
 		xml\dependences.xml = xml\dependences.xml
@@ -55,10 +55,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7B04726D-0246-46D2-A578-7C6336930F6D} = {60A63615-6C1E-4F40-8798-D0E877A01115}
-		{14EA74FE-652E-4408-9C8A-27BBDB1D38DF} = {60A63615-6C1E-4F40-8798-D0E877A01115}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {003BDA80-C0AA-4897-9197-BF2CFBEB689F}
