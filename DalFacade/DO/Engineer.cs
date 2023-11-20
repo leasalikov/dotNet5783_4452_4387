@@ -15,4 +15,7 @@ public record Engineer
     string Email,
     EngineerLevelEnum EngineerLevel,
     float PriceOfHour
-);
+)
+{
+    public Engineer() : this(0, "", "", 0, 0) { }
+}

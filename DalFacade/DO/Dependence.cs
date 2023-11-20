@@ -16,11 +16,5 @@ public record Dependence
     {
         throw new NotImplementedException();
     }
-    //public Dependence(int id, int idPendingTask, int idPreviousTask)
-    //{
-    //    ID = id;
-    //    IDPendingTask = idPendingTask;
-    //    IDPreviousTask = idPreviousTask;
-    //}
-    //public Dependence();
+    public Dependence() : this(0, 0, 0) { }
 };

@@ -23,7 +23,7 @@ public record Task
     string? Description,
     string? Nickname,
     bool Milestone,
-    DateTime Production,
+    DateTime? Production,
     DateTime? Start,
     DateTime? AcualStartNate,
     int longTime,
@@ -33,6 +33,9 @@ public record Task
     string? Remaeks,
     int IDEngineer,
     EngineerLevelEnum Difficulty
-);
+)
+{
+    public Task() : this(0, "", "", false, null, null, null, 0, null, null, "", "", 0, 0) { }
+}
 
 

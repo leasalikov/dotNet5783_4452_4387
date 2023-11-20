@@ -1,44 +1,80 @@
 ﻿
 using DalApi;
 using DO;
-using System.Xml.Serialization;
 
 namespace Dal;
 
 internal class DependenceImplementation : IDependence
 {
+    /// <summary>
+    /// The function creates a new dependence and returns its serial number
+    /// </summary>
     public int Create(Dependence item)
     {
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
         int newId = Config.NextDependnceId;
         Dependence dependence = item with { ID = newId };
-        //DataSource.Dependences.Add(dependence);
-        StreamReader reader = new(FILEKALA);
-        var l = (List<Kalah>?)xmlSerializer?.Deserialize(reader);
+        ls.Add(dependence);
+        XMLTools.SaveListToXMLSerializer(ls, "xml.dependences");
         return newId;
     }
 
+    /// <summary>
+    /// The function delete a dependence 
+    /// </summary>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
+        Dependence dependence = ls.Where(item => item.ID == id).First() ??
+           throw new DalDoesNotExistException($"Dependence with ID {id} does not exist");
+        ls.Remove(dependence);
+        XMLTools.SaveListToXMLSerializer(ls, "xml.dependences");
     }
 
+    /// <summary>
+    /// The function reads a dependence according to the id and returns him
+    /// </summary>
     public Dependence? Read(int id)
     {
-        throw new NotImplementedException();
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
+        Dependence dependence = ls.Where(s => s!.ID == id).First() ??
+            throw new DalDoesNotExistException($"Dependence with ID {id} does not exist");
+        return dependence;
     }
 
+    /// <summary>
+    /// The function reads a dependence and returns him
+    /// </summary>
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        throw new NotImplementedException();
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
+        Dependence dependence = ls.Where(filter).First() ??
+            throw new DalDoesNotExistException($"Does not exist");
+        return dependence;
     }
 
+    /// <summary>
+    /// The function read all the dependences and returns them
+    /// </summary>
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
+        if (filter == null)
+            return ls.Select(item => item);
+        else
+            return ls.Where(filter);
     }
 
+    /// <summary>
+    /// The function updates the ditals of a dependence
+    /// </summary>
     public void Update(Dependence item)
     {
-        throw new NotImplementedException();
+        List<Dependence> ls = XMLTools.LoadListFromXMLSerializer<Dependence>("xml.dependences");
+        Dependence dependence = ls.Where(item1 => item1.ID == item.ID).First() ??
+           throw new DalDoesNotExistException($"Dependence with ID {item.ID} does not exist");
+        ls.Remove(dependence);
+        ls.Add(item);
+        XMLTools.SaveListToXMLSerializer(ls, "xml.dependences");
     }
 }
