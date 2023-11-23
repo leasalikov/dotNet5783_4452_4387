@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -16,6 +17,8 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.Add(task);
         return newId;
     }
+
+
     /// <summary>
     /// The function delete a task 
     /// </summary>
