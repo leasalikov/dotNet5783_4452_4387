@@ -12,7 +12,7 @@ namespace DalTest
     internal class Program
     {
         //private static IDal? s_dal = new DalList();
-        static readonly IDal s_dal = new Dal.DalXml();
+        static readonly IDal s_dal = new DO.DalXml();
         static void Main(string[] args)
         {
             try
