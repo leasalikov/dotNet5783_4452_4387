@@ -52,12 +52,26 @@ internal class EngineerImplementation : IEngineer
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public Engineer? Read(int id) =>
-         GetEngineer(XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
-        .FirstOrDefault(st => st.ToIntNullable("ID") == id) ?? null);
+ 
 
-    //fix to: throw new DalMissingIdException(id);
-    //?? throw new DalDoesNotExistException($"Engineer with ID={id} does not exist"))!;
+
+    //public Engineer? Read(int id)
+    //{
+    //    GetEngineer(XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
+    //     GetEngineer.FirstOrDefault(st => st.ToIntNullable("ID") == id) ?? null);
+    //}
+    //throw new DalDoesNotExistException($"Does not exist");
+
+    public Engineer? Read(int id)
+    {
+        XElement? engineer = XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
+            .FirstOrDefault(st => st.ToIntNullable("ID") == id);
+        if (engineer == null)
+        {
+            throw new DalDoesNotExistException($"Does not exist");
+        }
+        return GetEngineer(engineer);
+    }
 
     /// <summary>
     /// finds an engineer by specific attribute using filter.
@@ -65,11 +79,20 @@ internal class EngineerImplementation : IEngineer
     /// <param name="filter"></param>
     /// <returns></returns>
     /// <exception cref="DalDoesNotExistException"></exception>
-    public Engineer? Read(Func<Engineer, bool> filter) =>
-        XMLTools.LoadListFromXMLElement(s_engineers).Elements().Select(s => GetEngineer(s)).Where(filter!).FirstOrDefault() ?? null;
+    /// 
 
-    // fix to: throw new DalMissingIdException(id);
-    //?? throw new DalDoesNotExistException($"Engineer with such filter does not exist")!;
+    //public Engineer? Read(Func<Engineer, bool> filter) =>
+    //    XMLTools.LoadListFromXMLElement(s_engineers).Elements().Select(s => GetEngineer(s)).Where(filter!).FirstOrDefault() ?? null;
+
+    public Engineer? Read(Func<Engineer, bool> filter)
+    {
+        var engineer = XMLTools.LoadListFromXMLElement(s_engineers).Elements().Select(s => GetEngineer(s)).Where(filter!).FirstOrDefault();
+        if (engineer == null)
+        {
+            throw new DalDoesNotExistException($"Engineer with such filter does not exist");
+        }
+        return engineer;
+    }
 
     /// <summary>
     /// returns all engineers
@@ -92,9 +115,7 @@ internal class EngineerImplementation : IEngineer
         XElement engineersRootElem = XMLTools.LoadListFromXMLElement(s_engineers);
         if (XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
             .FirstOrDefault(st => st.ToIntNullable("Id") == engineer.ID) is not null)
-            // fix to: throw new DalMissingIdException(id);;
             throw new DalAlreadyExistsException("id already exist");
-
         engineersRootElem.Add(new XElement("Engineer", CreateEngineerElement(engineer)));
         XMLTools.SaveListToXMLElement(engineersRootElem, s_engineers);
 
@@ -117,6 +138,7 @@ internal class EngineerImplementation : IEngineer
 
         XMLTools.SaveListToXMLElement(engineersRootElem, s_engineers);
     }
+
     /// <summary>
     /// updates an engineer
     /// </summary>
