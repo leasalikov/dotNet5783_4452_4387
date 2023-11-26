@@ -8,4 +8,18 @@
     <EngineerLevel>Expert</EngineerLevel>
     <PriceOfHour>50</PriceOfHour>
   </Engineer>
+  <Engineer>
+    <ID>12</ID>
+    <FName>ג</FName>
+    <Email>ג@F</Email>
+    <EngineerLevel>Competent</EngineerLevel>
+    <PriceOfHour>45</PriceOfHour>
+  </Engineer>
+  <Engineer>
+    <ID>12</ID>
+    <FName>ח</FName>
+    <Email>ח@ח</Email>
+    <EngineerLevel>Proficient</EngineerLevel>
+    <PriceOfHour>78</PriceOfHour>
+  </Engineer>
 </ArrayOfEngineer>
