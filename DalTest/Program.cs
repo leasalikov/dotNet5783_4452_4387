@@ -89,14 +89,14 @@ namespace DalTest
                     case "Exit":
                         break;
                     case "Create":
-                        s_dal.Task!.Create(createTask());
+                        s_dal!.Task!.Create(createTask());
                         break;
                     case "Read":
                         Console.WriteLine("enter task's id");
                         Console.WriteLine(s_dal!.Task.Read(Convert.ToInt32(Console.ReadLine())));
                         break;
                     case "ReadAll":
-                        foreach (var item in s_dal.Task.ReadAll())
+                        foreach (var item in s_dal!.Task.ReadAll())
                             Console.WriteLine(item);
                         break;
                     case "Update":
