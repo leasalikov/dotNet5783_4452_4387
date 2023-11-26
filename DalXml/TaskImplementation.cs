@@ -10,143 +10,72 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 internal class TaskImplementation : ITask
 {
-    const string s_tasks = "tasks";
     /// <summary>
-    ///  Gets an task.
+    /// The function creates a new task and returns its serial number
     /// </summary>
-    /// <param name="e"></param>
-    /// <returns></returns>
-    static DO.Task? GetTask(XElement? task)
+    public int Create(DO.Task item)
     {
-        if (task == null)
-            return null;
-        return task.ToIntNullable("ID") is null ? null : new DO.Task()
-        {
-            ID = (int)task.Element("ID")!,
-            Description = (string)task.Element("Description")!,
-            Nickname = (string)task.Element("Nickname")!,
-            Milestone = (bool)task.Element("Milestone")!,
-            Production = (DateTime)task.Element("Production")!,
-            Start = (DateTime)task.Element("Start")!,
-            AcualStartNate = (DateTime)task.Element("AcualStartNate")!,
-            longTime = (int)task.Element("longTime")!,
-            deadline = (DateTime)task.Element("deadline")!,
-            AcualEndNate = (DateTime)task.Element("AcualEndNate")!,
-            Product = (string)task.Element("Product")!,
-            Remaeks = (string)task.Element("Remaeks")!,
-            IDEngineer = (int)task.Element("IDEngineer")!,
-            //Difficulty = XMLTools.ToEnumNullable<EngineerExperience>(task, "Difficulty"),
-            //Difficulty = XMLTools.ToEnumNullable<Task>(task ,"Difficulty")
-        };
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        int newId = Config.NextTaskId;
+        DO.Task task = item with { ID = newId };
+        ls.Add(task);
+        XMLTools.SaveListToXMLSerializer(ls, "tasks");
+        return newId;
     }
 
-    /// <summary>
-    /// Creates an task element.
-    /// </summary>
-    /// <param name="task"></param>
-    /// <returns></returns>
-    static IEnumerable<XElement> CreateTaskElement(DO.Task task)
-    {
-        yield return new XElement("ID", task.ID);
-        if (task.Description is not null)
-            yield return new XElement("Description", task.Description);
-        if (task.Description is not null)
-            yield return new XElement("Nickname", task.Nickname);
-        if (task.Description is not null)
-            yield return new XElement("Production", task.Production);
-        if (task.Description is not null)
-            yield return new XElement("Start", task.Start);
-        if (task.Description is not null)
-            yield return new XElement("AcualStartNate", task.AcualStartNate);
-        if (task.Description is not null)
-            yield return new XElement("longTime", task.longTime);
-        if (task.Description is not null)
-            yield return new XElement("deadline", task.deadline);
-        if (task.Description is not null)
-            yield return new XElement("AcualEndNate", task.AcualEndNate);
-        if (task.Description is not null)
-            yield return new XElement("Product", task.Product);
-        if (task.Description is not null)
-            yield return new XElement("Remaeks", task.Remaeks);
-        if (task.Description is not null)
-            yield return new XElement("IDEngineer", task.IDEngineer);
-    }
-    /// <summary>
-    /// finds an task by Id.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="DalDoesNotExistException"></exception>
-    public DO.Task? Read(int id) =>
-         GetTask(XMLTools.LoadListFromXMLElement(s_tasks)?.Elements()
-        .FirstOrDefault(st => st.ToIntNullable("ID") == id) ?? null);
-
-    //fix to: throw new DalMissingIdException(id);
-    //?? throw new DalDoesNotExistException($"Task with ID={id} does not exist"))!;
 
     /// <summary>
-    /// finds an task by specific attribute using filter.
+    /// The function delete a task 
     /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
-    /// <exception cref="DalDoesNotExistException"></exception>
-    public DO.Task? Read(Func<DO.Task, bool> filter) =>
-        XMLTools.LoadListFromXMLElement(s_tasks).Elements().Select(s => GetTask(s)).Where(filter!).FirstOrDefault() ?? null;
-
-    // fix to: throw new DalMissingIdException(id);
-    //?? throw new DalDoesNotExistException($"Task with such filter does not exist")!;
-
-    /// <summary>
-    /// returns all tasks
-    /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
-    public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null) =>
-        filter is null
-        ? XMLTools.LoadListFromXMLElement(s_tasks).Elements().Select(s => GetTask(s))
-        : XMLTools.LoadListFromXMLElement(s_tasks).Elements().Select(s => GetTask(s)).Where(filter!);
-
-    /// <summary>
-    /// creates a new task.
-    /// </summary>
-    /// <param name="task"></param>
-    /// <returns></returns>
-    /// <exception cref="DalAlreadyExistsException"></exception>
-    public int Create(DO.Task task)
-    {
-        XElement engineersRootElem = XMLTools.LoadListFromXMLElement(s_tasks);
-        if (XMLTools.LoadListFromXMLElement(s_tasks)?.Elements()
-            .FirstOrDefault(st => st.ToIntNullable("ID") == task.ID) is not null)
-            // fix to: throw new DalMissingIdException(id);;
-            throw new DalAlreadyExistsException("id already exist");
-        engineersRootElem.Add(new XElement("Engineer", CreateTaskElement(task)));
-        XMLTools.SaveListToXMLElement(engineersRootElem, s_tasks);
-        return task.ID;
-    }
-
-    /// <summary>
-    /// deletes an task from data using a list.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <exception cref="DalDoesNotExistException"></exception>
     public void Delete(int id)
     {
-        XElement engineersRootElem = XMLTools.LoadListFromXMLElement(s_tasks);
-
-        (engineersRootElem.Elements()
-            // fix to: throw new DalMissingIdException(id);
-            .FirstOrDefault(st => (int?)st.Element("ID") == id) ?? throw new DalDoesNotExistException("missing id"))
-            .Remove();
-
-        XMLTools.SaveListToXMLElement(engineersRootElem, s_tasks);
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task task = ls.Where(s => s.ID == id).First() ??
+           throw new DalDoesNotExistException($"Task with ID {id} does not exist");
+        ls.Remove(task);
+        XMLTools.SaveListToXMLSerializer(ls, "tasks");
     }
     /// <summary>
-    /// updates an task
+    /// The function read a task and returns him
     /// </summary>
-    /// <param name="engineer"></param>
-    public void Update(DO.Task task)
+    public DO.Task? Read(Func<DO.Task, bool> filter)
     {
-        Delete(task.ID);
-        Create(task);
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task task = ls.Where(filter).First() ??
+            throw new DalDoesNotExistException($"Does not exist");
+        return task;
+    }
+    /// <summary>
+    /// The function reads a task according to the id and returns him
+    /// </summary>
+    public DO.Task? Read(int id)
+    {
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task task = ls.Where(s => s!.ID == id).First() ??
+            throw new DalDoesNotExistException($"Task with ID {id} does not exist");
+        return task;
+    }
+    /// <summary>
+    /// The function read all the engineers and returns them
+    /// </summary>
+    public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
+    {
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        if (filter == null)
+            return ls.Select(item => item);
+        else
+            return ls.Where(filter);
+    }
+    /// <summary>
+    /// The function updates the ditals of a task
+    /// </summary>
+    public void Update(DO.Task item)
+    {
+        List<DO.Task> ls = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task task = ls.Where(item1 => item1.ID == item.ID).First() ??
+           throw new DalDoesNotExistException($"Task with ID {item.ID} does not exist");
+        ls.Remove(task);
+        ls.Add(item);
+        XMLTools.SaveListToXMLSerializer(ls, "tasks");
     }
 }

@@ -22,6 +22,14 @@ namespace DalTest
                 generalMenue();
                 Initialization.Do(s_dal);
             }
+            catch (DalAlreadyExistsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (DalDeletionImpossible ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             catch (Exception error)
             {
                 Console.WriteLine(error.ToString());
