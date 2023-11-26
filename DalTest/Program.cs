@@ -1,18 +1,20 @@
-﻿using Dal;
-using DalApi;
+﻿using DalApi;
 using DO;
-using System.ComponentModel;
-using System.Data.SqlTypes;
-using System.Globalization;
+using Dal;
+using System.Diagnostics;
+using System.Numerics;
 using System.Reflection.Emit;
-using System.Text.Json.Serialization;
+using System.Security.Cryptography;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using System.Data.SqlTypes;
 
 namespace DalTest
 {
     internal class Program
     {
-        //private static IDal? s_dal = new DalList();
-        static readonly IDal s_dal = new DO.DalXml();
+        //private static IDal? s_dal = new DalList();;
+         static readonly IDal? s_dal = new DalXml();
         static void Main(string[] args)
         {
             try
