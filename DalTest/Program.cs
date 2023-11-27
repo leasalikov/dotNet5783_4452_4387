@@ -25,10 +25,12 @@ namespace DalTest
             catch (DalAlreadyExistsException ex)
             {
                 Console.WriteLine(ex.Message);
+                generalMenue();
             }
             catch (DalDeletionImpossible ex)
             {
                 Console.WriteLine(ex.Message);
+                generalMenue();
             }
             catch (Exception error)
             {
