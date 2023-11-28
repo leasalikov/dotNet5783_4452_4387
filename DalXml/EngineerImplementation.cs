@@ -114,7 +114,7 @@ internal class EngineerImplementation : IEngineer
     {
         XElement engineersRootElem = XMLTools.LoadListFromXMLElement(s_engineers);
         if (XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
-            .FirstOrDefault(st => st.ToIntNullable("Id") == engineer.ID) is not null)
+            .FirstOrDefault(st => st.ToIntNullable("ID") == engineer.ID) is not null)
             throw new DalAlreadyExistsException("id already exist");
         engineersRootElem.Add(new XElement("Engineer", CreateEngineerElement(engineer)));
         XMLTools.SaveListToXMLElement(engineersRootElem, s_engineers);

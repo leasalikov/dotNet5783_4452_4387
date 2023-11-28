@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-	<NextDependnceId>1</NextDependnceId>
-	<NextTaskId>100</NextTaskId>
+  <NextDependnceId>5</NextDependnceId>
+  <NextTaskId>106</NextTaskId>
 </config>
