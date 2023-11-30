@@ -22,14 +22,6 @@ namespace DalTest
                 generalMenue();
                 Initialization.Do(s_dal);
             }
-            catch (DalAlreadyExistsException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (DalDeletionImpossible ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
             catch (Exception error)
             {
                 Console.WriteLine(error.ToString());
@@ -249,23 +241,35 @@ namespace DalTest
             int choose;
             do
             {
-                Console.WriteLine("Enter entyty choice: (1-task, 2-engineer, 3-dependence)");
-                choose = (Convert.ToInt32(Console.ReadLine()));
-                switch (choose)
+                    Console.WriteLine("Enter entyty choice: (1-task, 2-engineer, 3-dependence)");
+                    choose = (Convert.ToInt32(Console.ReadLine()));
+                try
                 {
-                    case 1:
-                        taskMenu();
-                        break;
-                    case 2:
-                        engineerMenu();
-                        break;
-                    case 3:
-                        dependenceMenu();
-                        break;
-                    default:
-                        break;
+                    switch (choose)
+                    {
+                        case 1:
+                            taskMenu();
+                            break;
+                        case 2:
+                            engineerMenu();
+                            break;
+                        case 3:
+                            dependenceMenu();
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            } while (choose != 0);
+                catch (DalAlreadyExistsException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (DalDeletionImpossible ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        } while (choose != 0); ;
         }
     }
 }
