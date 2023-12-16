@@ -97,9 +97,9 @@ public static class Initialization
             }
         }
     }
-    public static void Do(IDal? dal)
+    public static void Do() //stage 4
     {
-        s_dal = dal ?? throw new Exception("DAL can not be null!");
+        s_dal = DalApi.Factory.Get;
         createEngineer();
         createTasks();
         createDependence();

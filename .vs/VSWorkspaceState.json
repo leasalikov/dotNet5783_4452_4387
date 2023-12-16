@@ -2,9 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\DalFacade",
+    "\\DalFacade\\DalApi",
+    "\\DalFacade\\DO",
     "\\DalList",
-    "\\DalTest"
+    "\\DalTest",
+    "\\DalXml",
+    "\\Stage0",
+    "\\xml"
   ],
-  "SelectedNode": "\\DalTest\\Program.cs",
+  "SelectedNode": "\\xml\\data-config.xml",
   "PreviewInSolutionExplorer": false
 }
