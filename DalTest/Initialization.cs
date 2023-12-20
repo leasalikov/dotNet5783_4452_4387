@@ -55,7 +55,6 @@ public static class Initialization
         }
     }
 
-
     /// <summary>
     /// The function creates the array of Tasks
     /// </summary>

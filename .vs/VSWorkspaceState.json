@@ -1,15 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\DalFacade",
-    "\\DalFacade\\DalApi",
-    "\\DalFacade\\DO",
-    "\\DalList",
-    "\\DalTest",
-    "\\DalXml",
-    "\\Stage0",
-    "\\xml"
+    ""
   ],
-  "SelectedNode": "\\xml\\data-config.xml",
   "PreviewInSolutionExplorer": false
 }
