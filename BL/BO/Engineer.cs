@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿System;
+System.Collections.Generic;
+System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +14,6 @@ public class Engineer
     public string? Email { get; set; }
     public EngineerLevelEnum EngineerLevel { get; set; }
     public float PriceOfHour { get; set; }
-
-
+    //אם קיימת, מזהה וכינוי המשימה הנוכחית
 
 }
