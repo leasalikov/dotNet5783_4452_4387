@@ -17,7 +17,9 @@ public class Task
     public string? Product{ get; set; }//ToString
     public string? Remaeks{ get; set; }
     //אם קיים, מזהה ושם המהנדס שהוקצה למשימה 
-    public EngineerLevelEnum Difficulty?{ get; set; }
-  //  bool Milestone,
+    //public EngineerLevelEnum Difficulty?{ get; set; }
+
+
+   //  bool Milestone,
    // int longTime
 }

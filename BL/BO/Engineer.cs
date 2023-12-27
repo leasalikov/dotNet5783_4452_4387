@@ -1,9 +1,4 @@
-﻿System;
-System.Collections.Generic;
-System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BO;
 
 public class Engineer
