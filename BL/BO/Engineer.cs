@@ -3,12 +3,12 @@ namespace BO;
 
 public class Engineer
 {
-
-    public int Id { get; init; }
-    public string? Name { get; set; }
-    public string? Email { get; set; }
+    public required int ID { get; init; }
+    public required string Name { get; init; }
+    public required string Email { get; init; }
     public EngineerLevelEnum EngineerLevel { get; set; }
-    public float PriceOfHour { get; set; }
-    //אם קיימת, מזהה וכינוי המשימה הנוכחית
-
+    public required float PriceOfHour { get; set; }
+    // לבדוק אם קיימת משימה 
+    public int? TaskID { get; set; }
+    public string? TaskNickname { get; set; }
 }
