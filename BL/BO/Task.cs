@@ -3,26 +3,19 @@ namespace BO;
 public class Task
 {
     public int ID { get; init; }
-    public string? Nickname { get; set; }
+    public required string Nickname { get; set; }
     public string? Description { get; set; }
-    public DateTime Production { get; set; }
-    public Status? TaskStatus { get; set; }
-
-    //   תלויות (מסוג משימה-ברשימה)
-    public List<TaskInList>? taskInLists { get; set; }//?
-    //   אבן דרך קשורה (מזהה וכינוי)
-    public bool Milestone { get; set; }//??
-
-    public DateTime? EstimatedStartDate { get; set; }
+    public required DateTime Production { get; set; }
+    public required Status TaskStatus { get; set; }
+    public List<TaskInList>? TaskInLists { get; set; }
+    public required MilestoneIdNickname RelatedMilestone { get; set; }
+    public required DateTime EstimatedStartDate { get; set; }
     public DateTime? AcualStartNate { get; set; }
-    public DateTime? EstimatedEndDate { get; set; }
+    public required DateTime EstimatedEndDate { get; set; }
     public DateTime? deadline { get; set; }
     public DateTime? AcualEndNate { get; set; }
     public string? Product { get; set; }//ToString
     public string? Remaeks { get; set; }
-    public EngineerLevelEnum? Difficulty { get; set; }
-
-    //אם קיים מהנדס
-    public int EngineerID { get; init; }
-    public string? EngineerName { get; set; }
+    public required EngineerLevelEnum Difficulty { get; set; }
+    public EngineerForTask? EngineerIdName { get; init; }
 }
