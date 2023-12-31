@@ -1,13 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\BL",
-    "\\BlTest",
-    "\\BL\\BO",
-    "\\DalFacade",
-    "\\DalFacade\\DO",
-    "\\xml"
+    ""
   ],
-  "SelectedNode": "\\BL\\BO\\Task.cs",
   "PreviewInSolutionExplorer": false
 }

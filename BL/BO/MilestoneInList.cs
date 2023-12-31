@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BO;
 
-namespace BO
+internal class MilestoneInList
 {
-    internal class MilestoneInList
-    {
-    }
+    public string? Nickname { get; set; }
+    public string? Description { get; set; }
+    public required DateTime Production { get; set; }
+    public Status? Status { get; set; }
+    public int? ComplationPercentage { get; set; }
 }
