@@ -17,5 +17,5 @@ public class Task
     public string? Product { get; set; }//ToString
     public string? Remaeks { get; set; }
     public required EngineerLevelEnum Difficulty { get; set; }
-    public EngineerForTask? EngineerIdName { get; init; }
+    public EngineerInList? EngineerIdName { get; init; }
 }

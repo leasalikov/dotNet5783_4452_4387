@@ -2,32 +2,15 @@
 using BlApi;
 using BO;
 
-namespace BlImplementation;
-
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
      public int Create(BO.Engineer boEngineer)
     {
-        DO.Engineer doEngineer = new DO.Engineer
-        (boEngineer.Id,
-        boEngineer.Name, 
-        boEngineer.Email,
-        (DO.EngineerExperience)boEngineer.Level,
-        boEngineer.Cost);
-        try
-        {
-            int idEng = _dal.Engineer.Create(doEngineer);
-            return idEng;
-        }
-        catch (DO.DalAlreadyExistsException exception)
-        {
-            throw new BO.BlAlreadyExistsException($"An object of type Engineer with ID {boEngineer.Id} already exists", exception);
-        }
-
+        throw new NotImplementedException();
     }
-    public void add(Engineer engineer)
+    public void add(BO.Engineer engineer)
     {
         throw new NotImplementedException();
     }
@@ -37,14 +20,24 @@ internal class EngineerImplementation : IEngineer
         throw new NotImplementedException();
     }
 
-    public Engineer? Read(int id)
+    public BO.Engineer? Read(int id)
     {
         throw new NotImplementedException();
     }
 
-    public IEnumerable<Engineer> ReadAll()
+    public IEnumerable<BO.Engineer> ReadAll()
     {
-        throw new NotImplementedException();
+        _dal.Task.ReadAll();
+        return (IEnumerable < BO.Engineer > ) from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                select new BO.Engineer
+                {
+                    ID = doEngineer.ID,
+                    Name = doEngineer.FName,
+                    Email = doEngineer.Email,
+                    EngineerLevel = (BO.EngineerLevelEnum)doEngineer.EngineerLevel,
+                    PriceOfHour = doEngineer.PriceOfHour,
+                    Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
+                };
     }
 
     public void Update(Engineer engineer)
