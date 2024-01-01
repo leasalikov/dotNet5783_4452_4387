@@ -1,8 +1,6 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
-using System.Security.Cryptography;
-using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -10,13 +8,9 @@ internal class EngineerImplementation : IEngineer
 
      public int Create(BO.Engineer boEngineer)
     {
-        if(boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour > 0 || string.IsNullOrEmpty(boEngineer.Email))
-        {
-            throw new NotImplementedException();
-        }
-        DO.Engineer doEngineer = new DO.Engineer { ID = boEngineer.ID, FName = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
         try
         {
+            DO.Engineer doEngineer = BOToDO(boEngineer);
             _dal.Engineer.Create(doEngineer);
             return doEngineer.ID;
         }
@@ -27,14 +21,21 @@ internal class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        if ((from DO.Task doTask in _dal.Task.ReadAll() select doTask.IDEngineer == id)==null) {
+            _dal.Engineer.Delete(id);
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public BO.Engineer? Read(int id)
     {
         try
         {
-            DO.Engineer? myEngineer = _dal.Engineer.ReadAll().First(e => e.ID == id);
+            DO.Engineer? myEngineer = _dal.Engineer.Read(id);
             if (myEngineer == null)
             {
                 throw new InvalidOperationException();//חריגה שאין מתכנת עם הID שהתקבל
@@ -53,9 +54,15 @@ internal class EngineerImplementation : IEngineer
                 select DOToBO(doEngineer);
     }
 
-    public void Update(BO.Engineer engineer)
+    public void Update(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _dal.Engineer.Update(BOToDO(boEngineer));
+        }
+        catch
+        {
+        }
     }
 
     private BO.Engineer DOToBO(DO.Engineer doEngineer)
@@ -69,5 +76,14 @@ internal class EngineerImplementation : IEngineer
             PriceOfHour = doEngineer.PriceOfHour,
             Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
         };
+    }
+
+    private DO.Engineer BOToDO(BO.Engineer boEngineer)
+    {
+        if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour > 0 || string.IsNullOrEmpty(boEngineer.Email))
+        {
+            throw new NotImplementedException();
+        }
+        return new DO.Engineer { ID = boEngineer.ID, FName = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
     }
 }
