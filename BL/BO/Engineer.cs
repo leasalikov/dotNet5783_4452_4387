@@ -7,6 +7,6 @@ public class Engineer
     public required string Name { get; init; }
     public required string Email { get; init; }
     public EngineerLevelEnum EngineerLevel { get; set; }
-    public double? PriceOfHour { get; set; }
-    public required TaskIdNickname Task { get; set; }
+    public float PriceOfHour { get; set; }
+    public TaskIdNickname? Task { get; set; }
 }
