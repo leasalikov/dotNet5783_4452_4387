@@ -2,8 +2,9 @@
 namespace BO;
 public class Task
 {
-    public int ID { get; init; }
+    public required int ID { get; init; }
     public required string Nickname { get; set; }
+    public int? longTime { get; set; }
     public string? Description { get; set; }
     public required DateTime Production { get; set; }
     public required Status TaskStatus { get; set; }
@@ -19,5 +20,4 @@ public class Task
     public required EngineerLevelEnum Difficulty { get; set; }
     public EngineerInList? EngineerIdName { get; init; }
 
-    //משך הזמן הנדרש לביצוע המשימה - מספר ימי העבודה הנדרשים לביצוע המשימה
 }
