@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BlImplementation;
+using BlApi;
 
-namespace BlImplementation
+internal class MilestoneImplementation : IMilestone
 {
-    internal class MilestoneImplementation
+    private DalApi.IDal _dal = DalApi.Factory.Get;
+    public BO.Milestone ReadAll(int id)
     {
+        throw new NotImplementedException();
+    }
+
+    public BO.Milestone Update(int id)
+    {
+        throw new NotImplementedException();
     }
 }
