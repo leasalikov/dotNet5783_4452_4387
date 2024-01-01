@@ -1,6 +1,8 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
+using BO;
+
 /////
 ////////
 //ציפי המדהימה!!! לא עשיתי הרבה דברים עדיין בפנקיות שלי.... אני היום לא נירלי הולכת לעבוד על זה יותר, בע"ה המשך יבוא....
@@ -91,6 +93,12 @@ internal class TaskImplementation : ITask
 
 
         public void Update(BO.Task task)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+    public void Update(Task task)
     {
         throw new NotImplementedException();
     }
