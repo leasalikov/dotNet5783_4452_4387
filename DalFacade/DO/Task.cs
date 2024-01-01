@@ -26,7 +26,7 @@ public record Task
     DateTime? Production,
     DateTime? Start,
     DateTime? AcualStartNate,
-    int longTime,
+    int? longTime,
     DateTime? deadline,
     DateTime? AcualEndNate,
     string? Product,
