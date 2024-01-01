@@ -1,7 +1,12 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
-
+/////
+////////
+//ציפי המדהימה!!! לא עשיתי הרבה דברים עדיין בפנקיות שלי.... אני היום לא נירלי הולכת לעבוד על זה יותר, בע"ה המשך יבוא....
+/// <summary>
+/// 
+/// </summary>
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;

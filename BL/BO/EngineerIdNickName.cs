@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BO;
 
-namespace BO
+internal class EngineerIdNickName
 {
-    internal class EngineerIdNickName
-    {
-    }
+    public required int ID { get; set; }
+    public required string Nickname { get; set; }
 }
