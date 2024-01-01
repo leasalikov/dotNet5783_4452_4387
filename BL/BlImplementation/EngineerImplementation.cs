@@ -1,6 +1,6 @@
 ﻿
+namespace BlImplementation;
 using BlApi;
-using BO;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -8,9 +8,10 @@ internal class EngineerImplementation : IEngineer
 
      public int Create(BO.Engineer boEngineer)
     {
+
         throw new NotImplementedException();
     }
-    public void add(BO.Engineer engineer)
+    public void Add(BO.Engineer engineer)
     {
         throw new NotImplementedException();
     }
@@ -40,7 +41,7 @@ internal class EngineerImplementation : IEngineer
                 };
     }
 
-    public void Update(Engineer engineer)
+    public void Update(BO.Engineer engineer)
     {
         throw new NotImplementedException();
     }
