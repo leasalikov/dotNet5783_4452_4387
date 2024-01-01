@@ -30,7 +30,9 @@ internal class TaskImplementation : ITask
             Product = boTask.Product,
             Remaeks = boTask.Remaeks,
             Difficulty = (DO.EngineerLevelEnum)boTask.Difficulty,
-            //EngineerIdName = boTask.EngineerIdName != null ? new DO.EngineerInList { /* שלמות השדות של EngineerInList */ } : null,
+           // (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
+            Engineer = (from DO.Engineer doEngineer in _dal.Engineer.)
+            EngineerIdName = boTask.EngineerIdName != null ? new DO.EngineerInList { /* שלמות השדות של EngineerInList */ } : null,
 
         };
         try
@@ -56,10 +58,34 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task> ReadAll()
     {
-        throw new NotImplementedException();
-    }
+        _dal.Engineer.ReadAll();
+        return (IEnumerable<BO.Task>)from DO.Task doTask in _dal.Task.ReadAll()
+                                     select new BO.Task
+                                     {
+                                         ID = doTask.ID,
+                                         Nickname = doTask.Nickname,
+                                         longTime = doTask.longTime,
+                                         Description = doTask.Description,
+                                         Production = doTask.Production,
+                                         //TaskStatus = (DO.Status)doTask.TaskStatus,
+                                         //TaskInLists = doTask.TaskInLists?.Select(t => new DO.TaskInList { /* שלמות השדות של TaskInList */ }).ToList(),
+                                         //RelatedMilestone = new DO.MilestoneIdNickname { /* שלמות השדות של MilestoneIdNickname */ },
+                                         //EstimatedStartDate = doTask.EstimatedStartDate,
+                                         AcualStartNate = doTask.AcualStartNate,
+                                         //EstimatedEndDate = doTask.EstimatedEndDate,
+                                         deadline = doTask.deadline,
+                                         AcualEndNate = doTask.AcualEndNate,
+                                         Product = doTask.Product,
+                                         Remaeks = doTask.Remaeks,
+                                         //Difficulty = (DO.EngineerLevelEnum)doTask.Difficulty,
+                                         EngineerIdName = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
+                                         //EngineerIdName = doTask.EngineerIdName != null ? new DO.EngineerInList { /* שלמות השדות של EngineerInList */ } : null,
 
-    public void Update(BO.Task task)
+                                     };
+
+
+
+        public void Update(BO.Task task)
     {
         throw new NotImplementedException();
     }
