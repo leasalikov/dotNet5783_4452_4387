@@ -146,8 +146,6 @@ internal class TaskImplementation : ITask
     //    //                             };
     //}
 
-
-
     public void Update(BO.Task task)
     {
         throw new NotImplementedException();

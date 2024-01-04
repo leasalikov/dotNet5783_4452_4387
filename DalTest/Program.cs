@@ -219,7 +219,7 @@ namespace DalTest
                     case "ReadAll":
                         foreach (var item in s_dal!.Dependence.ReadAll())
                         {
-                            Console.WriteLine($"task id: {item.IDPendingTask}  pervious task id: {item.IDPreviousTask}");
+                            Console.WriteLine($"task id: {item.IDTask}  pervious task id: {item.IDPreviousTask}");
                         };
                         break;
                     case "Update":

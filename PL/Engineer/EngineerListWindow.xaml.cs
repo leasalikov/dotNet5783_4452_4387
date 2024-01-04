@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PL.Engineer;
 
-namespace PL
+namespace PL.Engineer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EngineerListWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EngineerListWindow : Window
     {
-        public MainWindow()
+        public EngineerListWindow()
         {
             InitializeComponent();
-        }
-        private void btnEngineers_Click(object sender, RoutedEventArgs e)
-        {
-            new EngineerListWindow().Show();
         }
     }
 }
