@@ -23,7 +23,7 @@ public record Task
     string? Description,
     string? Nickname,
     bool Milestone,
-    DateTime? Production,
+    DateTime Production,
     DateTime? Start,
     DateTime? AcualStartNate,
     int? longTime,
