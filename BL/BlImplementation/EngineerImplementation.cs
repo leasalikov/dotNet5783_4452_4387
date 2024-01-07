@@ -74,7 +74,7 @@ internal class EngineerImplementation : IEngineer
             Email = doEngineer.Email,
             EngineerLevel = (BO.EngineerLevel)doEngineer.EngineerLevel,
             PriceOfHour = doEngineer.PriceOfHour,
-            Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
+            //Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
         };
     }
 
