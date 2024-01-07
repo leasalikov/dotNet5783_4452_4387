@@ -10,32 +10,32 @@ using System.Collections.Generic;
 /// <summary>
 /// 
 /// </summary>
-internal class TaskImplementation : ITask
-{
-    private DalApi.IDal _dal = DalApi.Factory.Get;
+//internal class TaskImplementation : ITask
+//{
+//    private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    public void Create(BO.Task boTask)
-    {
-        if (boTask.ID <= 0 || boTask.Nickname == null)
-        {
-            throw new BO.BlNullPropertyException("ID and Nickname must have valid values");
-        }
-        DO.Task doTask = new DO.Task
-        {
-            ID = boTask.ID,
-            Description = boTask.Description,
-            Nickname = boTask.Nickname,
-            Milestone = false,/////////
-            Production = boTask.Production,
-            Start = ,///////////
-            AcualStartNate = boTask.AcualStartNate,
-            longTime = boTask.longTime,
-            deadline = boTask.deadline,
-            AcualEndNate = boTask.AcualEndNate,
-            Product = boTask.Product,
-            Remaeks = boTask.Remaeks,
-            IDEngineer = ,/////////////////////////////////////
-            Difficulty = (DO.EngineerLevelEnum)boTask.Difficulty,
+//    public void Create(BO.Task boTask)
+//    {
+//        if (boTask.ID <= 0 || boTask.Nickname == null)
+//        {
+//            throw new BO.BlNullPropertyException("ID and Nickname must have valid values");
+//        }
+//        DO.Task doTask = new DO.Task
+//        {
+//            ID = boTask.ID,
+//            Description = boTask.Description,
+//            Nickname = boTask.Nickname,
+//            Milestone = false,/////////
+//            Production = boTask.Production,
+//            //Start = ///////////
+//            AcualStartNate = boTask.AcualStartNate,
+//            // longTime = boTask.longTime,
+//            deadline = boTask.deadline,
+//            AcualEndNate = boTask.AcualEndNate,
+//            Product = boTask.Product,
+//            Remaeks = boTask.Remaeks,
+//            //IDEngineer = /////////////////////////////////////
+//            Difficulty = (DO.EngineerLevelEnum)boTask.Difficulty,
 
 
 
@@ -43,17 +43,18 @@ internal class TaskImplementation : ITask
 
 
             //TaskStatus = (DO.Status)boTask.TaskStatus,
-            TaskStatus = (BO.status)(thisTask!.scheduleDate is null ? 0
-                            : doTask!.StartDate is null ? 1
-                            : doTask.ActualEndDate is null ? 2
-                            : 3);
-        //TaskInLists = boTask.TaskInLists?.Select(t => new DO.TaskInList { /* שלמות השדות של TaskInList */ }).ToList(),
-        //RelatedMilestone = new DO.MilestoneIdNickname { /* שלמות השדות של MilestoneIdNickname */ },
-        //EstimatedStartDate = boTask.EstimatedStartDate,
+            //TaskStatus = (BO.status)(thisTask!.scheduleDate is null ? 0
+            //  : doTask!.StartDate is null ? 1
+            //: doTask.ActualEndDate is null ? 2
+            //: 3);
+            //TaskInLists = boTask.TaskInLists?.Select(t => new DO.TaskInList { /* שלמות השדות של TaskInList */ }).ToList(),
+            //RelatedMilestone = new DO.MilestoneIdNickname { /* שלמות השדות של MilestoneIdNickname */ },
+            //EstimatedStartDate = boTask.EstimatedStartDate,
 
             //EstimatedEndDate = boTask.EstimatedEndDate,
 
-    };
+        
+    
 
    // bool Milestone,
 
@@ -103,20 +104,20 @@ internal class TaskImplementation : ITask
 
 
 
-    public void Delete(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //public void Delete(int id)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    public BO.Task? Read(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //public BO.Task? Read(int id)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    public IEnumerable<Task> ReadAll()
-    {
-        throw new NotImplementedException();
-    }
+    //public IEnumerable<Task> ReadAll()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     //public IEnumerable<BO.Task> ReadAll()
     //{
@@ -146,13 +147,13 @@ internal class TaskImplementation : ITask
     //    //                             };
     //}
 
-    public void Update(BO.Task task)
-    {
-        throw new NotImplementedException();
-    }
+    //public void Update(BO.Task task)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    private BO.Task DOToBO(DO.Task doTask)
-    {
+    //private BO.Task DOToBO(DO.Task doTask)
+    //{
     //    int ID,
     //string? Description,
     //string? Nickname,
@@ -167,36 +168,36 @@ internal class TaskImplementation : ITask
     //string? Remaeks,
     //int IDEngineer,
     //EngineerLevelEnum Difficulty
-        return new BO.Task
-        {
-            ID = doTask.ID,
-            Nickname = doTask.Nickname,
-            Description = doTask.Description,
-            Production = doTask.Production,
-            TaskStatus = (BO.Status)(doTask.Start is null ? 0
-                            : doTask.AcualStartNate is null ? 1
-                            : doTask.AcualEndNate is null ? 2
-                            : 3),
-            TaskInLists = null,
-            RelatedMilestone = null,
-            EstimatedStartDate = null,
-            AcualStartNate = null,
-            EstimatedEndDate = null,
-            deadline = doTask.deadline,
-            AcualEndNate = doTask.AcualEndNate,
-            Product = doTask.Product,//ToString
-            Remaeks = doTask.Remaeks,
-            Difficulty = (BO.EngineerLevel)doTask.Difficulty,
-            EngineerIdName
-    };
-    }
+    //    return new BO.Task
+    //    {
+    //        ID = doTask.ID,
+    //        Nickname = doTask.Nickname,
+    //        Description = doTask.Description,
+    //        Production = doTask.Production,
+    //        TaskStatus = (BO.Status)(doTask.Start is null ? 0
+    //                        : doTask.AcualStartNate is null ? 1
+    //                        : doTask.AcualEndNate is null ? 2
+    //                        : 3),
+    //        TaskInLists = null,
+    //        RelatedMilestone = null,
+    //        EstimatedStartDate = null,
+    //        AcualStartNate = null,
+    //        EstimatedEndDate = null,
+    //        deadline = doTask.deadline,
+    //        AcualEndNate = doTask.AcualEndNate,
+    //        Product = doTask.Product,//ToString
+    //        Remaeks = doTask.Remaeks,
+    //        Difficulty = (BO.EngineerLevel)doTask.Difficulty,
+    //        EngineerIdName
+    //};
+    //}
 
-    private DO.Task BOToDO(BO.Task boTask)
-    {
-        if (boTask.ID <= 0 || string.IsNullOrEmpty(boTask.Name) || boTask.PriceOfHour > 0 || string.IsNullOrEmpty(boTask.Email))
-        {
-            throw new NotImplementedException();
-        }
-        return new DO.Engineer { ID = boTask.ID, FName = boTask.Name, Email = boTask.Email, EngineerLevel = (DO.EngineerLevelEnum)boTask.EngineerLevel, PriceOfHour = boTask.PriceOfHour };
-    }
-}
+    //private DO.Task BOToDO(BO.Task boTask)
+    //{
+    //    if (boTask.ID <= 0 || string.IsNullOrEmpty(boTask.Name) || boTask.PriceOfHour > 0 || string.IsNullOrEmpty(boTask.Email))
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //    return new DO.Engineer { ID = boTask.ID, FName = boTask.Name, Email = boTask.Email, EngineerLevel = (DO.EngineerLevelEnum)boTask.EngineerLevel, PriceOfHour = boTask.PriceOfHour };
+    //}
+//}

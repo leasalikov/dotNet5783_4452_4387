@@ -35,7 +35,7 @@ public record Task
     EngineerLevelEnum Difficulty
 )
 {
-    public Task() : this(0, "", "", false, null, null, null, 0, null, null, "", "", 0, 0) { }
+    public Task() : this(0, "", "", false, new DateTime(), null, null, 0, null, null, "", "", 0, 0) { }
 }
 
 
