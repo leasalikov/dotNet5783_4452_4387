@@ -54,10 +54,11 @@ namespace DalTest
             DateTime Production;
             DateTime.TryParse(Console.ReadLine(), out Production);
             Console.WriteLine("Enter date started");
-            DateTime Start;
-            DateTime.TryParse(Console.ReadLine(), out Start);
-            Console.WriteLine("enter a long time that take for the task");
-            int longTime = Convert.ToInt32(Console.ReadLine());
+            DateTime EstimatedStartDate;
+            DateTime.TryParse(Console.ReadLine(), out EstimatedStartDate);
+            Console.WriteLine("enter a time that you thing that finish the task");
+            DateTime EstimatedEndDate;
+            DateTime.TryParse(Console.ReadLine(), out EstimatedEndDate);
             Console.WriteLine("Enter date acual start");
             DateTime AcualStartNate;
             DateTime.TryParse(Console.ReadLine(), out AcualStartNate);
@@ -67,7 +68,7 @@ namespace DalTest
             Console.WriteLine("Enter date of complete");
             DateTime AcualEndNate;
             DateTime.TryParse(Console.ReadLine(), out AcualEndNate);
-            return (new DO.Task(0, Description, Nickname, false, Production, Start, AcualStartNate, longTime, deadline, AcualEndNate, Product, Remaeks, IDEngineer, (EngineerLevelEnum)Elevel));
+            return (new DO.Task(0, Description, Nickname, false, Production, EstimatedStartDate, AcualStartNate, EstimatedEndDate, deadline, AcualEndNate, Product, Remaeks, IDEngineer, (EngineerLevelEnum)Elevel));
         }
         /// <summary>
         /// managing the task's entity menu.

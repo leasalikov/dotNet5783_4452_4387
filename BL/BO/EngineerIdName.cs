@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 
-public class EngineerInList
+public class EngineerIdName
 {
     public required int ID { get; set; }
     public required string Name { get; set; }
