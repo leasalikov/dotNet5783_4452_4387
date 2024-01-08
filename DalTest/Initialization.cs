@@ -67,11 +67,12 @@ public static class Initialization
 
         for (int i = 0; i < 100; i++)
         {
+            Random s_rand = new Random();
             DateTime Production = start.AddMonths(s_rand.Next(range));
             int longTime = s_rand.Next(30, 250);
             int IDEngineer = newEngineers[s_rand.Next(newEngineers.Count)].ID;
             EngineerLevelEnum Difficulty = (EngineerLevelEnum)new Random().Next(Enum.GetValues(typeof(EngineerLevelEnum)).Length);
-            DO.Task new_task = new(0, null, null, false, Production, null, null, longTime, null, null, null, null, IDEngineer, Difficulty);
+            DO.Task new_task = new(0, null, null, false, Production, null, null, null, null, null, null, null, IDEngineer, Difficulty); ;
             s_dal!.Task.Create(new_task);
         }
     }
