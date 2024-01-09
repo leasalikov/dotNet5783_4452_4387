@@ -7,7 +7,7 @@ public class Task
     public string? Description { get; set; }
     public required DateTime Production { get; set; }
     public required Status TaskStatus { get; set; }
-    public List<TaskInList>? TaskInLists { get; set; }
+    public List<TaskInList>? TaskList { get; set; }
     public required MilestoneIdNickname RelatedMilestone { get; set; }
     public DateTime? EstimatedStartDate { get; set; }
     public DateTime? AcualStartNate { get; set; }
@@ -16,7 +16,7 @@ public class Task
     public DateTime? AcualEndNate { get; set; }
     public string? Product { get; set; }
     public string? Remaeks { get; set; }
-    public EngineerIdName? EngineerIdName { get; init; }
+    public TasksEngineer? EngineerIdName { get; init; }
     public required EngineerLevelEnum Difficulty { get; set; }
 
 }

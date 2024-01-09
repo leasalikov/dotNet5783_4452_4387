@@ -4,10 +4,8 @@ using BlApi;
 using BO;
 using DalApi;
 using DO;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 
 internal class TaskImplementation : ITask
 {
@@ -29,21 +27,6 @@ internal class TaskImplementation : ITask
         {
             return 0;
         }
-        //DO.Task doTask = new DO.Task
-        //{
-        //    ID = boTask.ID,
-        //    Description = boTask.Description,
-        //    Nickname = boTask.Nickname,
-        //    Milestone = false,
-        //    Production = boTask.Production,
-        //    Start = ,///////////
-        //    AcualStartNate = boTask.AcualStartNate,
-        //    longTime = boTask.longTime,
-        //    deadline = boTask.deadline,
-        //    AcualEndNate = boTask.AcualEndNate,
-        //    Product = boTask.Product,
-        //    Remaeks = boTask.Remaeks,
-        //};
     }
     public void Delete(int id)
     {
@@ -98,16 +81,13 @@ internal class TaskImplementation : ITask
     {
         return new BO.Task
         {
-            ID = doTask.ID,
-            Nickname = doTask.Nickname,
+            ID = doTask.ID!,
+            Nickname = doTask.Nickname!,
             Description = doTask.Description,
             Production = doTask.Production,
-            TaskStatus = (BO.Status)(doTask.EstimatedStartDate is null ? 0
-                            : doTask.AcualStartNate is null ? 1
-                            : doTask.AcualEndNate is null ? 2
-                            : 3),
-            TaskInLists = null,
-            RelatedMilestone = null,
+            TaskStatus = FindStatus(doTask),
+            TaskList = FindTaskList(doTask.ID),
+            RelatedMilestone = findMilestone(TaskList),
             EstimatedStartDate = doTask.EstimatedStartDate,
             AcualStartNate = doTask.AcualStartNate,
             EstimatedEndDate = doTask.EstimatedEndDate,
@@ -116,20 +96,22 @@ internal class TaskImplementation : ITask
             Product = doTask.Product,
             Remaeks = doTask.Remaeks,
             Difficulty = (BO.EngineerLevelEnum)doTask.Difficulty,
-            EngineerIdName = findEngineer(doTask.ID)
+            EngineerIdName = findEngineer(doTask.IDEngineer)
         };
     }
+
     private DO.Task BOToDO(BO.Task boTask)
     {
         if (boTask.ID <= 0 || string.IsNullOrEmpty(boTask.Nickname))
         {
             throw new NotImplementedException();
         }
-        return new DO.Task { ID = boTask.ID, Nickname = boTask.Nickname,
-            Description = boTask.Description, Production=boTask.Production,
-            //TaskStatus= boTask.TaskStatus,
-            //TaskInLists,
-            //RelatedMilestone,
+        return new DO.Task { 
+            ID = boTask.ID, 
+            Description = boTask.Description,
+            Nickname = boTask.Nickname,
+            Milestone = false,//??
+            Production =boTask.Production,
             EstimatedStartDate = boTask.EstimatedStartDate,
             AcualStartNate = boTask.AcualStartNate,
             EstimatedEndDate = boTask.EstimatedEndDate,
@@ -137,20 +119,62 @@ internal class TaskImplementation : ITask
             AcualEndNate = boTask.AcualEndNate,
             Product = boTask.Product,
             Remaeks = boTask.Remaeks,
+            IDEngineer = boTask.EngineerIdName.ID,
             Difficulty = (DO.EngineerLevelEnum)boTask.Difficulty,
-          //  EngineerIdName = findEngineer(boTask.ID)
         };
     }
 
-    private EngineerIdName findEngineer(int id)
+    private TasksEngineer findEngineer(int id)
     {
         try
         {
-            return new BO.EngineerIdName { ID = id, Name = _dal.Engineer.Read(id).FName };
+            return new BO.TasksEngineer { ID = id, Name = _dal.Engineer.Read(id)!.Name };
         }
         catch
         {
             throw new NotImplementedException();
         }
+    }
+    private List<TaskInList> FindTaskList(int TaskId)
+    {
+        var idList = (from doDependence in _dal.Dependence.ReadAll()
+                      where TaskId == doDependence.IDTask
+                      select doDependence.IDPreviousTask)
+                .ToList();
+
+        List<TaskInList> taskList = idList
+            .Select(id => _dal.Task.Read(id)!)
+            .Select(task => new TaskInList
+            {
+                ID = task.ID,
+                Nickname = task.Nickname!,
+                Description = task.Description!,
+                Status = FindStatus(task)
+            })
+            .ToList();
+
+        return taskList;
+    }
+
+    private BO.Status FindStatus(DO.Task doTask)
+    {
+        return (BO.Status)(doTask.EstimatedStartDate is null ? 0
+                            : doTask.AcualStartNate is null ? 1
+                            : doTask.AcualEndNate is null ? 2
+                            : 3);
+    }
+    
+    private BO.MilestoneIdNickname findMilestone(List<TaskInList> tasks)
+    {
+        from task in tasks
+        where _dal.Task.Read(task.ID).Milestone == true
+        select new BO.MilestoneIdNickname
+        {
+            ID = task.ID,
+            NickName = task.Nickname!
+
+        }
+
+
     }
 }

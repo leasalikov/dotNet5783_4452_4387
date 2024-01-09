@@ -70,11 +70,11 @@ internal class EngineerImplementation : IEngineer
         return new BO.Engineer
         {
             ID = doEngineer.ID,
-            Name = doEngineer.FName,
+            Name = doEngineer.Name,
             Email = doEngineer.Email,
             EngineerLevel = (BO.EngineerLevelEnum)doEngineer.EngineerLevel,
             PriceOfHour = doEngineer.PriceOfHour,
-            //Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
+            Task = (from DO.Task doTask in _dal.Task.ReadAll() where doTask.IDEngineer == doEngineer.ID select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname }).First()
         };
     }
 
@@ -84,6 +84,6 @@ internal class EngineerImplementation : IEngineer
         {
             throw new NotImplementedException();
         }
-        return new DO.Engineer { ID = boEngineer.ID, FName = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
+        return new DO.Engineer { ID = boEngineer.ID, Name = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
     }
 }

@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
-            <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+            <ComboBox HorizontalAlignment="Left" Grid.Column="1" Width="400"/>
         </Grid>
         <ListView Grid.Row="1">
             <ListView.View>
@@ -29,6 +29,7 @@
             </ListView.View>
         </ListView>
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="0" Margin="933,531,0,0" Grid.Row="1" VerticalAlignment="Top" Width="0"/>
 
     </Grid>
 </Window>
