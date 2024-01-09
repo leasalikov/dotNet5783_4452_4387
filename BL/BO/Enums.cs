@@ -1,6 +1,6 @@
 ﻿
 namespace BO;
-public enum EngineerLevel
+public enum EngineerLevelEnum
 {
     Novice, AdvancedBeginner, Competent, Proficient, Expert
 }

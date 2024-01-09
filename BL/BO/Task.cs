@@ -17,6 +17,6 @@ public class Task
     public string? Product { get; set; }
     public string? Remaeks { get; set; }
     public EngineerIdName? EngineerIdName { get; init; }
-    public required EngineerLevel Difficulty { get; set; }
+    public required EngineerLevelEnum Difficulty { get; set; }
 
 }
