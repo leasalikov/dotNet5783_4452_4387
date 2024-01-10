@@ -23,7 +23,7 @@ internal class EngineerImplementation : IEngineer
         return e.ToIntNullable("ID") is null ? null : new Engineer()
         {
             ID = (int)e.Element("ID")!,
-            FName = (string)e.Element("FName")!,
+            Name = (string)e.Element("Name")!,
             Email = (string)e.Element("Email")!,
             EngineerLevel = (EngineerLevelEnum)XMLTools.ToEnumNullable<EngineerLevelEnum>(e, "EngineerLevel")!,
             PriceOfHour = (float)e.Element("PriceOfHour")!
@@ -38,8 +38,8 @@ internal class EngineerImplementation : IEngineer
     static IEnumerable<XElement> CreateEngineerElement(Engineer engineer)
     {
         yield return new XElement("ID", engineer.ID);
-        if (engineer.FName is not null)
-            yield return new XElement("FName", engineer.FName);
+        if (engineer.Name is not null)
+            yield return new XElement("Name", engineer.Name);
         if (engineer.Email is not null)
             yield return new XElement("Email", engineer.Email);
         //if (engineer.EngineerLevel != null)
@@ -52,15 +52,6 @@ internal class EngineerImplementation : IEngineer
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="DalDoesNotExistException"></exception>
- 
-
-
-    //public Engineer? Read(int id)
-    //{
-    //    GetEngineer(XMLTools.LoadListFromXMLElement(s_engineers)?.Elements()
-    //     GetEngineer.FirstOrDefault(st => st.ToIntNullable("ID") == id) ?? null);
-    //}
-    //throw new DalDoesNotExistException($"Does not exist");
 
     public Engineer? Read(int id)
     {

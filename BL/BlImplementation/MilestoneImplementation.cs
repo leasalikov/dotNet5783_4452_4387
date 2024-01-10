@@ -1,7 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
-using DO;
 
 internal class MilestoneImplementation : IMilestone
 {
@@ -16,16 +15,4 @@ internal class MilestoneImplementation : IMilestone
     {
         throw new NotImplementedException();
     }
-    //public BO.Milestone ReadAll(int id)
-    //{
-    //    _dal.Dependence.Read(id){
-
-    //    };
-    //    throw new NotImplementedException();
-    //}
-
-    //public BO.Milestone Update(int id)
-    //{
-    //    throw new NotImplementedException();
-    //}
 }

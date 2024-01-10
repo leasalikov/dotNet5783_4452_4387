@@ -2,7 +2,7 @@
 namespace BO;
 public enum EngineerLevelEnum
 {
-    Novice, AdvancedBeginner, Competent, Proficient, Expert
+    Novice, AdvancedBeginner, Competent, Proficient, Expert, None
 }
 
 public enum Status
