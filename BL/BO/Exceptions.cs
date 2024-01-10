@@ -17,3 +17,16 @@ public class BlAlreadyExistsException : Exception
     public BlAlreadyExistsException(string message) : base(message) { }
     public BlAlreadyExistsException(string message, Exception innerException) : base(message, innerException) { }
 }
+public class BlDependesOnIt: Exception
+{
+    public BlDependesOnIt(string? message) : base(message) { }
+}
+
+public class BlIncorrectDetails : Exception
+{
+    public BlIncorrectDetails(string? message) : base(message) { }
+}
+public class EngineerHaveTask : Exception
+{
+    public EngineerHaveTask(string? message) : base(message) { }
+}

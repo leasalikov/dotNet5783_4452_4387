@@ -1,33 +1,45 @@
 ﻿
 namespace BlImplementation;
 using BlApi;
+using BO;
 
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-     public int Create(BO.Engineer boEngineer)
+     public void Create(BO.Engineer boEngineer)
     {
         try
         {
             DO.Engineer doEngineer = BOToDO(boEngineer);
             _dal.Engineer.Create(doEngineer);
-            return doEngineer.ID;
+        }
+        catch (BlIncorrectDetails ex)
+        {
+            throw ex;
         }
         catch {
-            return 0;
+            throw new BO.BlAlreadyExistsException($"Engineer number {boEngineer.ID} exists");
         }
     }
 
     public void Delete(int id)
     {
-        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
-        if ((from DO.Task doTask in _dal.Task.ReadAll() select doTask.IDEngineer == id)==null) {
+        try
+        {
+            if (_dal.Task.ReadAll().Any(task => task.IDEngineer == id))
+            {
+                throw new BO.EngineerHaveTask("There are tasks that rely on it");
+            }
             _dal.Engineer.Delete(id);
         }
-        else
+        catch(EngineerHaveTask ex)
         {
-            throw new NotImplementedException();
+            throw ex;
+        }
+        catch
+        {
+            throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
     }
 
@@ -36,15 +48,10 @@ internal class EngineerImplementation : IEngineer
         try
         {
             DO.Engineer? myEngineer = _dal.Engineer.Read(id);
-            if (myEngineer == null)
-            {
-                throw new InvalidOperationException();//חריגה שאין מתכנת עם הID שהתקבל
-            }
             return DOToBO(myEngineer);
         }
         catch {
-            /////////////////////??????????????????????????
-            return null;
+            throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
     }
 
@@ -60,8 +67,13 @@ internal class EngineerImplementation : IEngineer
         {
             _dal.Engineer.Update(BOToDO(boEngineer));
         }
+        catch (BlIncorrectDetails ex)
+        {
+            throw ex;
+        }
         catch
         {
+            throw new BlDoesNotExistException($"Engineer id {boEngineer.ID} dos't exist");
         }
     }
 
@@ -82,7 +94,7 @@ internal class EngineerImplementation : IEngineer
     {
         if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour > 0 || string.IsNullOrEmpty(boEngineer.Email))
         {
-            throw new NotImplementedException();
+            throw new BlIncorrectDetails("The Detals are incorrect");
         }
         return new DO.Engineer { ID = boEngineer.ID, Name = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
     }

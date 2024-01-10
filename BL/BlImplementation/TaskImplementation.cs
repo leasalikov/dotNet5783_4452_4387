@@ -2,43 +2,44 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
-using DalApi;
-using DO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    public int Create(BO.Task boTask)
+    public void Create(BO.Task boTask)
     {
-        if (boTask.ID <= 0 || boTask.Nickname == null)
-        {
-            throw new BO.BlNullPropertyException("ID and Nickname must have valid values");
-        }
         try
         {
             DO.Task doTask = BOToDO(boTask);
             _dal.Task.Create(doTask);
-            return doTask.ID;
+        }
+        catch (BO.BlNullPropertyException ex)
+        {
+            throw ex;
         }
         catch
         {
-            return 0;
+            throw new BO.BlAlreadyExistsException($"Task number {boTask.ID} exists");
         }
     }
     public void Delete(int id)
     {
-        DO.Task? doTask = _dal.Task.Read(id);
-        // if ((from DO.Task doTask in _dal.Task.ReadAll() select doTask.IDEngineer == id) == null)
-        if ((from DO.Engineer doEngineer in _dal.Engineer.ReadAll() select doEngineer.ID == id) == null)//?????????????????????????
+        try
         {
+            if (_dal.Dependence.ReadAll().Any(dependence => dependence!.IDPreviousTask == id))
+            {
+                throw new BO.BlDependesOnIt("There are tasks that rely on it");
+            }
             _dal.Task.Delete(id);
         }
-        else
+        catch (BO.BlDependesOnIt ex)
         {
-            throw new NotImplementedException();
+            throw ex;
+        }
+        catch
+        {
+            throw new BlDoesNotExistException($"Task number {id} dos't exist");
         }
     }
 
@@ -47,23 +48,18 @@ internal class TaskImplementation : ITask
         try
         {
             DO.Task? myTask = _dal.Task.Read(id);
-            if (myTask == null)
-            {
-                throw new InvalidOperationException();//חריגה שאין מתכנת עם הID שהתקבל
-            }
             return DOToBO(myTask);
         }
         catch
         {
-            /////////////////////??????????????????????????
-            return null;
+            throw new BlDoesNotExistException($"Task number {id} dos't exist");
         }
     }
 
     public IEnumerable<BO.Task> ReadAll()
     {
-        return from DO.Task doTask in _dal.Task.ReadAll()
-               select DOToBO(doTask);
+        return _dal.Task.ReadAll()
+               .Select(doTask => DOToBO(doTask!));
     }
 
     public void Update(BO.Task boTask)
@@ -72,8 +68,13 @@ internal class TaskImplementation : ITask
         {
             _dal.Task.Update(BOToDO(boTask));
         }
+        catch (BO.BlNullPropertyException ex)
+        {
+            throw ex;
+        }
         catch
         {
+            throw new BlDoesNotExistException($"Task number {boTask.ID} dos't exist");
         }
     }
 
@@ -87,7 +88,7 @@ internal class TaskImplementation : ITask
             Production = doTask.Production,
             TaskStatus = FindStatus(doTask),
             TaskList = FindTaskList(doTask.ID),
-            RelatedMilestone = findMilestone(TaskList),
+            RelatedMilestone = findMilestone(doTask.ID),
             EstimatedStartDate = doTask.EstimatedStartDate,
             AcualStartNate = doTask.AcualStartNate,
             EstimatedEndDate = doTask.EstimatedEndDate,
@@ -104,14 +105,15 @@ internal class TaskImplementation : ITask
     {
         if (boTask.ID <= 0 || string.IsNullOrEmpty(boTask.Nickname))
         {
-            throw new NotImplementedException();
+            throw new BlIncorrectDetails("ID and Nickname must have valid values");
         }
-        return new DO.Task { 
-            ID = boTask.ID, 
+        return new DO.Task
+        {
+            ID = boTask.ID,
             Description = boTask.Description,
             Nickname = boTask.Nickname,
-            Milestone = false,//??
-            Production =boTask.Production,
+            Milestone = false,
+            Production = boTask.Production,
             EstimatedStartDate = boTask.EstimatedStartDate,
             AcualStartNate = boTask.AcualStartNate,
             EstimatedEndDate = boTask.EstimatedEndDate,
@@ -119,7 +121,7 @@ internal class TaskImplementation : ITask
             AcualEndNate = boTask.AcualEndNate,
             Product = boTask.Product,
             Remaeks = boTask.Remaeks,
-            IDEngineer = boTask.EngineerIdName.ID,
+            IDEngineer = boTask.EngineerIdName!.ID,
             Difficulty = (DO.EngineerLevelEnum)boTask.Difficulty,
         };
     }
@@ -135,14 +137,18 @@ internal class TaskImplementation : ITask
             throw new NotImplementedException();
         }
     }
+
+    private List<int> FindIdList(int TaskId)
+    {
+        return (from doDependence in _dal.Dependence.ReadAll()
+                where TaskId == doDependence.IDTask
+                select doDependence.IDPreviousTask)
+        .ToList();
+    }
     private List<TaskInList> FindTaskList(int TaskId)
     {
-        var idList = (from doDependence in _dal.Dependence.ReadAll()
-                      where TaskId == doDependence.IDTask
-                      select doDependence.IDPreviousTask)
-                .ToList();
 
-        List<TaskInList> taskList = idList
+        return FindIdList(TaskId)
             .Select(id => _dal.Task.Read(id)!)
             .Select(task => new TaskInList
             {
@@ -152,8 +158,6 @@ internal class TaskImplementation : ITask
                 Status = FindStatus(task)
             })
             .ToList();
-
-        return taskList;
     }
 
     private BO.Status FindStatus(DO.Task doTask)
@@ -163,18 +167,17 @@ internal class TaskImplementation : ITask
                             : doTask.AcualEndNate is null ? 2
                             : 3);
     }
-    
-    private BO.MilestoneIdNickname findMilestone(List<TaskInList> tasks)
+
+    private BO.MilestoneIdNickname findMilestone(int TaskId)
     {
-        from task in tasks
-        where _dal.Task.Read(task.ID).Milestone == true
-        select new BO.MilestoneIdNickname
-        {
-            ID = task.ID,
-            NickName = task.Nickname!
-
-        }
-
-
+        BO.MilestoneIdNickname? milestone = (from id in FindIdList(TaskId)
+                                             let task = _dal.Task.Read(id)!
+                                             where task.Milestone == true
+                                             select new BO.MilestoneIdNickname
+                                             {
+                                                 ID = id!,
+                                                 NickName = task.Nickname!
+                                             }).FirstOrDefault();
+        return milestone;
     }
 }
