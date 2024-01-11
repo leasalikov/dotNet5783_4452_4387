@@ -10,6 +10,15 @@ namespace PL
             (Enum.GetValues(typeof(BO.EngineerLevelEnum)) as IEnumerable<BO.EngineerLevelEnum>)!;
 
         public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
-        public BO.EngineerLevelEnum EngineerList { get; set; } = BO.EngineerLevelEnum.None;
+
+        //        namespace PL;
+        //    internal class SemestersCollection : IEnumerable
+        //    {
+        //        static readonly IEnumerable<BO.SemesterNames> s_enums =
+        //    (Enum.GetValues(typeof(BO.SemesterNames)) as IEnumerable<BO.SemesterNames>)!;
+
+        //        public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
+        //    }
+
     }
 }

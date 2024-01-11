@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using BO;
 using DalApi;
 
@@ -18,8 +19,9 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
-            var temp = (from engineer in s_bl.Engineer.ReadAll()
-                        select new EngineerInList { Name = engineer.Name, Email = engineer.Email }).ToList();
+            var temp = EngineerToList(s_bl?.Engineer.ReadAll());
+            //var temp = (from engineer in s_bl.Engineer.ReadAll()
+            //            select new EngineerInList { Name = engineer.Name, Email = engineer.Email }).ToList();
             EngineerList = temp == null ? new() : new(temp);
         }
 
@@ -32,21 +34,19 @@ namespace PL.Engineer
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
+        public BO.EngineerLevelEnum LevelEngineer { get; set; } = BO.EngineerLevelEnum.None;
+        //public BO.SemesterNames Semester { get; set; } = BO.SemesterNames.None;
         private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var temp = EngineerList == BO.EngineerLevelEnum.None ?
-            s_bl?.Engineer.ReadAll() :
-            s_bl?.Engineer.ReadAll(item => item.InEngineer == Engineer);
-            EngineerInList = temp == null ? new() : new(temp);
+        {            var temp = LevelEngineer == BO.EngineerLevelEnum.None ?
+            EngineerToList(s_bl?.Engineer.ReadAll()) :
+            EngineerToList(s_bl?.Engineer.ReadAll(item => item.EngineerLevel == LevelEngineer));//item => item.EngineerLevel == LevelEngineer
+            EngineerList = temp == null ? new() : new(temp);
         }
-
-        //private void cbSemesterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    var temp = Semester == BO.SemesterNames.None ?
-        //    s_bl?.Course.ReadAll() :
-        //    s_bl?.Course.ReadAll(item => item.InSemester == Semester);
-        //    CourseList = temp == null ? new() : new(temp);
-        //}
+        private IEnumerable<BO.EngineerInList> EngineerToList(IEnumerable<BO.Engineer> engineers)
+        {
+            return (from BO.Engineer engineer in engineers
+                    select new EngineerInList { Name = engineer.Name, Email = engineer.Email }).ToList();
+        }
     }
 }
 

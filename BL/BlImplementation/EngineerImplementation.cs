@@ -55,10 +55,16 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
-    public IEnumerable<BO.Engineer> ReadAll()
+    public IEnumerable<BO.Engineer> ReadAll(BO.EngineerLevelEnum level = EngineerLevelEnum.None)
     {
+        if(level == EngineerLevelEnum.None)
+        {
+            return from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                   select DOToBO(doEngineer);
+        }
         return from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-                select DOToBO(doEngineer);
+               where (BO.EngineerLevelEnum)doEngineer.EngineerLevel == level
+               select DOToBO(doEngineer);
     }
 
     public void Update(BO.Engineer boEngineer)

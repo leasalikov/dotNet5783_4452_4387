@@ -22,8 +22,10 @@
             <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
             <ComboBox SelectionChanged="cbEngineerSelector_SelectionChanged"  Grid.Column="1" SelectedValue="{Binding EngineerList, Mode=TwoWay}"
                     ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}" Height="43" VerticalAlignment="Top"/>
+
+
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding LevelEngineer}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
