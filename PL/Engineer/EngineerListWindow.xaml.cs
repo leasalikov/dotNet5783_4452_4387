@@ -42,6 +42,16 @@ namespace PL.Engineer
             EngineerToList(s_bl?.Engineer.ReadAll(item => item.EngineerLevel == LevelEngineer));//item => item.EngineerLevel == LevelEngineer
             EngineerList = temp == null ? new() : new(temp);
         }
+
+
+        //private void ComboBox_SelectionByEngineerExperience(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var temp = Experience == BO.EngineerExperience.All ?
+        //    s_bl?.Engineer.ReadAll() :
+        //    s_bl?.Engineer.ReadAll(item => (int)item!.Level == (int)Experience);
+        //    EngineerList = temp == null ? new() : new(temp);
+
+        //}
         private IEnumerable<BO.EngineerInList> EngineerToList(IEnumerable<BO.Engineer> engineers)
         {
             return (from BO.Engineer engineer in engineers
