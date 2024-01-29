@@ -32,14 +32,13 @@ namespace PL.Engineer
         }
 
         public static readonly DependencyProperty EngineerListProperty =
-            DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
-
+                DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
         public BO.EngineerLevelEnum LevelEngineer { get; set; } = BO.EngineerLevelEnum.None;
         //public BO.SemesterNames Semester { get; set; } = BO.SemesterNames.None;
         private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {            var temp = LevelEngineer == BO.EngineerLevelEnum.None ?
             EngineerToList(s_bl?.Engineer.ReadAll()) :
-            EngineerToList(s_bl?.Engineer.ReadAll(item => item.EngineerLevel == LevelEngineer));//item => item.EngineerLevel == LevelEngineer
+            EngineerToList(s_bl?.Engineer.ReadAll(LevelEngineer));//item => item.EngineerLevel == LevelEngineer
             EngineerList = temp == null ? new() : new(temp);
         }
         private IEnumerable<BO.EngineerInList> EngineerToList(IEnumerable<BO.Engineer> engineers)
