@@ -20,15 +20,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
-            <ComboBox SelectionChanged="cbEngineerSelector_SelectionChanged"  Grid.Column="1" SelectedValue="{Binding EngineerList, Mode=TwoWay}"
-                    ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}" Height="43" VerticalAlignment="Top"/>
-
+            <!--<ComboBox Grid.Column="1" SelectedValue="{Binding EngineerList, Mode=TwoWay}"
+                ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}"/>-->
+            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedEngineer, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}"/>
 
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding LevelEngineer}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
                 </GridView>
             </ListView.View>
         </ListView>
