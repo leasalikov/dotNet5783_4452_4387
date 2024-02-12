@@ -31,8 +31,9 @@ namespace PL.Engineer
 
         public static readonly DependencyProperty EngineerListProperty =
                 DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
+        
         public BO.EngineerLevelEnum LevelEngineer { get; set; } = BO.EngineerLevelEnum.None;
-
+        //לא עובד???????
         private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tempEngineerList = LevelEngineer == BO.EngineerLevelEnum.None ?
@@ -41,6 +42,11 @@ namespace PL.Engineer
             EngineerList = tempEngineerList == null ? new() : new(tempEngineerList);
         }
 
+        //private void cbSemesterSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    CourseList = (Semester == BO.SemesterNames.None) ?
+        //        s_bl?.Course.ReadAll()! : s_bl?.Course.ReadAll(item => item.InSemester == Semester)!;
+        //}
 
         //private void ComboBox_SelectionByEngineerExperience(object sender, SelectionChangedEventArgs e)
         //{

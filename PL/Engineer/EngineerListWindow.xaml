@@ -22,7 +22,8 @@
             <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
             <!--<ComboBox Grid.Column="1" SelectedValue="{Binding EngineerList, Mode=TwoWay}"
                 ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}"/>-->
-            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedEngineer, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}"/>
+            <ComboBox Grid.Column="1" SelectedItem="{Binding SelectedEngineer, Mode=TwoWay}" 
+					  ItemsSource="{Binding Source={StaticResource EngineersTeamKey}}"/>
 
         </Grid>
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">

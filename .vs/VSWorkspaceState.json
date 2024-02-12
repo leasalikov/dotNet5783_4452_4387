@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PL"
+    "\\PL",
+    "\\PL\\Engineer"
   ],
-  "SelectedNode": "\\PL\\MainWindow.xaml",
+  "SelectedNode": "\\PL\\Engineer\\EngineerWindow.xaml",
   "PreviewInSolutionExplorer": false
 }
