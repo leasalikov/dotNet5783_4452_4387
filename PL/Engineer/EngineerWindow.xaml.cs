@@ -25,7 +25,7 @@ namespace PL.Engineer
 
         public EngineerWindow()
         {
-            int s_bl.Id! = 0;
+            //int s_bl.Id! = 0;
             InitializeComponent();
         }
     }
