@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Click="btnEngineers_Click" HorizontalAlignment="Center" Height="50" Width="100" Content="Handle Engineers"/>
+        <Button Click="btnEngineers_Click" HorizontalAlignment="Left" Height="50" Width="100" Content="Handle Engineers"/>
+        <Button Click="btnTasks_Click" HorizontalAlignment="Center" Height="50" Width="100" Content="Handle Task"/>
+        <Button Click="btnInitDB_Click" HorizontalAlignment="Right" Height="50" Width="100" Content="Init DB"/>
     </Grid>
   
 </Window>

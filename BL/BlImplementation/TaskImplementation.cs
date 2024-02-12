@@ -2,6 +2,7 @@
 namespace BlImplementation;
 using BlApi;
 using BO;
+using System.Reflection.Emit;
 
 internal class TaskImplementation : ITask
 {
@@ -56,10 +57,17 @@ internal class TaskImplementation : ITask
         }
     }
 
-    public IEnumerable<BO.Task> ReadAll()
+    public IEnumerable<BO.Task> ReadAll(BO.Status status = Status.All)
     {
-        return _dal.Task.ReadAll()
+        if (status == Status.All)
+        {
+            return _dal.Task.ReadAll()
                .Select(doTask => DOToBO(doTask!));
+        }
+        return from DO.Task doTask in _dal.Task.ReadAll()
+               let boTask = DOToBO(doTask)
+               where (BO.Status)boTask.TaskStatus == status
+               select boTask;
     }
 
     public void Update(BO.Task boTask)
