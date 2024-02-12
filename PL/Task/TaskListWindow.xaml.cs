@@ -35,7 +35,6 @@ public partial class TaskListWindow : Window
 
     private void cbTaskSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        TaskList = TaskToList((Status == BO.Status.All) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(Status)!);
+        TaskList = TaskToList(s_bl?.Task.ReadAll(Status));
     }
 }
