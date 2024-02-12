@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="450" Width="800">
+        Title="TaskWindow" Height="450" Width="800"
+        DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Nickname:" Grid.Row="0" />
+        <TextBox Text="{Binding Nickname}" Grid.Row="0" />
+
+        <Label Content="Description:" />
+        <TextBox Text="{Binding Description}" />
+
+        <Label Content="Production Date:" />
+        <DatePicker SelectedDate="{Binding Production}" />
+
+        <Label Content="Task status:" />
+        <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" />
+
+        <Label Content="Dependencies list :" />
+        <DatePicker SelectedDate="{Binding TaskList}" />
+
+        <Label Content="Related milestone:" />
+        <DatePicker SelectedDate="{Binding RelatedMilestone}" />
+
+        <Label Content="Estimated start date:" />
+        <DatePicker SelectedDate="{Binding EstimatedStartDate}" />
+
+        <Label Content="Acual start nate:" />
+        <DatePicker SelectedDate="{Binding AcualStartNate}" />
+
+        <Label Content="Estimated end date:" />
+        <DatePicker SelectedDate="{Binding EstimatedEndDate}" />
+
+        <Label Content="deadline:" />
+        <DatePicker SelectedDate="{Binding deadline}" />
+
+        <Label Content="Acual end nate:" />
+        <DatePicker SelectedDate="{Binding AcualEndNate}" />
+
+        <Label Content="Product:" />
+        <TextBox Text="{Binding Product}" />
+
+        <Label Content="Remaeks:" />
+        <TextBox Text="{Binding Remaeks}" />
+
+        <Label Content="EngineerIdName:" />
+        <DatePicker SelectedDate="{Binding EngineerIdName}" />
+
+        <Label Content="Difficulty:" />
+        <DatePicker SelectedDate="{Binding Difficulty}" Margin="10,0,-10,0" />
+
+        <Button Grid.Column="0" 
+                Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+                HorizontalAlignment="Left" Margin="3,0,0,0"  VerticalAlignment="Top" Padding="5" 
+                Click="btnAddUpdate_Click"/>
     </Grid>
 </Window>

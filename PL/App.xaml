@@ -6,5 +6,6 @@
     <Application.Resources>
         <local:EngineersTeam x:Key="EngineersTeamKey" />
         <local:TasksCollection x:Key="TasksCollectionKey" />
+        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
     </Application.Resources>
 </Application>
