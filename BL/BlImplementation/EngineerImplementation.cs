@@ -7,12 +7,12 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-     public void Create(BO.Engineer boEngineer)
+     public int Create(BO.Engineer boEngineer)
     {
         try
         {
             DO.Engineer doEngineer = BOToDO(boEngineer);
-            _dal.Engineer.Create(doEngineer);
+            return _dal.Engineer.Create(doEngineer);
         }
         catch (BlIncorrectDetails ex)
         {
@@ -100,7 +100,7 @@ internal class EngineerImplementation : IEngineer
 
     private DO.Engineer BOToDO(BO.Engineer boEngineer)
     {
-        if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour > 0 || string.IsNullOrEmpty(boEngineer.Email))
+        if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour < 35 || string.IsNullOrEmpty(boEngineer.Email))
         {
             throw new BlIncorrectDetails("The Detals are incorrect");
         }

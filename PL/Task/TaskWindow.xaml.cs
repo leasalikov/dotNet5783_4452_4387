@@ -1,5 +1,7 @@
 ﻿using BO;
 using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +16,33 @@ public partial class TaskWindow : Window
     public TaskWindow(int Id = 0)
     {
         InitializeComponent();
-        CurrentTask = Id == 0 ? s_bl?.Task.Read(Id) : null;
+        if(Id == 0)
+        {
+            CurrentTask = new BO.Task
+            {
+                ID = 0,
+                Nickname = "",
+                Description = "",
+                Production = new(),
+                TaskStatus = 0,
+                TaskList = null,
+                RelatedMilestone = null,
+                EstimatedStartDate = new(),
+                AcualStartNate = new(),
+                EstimatedEndDate = new(),
+                deadline = new(),
+
+                AcualEndNate = new(),
+                Product = "",
+                Remaeks = "",
+                EngineerIdName = null,
+                Difficulty = 0
+            };
+        }
+        else
+        {
+            CurrentTask = Id == 0 ? s_bl?.Task.Read(Id) : null;
+        }
     }
 
 

@@ -24,28 +24,33 @@ namespace PL.Engineer;
 public partial class EngineerWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public BO.Engineer CurrentEngineer
+    {
+        get { return (BO.Engineer)GetValue(EngineerProperty); }
+        set { SetValue(EngineerProperty, value); }
+    }
+
+    public static readonly DependencyProperty EngineerProperty =
+        DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
     public EngineerWindow(int Id = 0)
     {
         InitializeComponent();
-        CurrentEngineer = Id == 0 ? s_bl?.Engineer.Read(Id) : null;
-    //    if (Id == 0)
-    //    {
-    //        CurrentEngineer = new BO.Engineer
-    //        {
-    //        };
-    //    }
-    //    else
-    //        CurrentEngineer = s_bl?.Engineer.Read(Id);
+        if (Id == 0)
+        {
+            CurrentEngineer = new BO.Engineer
+            {
+                ID = 0,
+                Name = "",
+                Email = "",
+                EngineerLevel = 0,
+            };
+        }
+        else
+        {
+            CurrentEngineer = s_bl?.Engineer.Read(Id);
+        }
     }
-    public BO.Engineer CurrentEngineer
-    {
-        get { return (BO.Engineer)GetValue(CurrentEngineerProperty); }
-        set { SetValue(CurrentEngineerProperty, value); }
-    }
-
-    public static readonly DependencyProperty CurrentEngineerProperty =
-        DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
@@ -53,9 +58,15 @@ public partial class EngineerWindow : Window
         try
         {
             if (content == "Add")
-                s_bl.Engineer.Create(CurrentEngineer);
+            {
+                int id = s_bl.Engineer.Create(CurrentEngineer);
+                MessageBox.Show($"Engineer with id={id} was successfully added!");
+            }
             else
+            {
                 s_bl.Engineer.Update(CurrentEngineer);
+                MessageBox.Show($"Engineer with id={CurrentEngineer.ID} was successfully added!");
+            }
 
         }
         catch (Exception ex) { }
