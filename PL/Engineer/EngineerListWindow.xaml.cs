@@ -19,7 +19,7 @@ public partial class EngineerListWindow : Window
     public EngineerListWindow()
     {
         InitializeComponent();
-        this.DataContext = this;
+        DataContext = this;
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
     public IEnumerable<BO.EngineerInList> EngineerList
@@ -30,14 +30,6 @@ public partial class EngineerListWindow : Window
 
     public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
-
-    //private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    //{
-    //    var tempEngineerList = LevelEngineer == BO.EngineerLevelEnum.None ?
-    //                EngineerToList(s_bl?.Engineer.ReadAll()) :
-    //                EngineerToList(s_bl?.Engineer.ReadAll(LevelEngineer));
-    //    EngineerList = tempEngineerList == null ? new() : new(tempEngineerList);
-    //}
 
     private IEnumerable<BO.EngineerInList> EngineerToList(IEnumerable<BO.Engineer> engineers)
     {
@@ -51,8 +43,13 @@ public partial class EngineerListWindow : Window
     }
     private void btnAddEngineer_Click(object sender, RoutedEventArgs e)
     {
-        new EngineerWindow().Show();
+        new EngineerWindow().ShowDialog();
     }
 
+    private void UpdateEngineer(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        BO.EngineerInList? EngineerInList = (sender as ListView)?.SelectedItem as BO.EngineerInList;
+        new EngineerWindow().ShowDialog(EngineerInList.id);
+    }
 }
 
