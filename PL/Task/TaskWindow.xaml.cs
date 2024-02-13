@@ -29,16 +29,16 @@ public partial class TaskWindow : Window
 
     private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
     {
-        int taskId = (int)GetValue(ConvertIdToContentKeyProperty);
-        if ((int)GetValue(ConverIdToContentKeyProperty) == 0)
+        string content = (sender as Button)!.Content.ToString()!;
+        try
         {
+            if (content == "Add")
+                s_bl.Task.Create(CurrentTask);
+            else
+                s_bl.Task.Update(CurrentTask);
 
         }
-        s_bl.Task.Update(CurrentTask);
-        s_bl.Task.Create(CurrentTask);
-        Console.WriteLine("jkjkjkjkjlllll");
+        catch (Exception ex) { }
+
     }
-
-
-
 }

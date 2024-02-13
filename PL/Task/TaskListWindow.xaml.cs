@@ -24,9 +24,7 @@ public partial class TaskListWindow : Window
             TaskList = TaskToList(s_bl?.Task.ReadAll()!);
         }
         catch
-        {
-            Console.WriteLine("jjjjjjjjjjj");
-        }
+        { }
     }
     public IEnumerable<BO.TaskInList> TaskList
     {
