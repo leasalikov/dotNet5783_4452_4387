@@ -49,12 +49,16 @@ public partial class EngineerWindow : Window
 
     private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
     {
-        int engineerId = (int)GetValue(ConvertIdToContentKeyProperty);
-        if ((int)GetValue(ConverIdToContentKeyProperty) == 0)
+        string content = (sender as Button)!.Content.ToString()!;
+        try
         {
+            if (content == "Add")
+                s_bl.Engineer.Create(CurrentEngineer);
+            else
+                s_bl.Engineer.Update(CurrentEngineer);
 
         }
-        s_bl.Task.Update(CurrentTask);
-        s_bl.Task.Create(CurrentTask);
+        catch (Exception ex) { }
+
     }
 }
