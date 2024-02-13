@@ -14,7 +14,8 @@
     </Grid>-->
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,29 +23,28 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Name:" Grid.Row="0" />
-        <TextBox Text="{Binding Name}" />
+        <Label Content="Name:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" />
+        <TextBox Text="{Binding Name}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
-        <Label Content="Email:" Grid.Row="1"/>
-        <TextBox Text="{Binding Email,Mode=TwoWay, NotifyOnValidationError=true, 
-            ValidatesOnExceptions=true}" />
+        <Label Content="Email:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                 Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
-        <Label Content="Engineer level:" Grid.Row="2"/>
+        <Label Content="Engineer level:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" 
-                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="26" Grid.RowSpan="2" VerticalAlignment="Top" Width="100"/>
 
-        <Label Content="Price of hour:" Grid.Row="3"/>
-        <TextBox Text="{Binding PriceOfHour, Mode=TwoWay, NotifyOnValidationError=true, 
-            ValidatesOnExceptions=true}" />
+        <Label Content="Price of hour:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding PriceOfHour, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
-        <Label Content="TaskIdNickname:" Grid.Row="4"/>
-        <TextBox Text="{Binding TaskIdNickname, Mode=TwoWay, NotifyOnValidationError=true, 
-            ValidatesOnExceptions=true}" />
-        <Button Grid.Column="0"
-                Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
-                HorizontalAlignment="Left" Margin="3,0,0,0"  VerticalAlignment="Top" Padding="5" 
-                Click="btnAddUpdate_Click"/>
+        <Label Content="TaskIdNickname:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding TaskIdNickname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
+
+        <Button Grid.Row="5" Grid.Column="1" Content="{Binding Id, Mode=OneTime, 
+            Converter={StaticResource ConverIdToContentKey}}" Click="btnAddUpdate_Click" HorizontalAlignment="Center" Margin="0,10,0,0" Width="60" Height="30"/>
     </Grid>
 </Window>

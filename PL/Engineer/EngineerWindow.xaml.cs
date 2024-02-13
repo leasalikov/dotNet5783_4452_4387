@@ -49,6 +49,12 @@ public partial class EngineerWindow : Window
 
     private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
     {
+        int engineerId = (int)GetValue(ConvertIdToContentKeyProperty);
+        if ((int)GetValue(ConverIdToContentKeyProperty) == 0)
+        {
 
+        }
+        s_bl.Task.Update(CurrentTask);
+        s_bl.Task.Create(CurrentTask);
     }
 }
