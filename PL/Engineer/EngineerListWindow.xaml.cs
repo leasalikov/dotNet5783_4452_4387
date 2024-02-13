@@ -19,7 +19,7 @@ public partial class EngineerListWindow : Window
     public EngineerListWindow()
     {
         InitializeComponent();
-        DataContext = this;
+        //DataContext = this;
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
     public IEnumerable<BO.EngineerInList> EngineerList
@@ -44,12 +44,14 @@ public partial class EngineerListWindow : Window
     private void btnAddEngineer_Click(object sender, RoutedEventArgs e)
     {
         new EngineerWindow().ShowDialog();
+        EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
 
     private void UpdateEngineer(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         BO.EngineerInList? EngineerInList = (sender as ListView)?.SelectedItem as BO.EngineerInList;
         new EngineerWindow(EngineerInList.ID).ShowDialog();
+        EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
 }
 
