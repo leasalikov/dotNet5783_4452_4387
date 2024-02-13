@@ -1,4 +1,5 @@
 ﻿using BO;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,7 +29,14 @@ public partial class TaskWindow : Window
 
     private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
     {
-        //TaskList = TaskToList(s_bl?.Task.ReadAll(Status));
+        int taskId = (int)GetValue(ConvertIdToContentKeyProperty);
+        if ((int)GetValue(ConverIdToContentKeyProperty) == 0)
+        {
+
+        }
+        s_bl.Task.Update(CurrentTask);
+        s_bl.Task.Create(CurrentTask);
+        Console.WriteLine("jkjkjkjkjlllll");
     }
 
 

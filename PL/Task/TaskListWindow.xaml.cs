@@ -1,8 +1,11 @@
 ﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PL.Task;
 
@@ -16,7 +19,14 @@ public partial class TaskListWindow : Window
     public TaskListWindow()
     {
         InitializeComponent();
-        TaskList = TaskToList(s_bl?.Task.ReadAll()!);
+        try
+        {
+            TaskList = TaskToList(s_bl?.Task.ReadAll()!);
+        }
+        catch
+        {
+            Console.WriteLine("jjjjjjjjjjj");
+        }
     }
     public IEnumerable<BO.TaskInList> TaskList
     {
@@ -26,7 +36,7 @@ public partial class TaskListWindow : Window
 
     public static readonly DependencyProperty TaskListProperty =
         DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
-    
+
     private IEnumerable<BO.TaskInList> TaskToList(IEnumerable<BO.Task> tasks)
     {
         return (from BO.Task task in tasks
@@ -36,5 +46,15 @@ public partial class TaskListWindow : Window
     private void cbTaskSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         TaskList = TaskToList(s_bl?.Task.ReadAll(Status));
+    }
+
+    private void btnAddTask_Click(object sender, RoutedEventArgs e)
+    {
+        new TaskWindow().ShowDialog();
+    }
+
+    private void btnUpDateTask_DoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        //new TaskWindow(ListView.SelectedItem as YourItemType).ShowDialog();
     }
 }
