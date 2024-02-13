@@ -16,27 +16,12 @@ public partial class EngineerListWindow : Window
 {
     public BO.EngineerLevelEnum EngineerLevelEnum { get; set; } = BO.EngineerLevelEnum.None;
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
-
     public EngineerListWindow()
     {
         InitializeComponent();
         this.DataContext = this;
-        //var temp = EngineerToList(s_bl?.Engineer.ReadAll());
-        //EngineerList = temp == null ? new() : new(temp);
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
-
-    /*    public IEnumerable<BO.EngineerInList> EngineerList
-        {
-            get { return (IEnumerable<BO.EngineerInList>)GetValue(EngineerListProperty); }
-            set { SetValue(EngineerListProperty, value); }
-        }*/
-    //public IEnumerable<BO.EngineerInList> EngineerList
-    //{
-    //    get { return (ObservableCollection<BO.EngineerInList>)GetValue(EngineerListProperty); }
-    //    set { SetValue(EngineerListProperty, value); }
-    //}
     public IEnumerable<BO.EngineerInList> EngineerList
     {
         get { return (IEnumerable<BO.EngineerInList>)GetValue(EngineerListProperty); }
@@ -64,8 +49,10 @@ public partial class EngineerListWindow : Window
     {
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll(EngineerLevelEnum));
     }
+    private void btnAddEngineer_Click(object sender, RoutedEventArgs e)
+    {
+        new EngineerWindow().Show();
+    }
 
-    //EngineerList = EngineerToList((Status == BO.Status.None) ?
-    //s_bl?.Engineer.ReadAll()! : s_bl?.Task.ReadAll(Status)!);
 }
 

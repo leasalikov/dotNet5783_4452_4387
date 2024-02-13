@@ -32,7 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Click="btnAddEngineer_Click" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
         <!--<Button Content="Button" HorizontalAlignment="Left" Height="0" Margin="933,531,0,0" Grid.Row="1" VerticalAlignment="Top" Width="0"/>-->
     </Grid>
 </Window>
