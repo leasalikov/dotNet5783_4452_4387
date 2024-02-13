@@ -14,12 +14,12 @@ internal class TaskImplementation : ITask
 /// </summary>
 /// <param name="boTask"></param>
 /// <exception cref="BO.BlAlreadyExistsException"></exception>
-    public void Create(BO.Task boTask)
+    public int Create(BO.Task boTask)
     {
         try
         {
             DO.Task doTask = BOToDO(boTask);
-            _dal.Task.Create(doTask);
+            return _dal.Task.Create(doTask);
         }
         catch (BO.BlNullPropertyException ex)
         {

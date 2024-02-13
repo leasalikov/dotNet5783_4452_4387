@@ -15,6 +15,17 @@ namespace PL.Task;
 public partial class TaskWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+    //Defines a property named CurrentTask, which is bound to the TaskProperty dependency property.
+    public BO.Task CurrentTask
+    {
+        get { return (BO.Task)GetValue(TaskProperty); }
+        set { SetValue(TaskProperty, value); }
+    }
+    //Defines a dependency property named CurrentTask for data binding in TaskWindow, specifying its type as BO.Task.
+    public static readonly DependencyProperty TaskProperty =
+        DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+
     //The constructor initializes window components and either creates a new Task object with default values or attempts to retrieve task details from the business logic layer based on the provided ID.
     public TaskWindow(int Id = 0)
     {
@@ -44,18 +55,9 @@ public partial class TaskWindow : Window
         }
         else
         {
-            CurrentTask = Id == 0 ? s_bl?.Task.Read(Id) : null;
+            CurrentTask = s_bl?.Task.Read(Id);
         }
     }
-    //Defines a property named CurrentTask, which is bound to the CurrentTaskProperty dependency property.
-    public BO.Task CurrentTask
-    {
-        get { return (BO.Task)GetValue(CurrentTaskProperty); }
-        set { SetValue(CurrentTaskProperty, value); }
-    }
-    //Defines a dependency property named CurrentTask for data binding in TaskWindow, specifying its type as BO.Task.
-    public static readonly DependencyProperty CurrentTaskProperty =
-        DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
     // The function adds or updates a task in the business logic layer. Any error is caught and ignored
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
@@ -64,11 +66,17 @@ public partial class TaskWindow : Window
         try
         {
             if (content == "Add")
-                s_bl.Task.Create(CurrentTask);
+            {
+                int id = s_bl.Task.Create(CurrentTask);
+                MessageBox.Show($"Task with id={id} was successfully added!");
+            }
             else
+            {
                 s_bl.Task.Update(CurrentTask);
-
+                MessageBox.Show($"Task with id={CurrentTask.ID} was successfully added!");
+            }
         }
         catch (Exception ex) { }
+        this.Close();
     }
 }

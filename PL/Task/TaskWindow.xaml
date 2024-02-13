@@ -8,7 +8,6 @@
         Title="TaskWindow" Height="450" Width="800"
         DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Mode=Self}}">
 
-    <!--DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

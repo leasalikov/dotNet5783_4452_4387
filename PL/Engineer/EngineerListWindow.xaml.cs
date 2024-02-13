@@ -19,7 +19,6 @@ public partial class EngineerListWindow : Window
     public EngineerListWindow()
     {
         InitializeComponent();
-        //DataContext = this;
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
     public IEnumerable<BO.EngineerInList> EngineerList

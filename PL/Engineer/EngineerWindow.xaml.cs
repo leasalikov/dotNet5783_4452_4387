@@ -65,7 +65,7 @@ public partial class EngineerWindow : Window
             else
             {
                 s_bl.Engineer.Update(CurrentEngineer);
-                MessageBox.Show($"Engineer with id={CurrentEngineer.ID} was successfully added!");
+                MessageBox.Show($"Engineer with id={CurrentEngineer.ID} was successfully updated!");
             }
             this.Close();
 

@@ -54,11 +54,13 @@ public partial class TaskListWindow : Window
     private void btnAddTask_Click(object sender, RoutedEventArgs e)
     {
         new TaskWindow().ShowDialog();
+        TaskList = TaskToList(s_bl?.Task.ReadAll()!);
     }
     // The function updates the task according to data user choise
     private void UpdateTask(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         BO.TaskInList? TaskInList = (sender as ListView)?.SelectedItem as BO.TaskInList;
         new TaskWindow(TaskInList.ID).ShowDialog();
+        TaskList = TaskToList(s_bl?.Task.ReadAll()!);
     }
 }
