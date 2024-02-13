@@ -24,14 +24,17 @@ namespace PL.Engineer;
 public partial class EngineerWindow : Window
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    //Defines a property named CurrentEngineer, which is bound to the CurrentEngineerProperty dependency property.
     public BO.Engineer CurrentEngineer
     {
         get { return (BO.Engineer)GetValue(EngineerProperty); }
         set { SetValue(EngineerProperty, value); }
     }
+    //Defines a dependency property named CurrentEngineer for data binding in EngineerWindow, specifying its type as BO.Engineer.
 
     public static readonly DependencyProperty EngineerProperty =
         DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
+    //The constructor initializes window components and either creates a new Engineer object with default values or attempts to retrieve Engineer details from the business logic layer based on the provided ID.
 
     public EngineerWindow(int Id = 0)
     {
@@ -51,7 +54,7 @@ public partial class EngineerWindow : Window
             CurrentEngineer = s_bl?.Engineer.Read(Id);
         }
     }
-
+    // The function adds or updates a Engineer in the business logic layer. Any error is caught and ignored
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         string content = (sender as Button)!.Content.ToString()!;

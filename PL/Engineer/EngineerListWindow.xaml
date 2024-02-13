@@ -32,6 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <!-- Clicking the button will show the task details to fill by the user -->
         <Button Click="btnAddEngineer_Click" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
     </Grid>
 </Window>
