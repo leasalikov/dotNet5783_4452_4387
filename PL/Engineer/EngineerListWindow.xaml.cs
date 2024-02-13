@@ -49,7 +49,7 @@ public partial class EngineerListWindow : Window
     private void UpdateEngineer(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         BO.EngineerInList? EngineerInList = (sender as ListView)?.SelectedItem as BO.EngineerInList;
-        new EngineerWindow().Show(EngineerInList.ID);
+        new EngineerWindow(EngineerInList.ID).ShowDialog();
     }
 }
 

@@ -1,13 +1,18 @@
 ﻿
 namespace BlImplementation;
+
+using System.Buffers.Text;
 using BlApi;
 using BO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-
-     public void Create(BO.Engineer boEngineer)
+    /// <summary>
+    /// The function attempts to add a new engineer to the database, throwing a specific exception if the engineer already exists
+    /// </summary>
+    public void Create(BO.Engineer boEngineer)
     {
         try
         {
@@ -22,7 +27,9 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlAlreadyExistsException($"Engineer number {boEngineer.ID} exists");
         }
     }
-
+    /// <summary>
+    /// The function attempts to Delete a engineer to the database, throwing a specific exception if the engineer dos't exists
+    /// </summary>
     public void Delete(int id)
     {
         try
@@ -42,6 +49,9 @@ internal class EngineerImplementation : IEngineer
             throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
     }
+    /// <summary>
+    /// The function fetches an engineer by ID from the database, converting it to a business object, or throws an exception if not found.
+    /// </summary>
 
     public BO.Engineer? Read(int id)
     {
@@ -54,7 +64,9 @@ internal class EngineerImplementation : IEngineer
             throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
     }
-
+    /// <summary>
+    /// The function retrieves all engineers from the database, filtering by level if specified, and returns them as business objects
+    /// </summary>
     public IEnumerable<BO.Engineer> ReadAll(BO.EngineerLevelEnum level = EngineerLevelEnum.None)
     {
         if(level == EngineerLevelEnum.None)
@@ -66,7 +78,9 @@ internal class EngineerImplementation : IEngineer
                where (BO.EngineerLevelEnum)doEngineer.EngineerLevel == level
                select DOToBO(doEngineer);
     }
-
+    /// <summary>
+    ///The function modifies an engineer in the database based on the provided business object, or throws an exception if the engineer doesn't exist
+    /// </summary>
     public void Update(BO.Engineer boEngineer)
     {
         try
@@ -82,7 +96,9 @@ internal class EngineerImplementation : IEngineer
             throw new BlDoesNotExistException($"Engineer id {boEngineer.ID} dos't exist");
         }
     }
-
+    /// <summary>
+    /// The DOToBO function maps a data object representing an engineer to a corresponding business object, including related task information if available
+    /// </summary>
     private BO.Engineer DOToBO(DO.Engineer doEngineer)
     {
         return new BO.Engineer
@@ -97,7 +113,9 @@ internal class EngineerImplementation : IEngineer
                            select new BO.TaskIdNickname() { ID = doTask.ID, Nickname = doTask.Nickname! }).FirstOrDefault()
         };
     }
-
+    /// <summary>
+    /// The BOToDO function converts a business object for an engineer to a data object, validating details and throwing an exception for any incorrect information
+    /// </summary>
     private DO.Engineer BOToDO(BO.Engineer boEngineer)
     {
         if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour > 0 || string.IsNullOrEmpty(boEngineer.Email))

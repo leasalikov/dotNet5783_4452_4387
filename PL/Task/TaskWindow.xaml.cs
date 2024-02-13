@@ -27,9 +27,10 @@ public partial class TaskWindow : Window
     public static readonly DependencyProperty CurrentTaskProperty =
         DependencyProperty.Register("CurrentTask", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
-    private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
+    private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         string content = (sender as Button)!.Content.ToString()!;
+
         try
         {
             if (content == "Add")
