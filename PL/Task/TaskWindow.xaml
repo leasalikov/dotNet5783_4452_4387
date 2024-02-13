@@ -12,7 +12,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Nickname:" Grid.Row="0" />
-        <TextBox Text="{Binding Nickname}" Grid.Row="0" />
+        <TextBox Text="{Binding Nickname, Mode=TwoWay}" Grid.Row="0" />
+        <!--{Binding CourseName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}-->
 
         <Label Content="Description:" />
         <TextBox Text="{Binding Description}" />

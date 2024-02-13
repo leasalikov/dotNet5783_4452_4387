@@ -24,6 +24,7 @@
             <ComboBox Grid.Column="1" SelectedValue="{Binding Status, Mode=TwoWay}"
                     ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" SelectionChanged="cbTaskSelector_SelectionChanged"/>
         </Grid>
+        <!--<ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="btnUpDateTask_DoubleClick">-->
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}">
             <ListView.View>
                 <GridView>
@@ -34,6 +35,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Click="btnAddTask_Click" Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
     </Grid>
 </Window>
