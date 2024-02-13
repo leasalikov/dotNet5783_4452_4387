@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,8 +52,9 @@ public partial class TaskListWindow : Window
         new TaskWindow().ShowDialog();
     }
 
-    private void btnUpDateTask_DoubleClick(object sender, MouseButtonEventArgs e)
+    private void UpdateTask(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        //new TaskWindow(ListView.SelectedItem as YourItemType).ShowDialog();
+        BO.TaskInList? TaskInList = (sender as ListView)?.SelectedItem as BO.TaskInList;
+        new TaskWindow().Show(TaskInList.ID);
     }
 }

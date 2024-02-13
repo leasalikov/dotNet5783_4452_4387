@@ -25,7 +25,7 @@
                     ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" SelectionChanged="cbTaskSelector_SelectionChanged"/>
         </Grid>
         <!--<ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="btnUpDateTask_DoubleClick">-->
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" MouseDoubleClick="UpdateTask">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>

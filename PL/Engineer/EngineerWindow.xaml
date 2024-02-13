@@ -39,8 +39,8 @@
                  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
         <Label Content="TaskIdNickname:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"/>
-        <TextBox Text="{Binding TaskIdNickname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}
-            " Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
+        <TextBox Text="{Binding TaskIdNickname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                 Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
         <!--<Button Grid.Row="5" Grid.Column="1" Content="{Binding Id, Mode=OneTime, 
             Converter={StaticResource ConverIdToContentKey}}" 

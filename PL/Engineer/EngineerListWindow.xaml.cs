@@ -34,7 +34,7 @@ public partial class EngineerListWindow : Window
     private IEnumerable<BO.EngineerInList> EngineerToList(IEnumerable<BO.Engineer> engineers)
     {
         return (from BO.Engineer engineer in engineers
-                select new EngineerInList { Name = engineer.Name, Email = engineer.Email }).ToList();
+                select new EngineerInList { ID = engineer.ID, Name = engineer.Name, Email = engineer.Email }).ToList();
     }
 
     private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,7 +49,7 @@ public partial class EngineerListWindow : Window
     private void UpdateEngineer(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         BO.EngineerInList? EngineerInList = (sender as ListView)?.SelectedItem as BO.EngineerInList;
-        new EngineerWindow().ShowDialog(EngineerInList.id);
+        new EngineerWindow().Show(EngineerInList.ID);
     }
 }
 
