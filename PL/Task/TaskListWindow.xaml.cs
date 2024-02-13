@@ -55,6 +55,6 @@ public partial class TaskListWindow : Window
     private void UpdateTask(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         BO.TaskInList? TaskInList = (sender as ListView)?.SelectedItem as BO.TaskInList;
-        new TaskWindow().Show(TaskInList.ID);
+        new TaskWindow(TaskInList.ID).ShowDialog();
     }
 }
