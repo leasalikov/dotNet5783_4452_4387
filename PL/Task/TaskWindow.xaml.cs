@@ -58,6 +58,7 @@ public partial class TaskWindow : Window
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         string content = (sender as Button)!.Content.ToString()!;
+
         try
         {
             if (content == "Add")

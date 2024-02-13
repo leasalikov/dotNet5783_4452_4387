@@ -1,11 +1,9 @@
 ﻿
 using DO;
-
 namespace Dal;
 
 internal static class DataSource
 {
-
     internal static class Config
     {
         internal const int startTaskId = 1;

@@ -1,9 +1,12 @@
 ﻿namespace Dal;
 
 using DO;
+using System.Collections.Generic;
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 static class XMLTools
 {
@@ -30,6 +33,14 @@ static class XMLTools
     #endregion
 
     #region XmlConfig
+    /// <summary>
+    /// The GetAndIncreaseNextId function loads the next available ID from an XML file,
+    /// increments it, saves the updated value back to the XML file, and returns the original ID before the increment.
+    /// </summary>
+    /// <param name="data_config_xml"></param>
+    /// <param name="elemName"></param>
+    /// <returns></returns>
+    /// <exception cref="FormatException"></exception>
     public static int GetAndIncreaseNextId(string data_config_xml, string elemName)
     {
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
@@ -41,8 +52,15 @@ static class XMLTools
     }
 
     #endregion
-
+    /// <summary>
+    /// The SaveListToXMLElement function saves the provided XML element to a file in the XML directory,
+    /// throwing an exception if it fails.
+    /// </summary>
+    /// <param name="rootElem"></param>
+    /// <param name="entity"></param>
+    /// <exception cref="DalXMLFileLoadCreateException"></exception>
     #region SaveLoadWithXElement   
+
     public static void SaveListToXMLElement(XElement rootElem, string entity)
     {
         string filePath = $"{s_xml_dir + entity}.xml";
@@ -73,9 +91,15 @@ static class XMLTools
         }
     }
     #endregion
-
-    #region SaveLoadWithXMLSerializer
-    //public static void SaveListToXMLSerializer<T>(List<T?> list, string entity) where T : struct
+    /// <summary>
+    ///The SaveListToXMLSerializer function saves the provided list of objects to an XML file using XML serialization.
+    ///If the operation fails, it throws a DalXMLFileLoadCreateException.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="list"></param>
+    /// <param name="entity"></param>
+    /// <exception cref="DalXMLFileLoadCreateException"></exception>
+#region SaveLoadWithXMLSerializer
     public static void SaveListToXMLSerializer<T>(List<T> list, string entity) where T : class
     {
         string filePath = $"{s_xml_dir + entity}.xml";
@@ -92,7 +116,6 @@ static class XMLTools
         }
     }
 
-    //public static List<T?> LoadListFromXMLSerializer<T>(string entity) where T : struct
     public static List<T> LoadListFromXMLSerializer<T>(string entity) where T : class
     {
         string filePath = $"{s_xml_dir + entity}.xml";
@@ -102,8 +125,6 @@ static class XMLTools
             using FileStream file = new(filePath, FileMode.Open);
             XmlSerializer x = new(typeof(List<T>));
             return x.Deserialize(file) as List<T> ?? new();
-            //XmlSerializer x = new(typeof(List<T?>));
-            //return x.Deserialize(file) as List<T?> ?? new();
 
         }
         catch (Exception ex)
@@ -112,5 +133,4 @@ static class XMLTools
         }
     }
     #endregion
-
 }
