@@ -47,7 +47,7 @@ public partial class EngineerWindow : Window
     public static readonly DependencyProperty CurrentEngineerProperty =
         DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-    private void btnAddUpdate_Click(object sender, SelectionChangedEventArgs e)
+    private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         string content = (sender as Button)!.Content.ToString()!;
         try
