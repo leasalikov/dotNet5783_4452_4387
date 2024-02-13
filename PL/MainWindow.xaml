@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!-- Handles the click event for managing engineers -->
         <Button Click="btnEngineers_Click" HorizontalAlignment="Left" Height="50" Width="100" Content="Handle Engineers"/>
+        <!-- Handles the click event for managing tasks -->
         <Button Click="btnTasks_Click" HorizontalAlignment="Center" Height="50" Width="100" Content="Handle Task"/>
+        <!-- Handles the click event for initializing the database -->
         <Button Click="btnInitDB_Click" HorizontalAlignment="Right" Height="50" Width="100" Content="Init DB"/>
     </Grid>
-  
 </Window>
 
 
