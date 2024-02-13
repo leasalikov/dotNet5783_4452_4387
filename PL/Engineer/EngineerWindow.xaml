@@ -7,9 +7,44 @@
         mc:Ignorable="d"
         Title="EngineerWindow" Height="450" Width="800"
 	    DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid>
+    <!--<Grid>
 		<TextBox Grid.Row="2" Grid.Column="1"
             Text="{Binding EngineerName, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  
 				 HorizontalAlignment="Left" Height="NaN" Margin="3"  VerticalAlignment="Center" Width="120"/>
+    </Grid>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Name:" Grid.Row="0" />
+        <TextBox Text="{Binding Name}" />
+
+        <Label Content="Email:" Grid.Row="1"/>
+        <TextBox Text="{Binding Email,Mode=TwoWay, NotifyOnValidationError=true, 
+            ValidatesOnExceptions=true}" />
+
+        <Label Content="Engineer level:" Grid.Row="2"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" 
+                  SelectedValue="{Binding EngineerLevel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+
+        <Label Content="Price of hour:" Grid.Row="3"/>
+        <TextBox Text="{Binding PriceOfHour, Mode=TwoWay, NotifyOnValidationError=true, 
+            ValidatesOnExceptions=true}" />
+
+        <Label Content="TaskIdNickname:" Grid.Row="4"/>
+        <TextBox Text="{Binding TaskIdNickname, Mode=TwoWay, NotifyOnValidationError=true, 
+            ValidatesOnExceptions=true}" />
+        <Button Grid.Column="0"
+                Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+                HorizontalAlignment="Left" Margin="3,0,0,0"  VerticalAlignment="Top" Padding="5" 
+                Click="btnAddUpdate_Click"/>
     </Grid>
 </Window>

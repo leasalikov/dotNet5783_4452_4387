@@ -1,9 +1,9 @@
 ﻿
 using BO;
+using PL.Task;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,8 +14,9 @@ namespace PL.Engineer;
 /// </summary>
 public partial class EngineerListWindow : Window
 {
-    public BO.EngineerLevelEnum LevelEngineer { get; set; } = BO.EngineerLevelEnum.None;
+    public BO.EngineerLevelEnum EngineerLevelEnum { get; set; } = BO.EngineerLevelEnum.None;
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
 
     public EngineerListWindow()
     {
@@ -23,21 +24,27 @@ public partial class EngineerListWindow : Window
         this.DataContext = this;
         //var temp = EngineerToList(s_bl?.Engineer.ReadAll());
         //EngineerList = temp == null ? new() : new(temp);
-        EngineerList = (ObservableCollection<EngineerInList>)EngineerToList(s_bl?.Engineer.ReadAll()!);
+        EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
+
     /*    public IEnumerable<BO.EngineerInList> EngineerList
         {
             get { return (IEnumerable<BO.EngineerInList>)GetValue(EngineerListProperty); }
             set { SetValue(EngineerListProperty, value); }
         }*/
+    //public IEnumerable<BO.EngineerInList> EngineerList
+    //{
+    //    get { return (ObservableCollection<BO.EngineerInList>)GetValue(EngineerListProperty); }
+    //    set { SetValue(EngineerListProperty, value); }
+    //}
     public IEnumerable<BO.EngineerInList> EngineerList
     {
-        get { return (ObservableCollection<BO.EngineerInList>)GetValue(EngineerListProperty); }
+        get { return (IEnumerable<BO.EngineerInList>)GetValue(EngineerListProperty); }
         set { SetValue(EngineerListProperty, value); }
     }
 
     public static readonly DependencyProperty EngineerListProperty =
-            DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.EngineerInList>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
     //private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     //{
@@ -55,8 +62,9 @@ public partial class EngineerListWindow : Window
 
     private void cbEngineerSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        EngineerList = EngineerToList(s_bl?.Engineer.ReadAll(LevelEngineer));
+        EngineerList = EngineerToList(s_bl?.Engineer.ReadAll(EngineerLevelEnum));
     }
+
     //EngineerList = EngineerToList((Status == BO.Status.None) ?
     //s_bl?.Engineer.ReadAll()! : s_bl?.Task.ReadAll(Status)!);
 }
