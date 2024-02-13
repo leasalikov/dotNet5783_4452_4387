@@ -67,6 +67,7 @@ public partial class EngineerWindow : Window
                 s_bl.Engineer.Update(CurrentEngineer);
                 MessageBox.Show($"Engineer with id={CurrentEngineer.ID} was successfully added!");
             }
+            this.Close();
 
         }
         catch (Exception ex) { }
