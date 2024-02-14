@@ -53,7 +53,14 @@ public partial class EngineerWindow : Window
         }
         else
         {
-            CurrentEngineer = s_bl?.Engineer.Read(Id);
+            try
+            {
+                CurrentEngineer = s_bl?.Engineer.Read(Id)!;
+            }
+            catch (BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
     // The function adds or updates a Engineer in the business logic layer. Any error is caught and ignored
@@ -75,7 +82,13 @@ public partial class EngineerWindow : Window
             this.Close();
 
         }
-        catch (Exception ex) { }
-
+        catch (BlAlreadyExistsException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        catch (BlDoesNotExistException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 }
