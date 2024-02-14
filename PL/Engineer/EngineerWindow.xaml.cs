@@ -75,7 +75,13 @@ public partial class EngineerWindow : Window
             this.Close();
 
         }
-        catch (Exception ex) { }
-
+        catch (BlAlreadyExistsException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        catch (BlDoesNotExistException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
     }
 }
