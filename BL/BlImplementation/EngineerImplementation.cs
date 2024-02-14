@@ -117,7 +117,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     private DO.Engineer BOToDO(BO.Engineer boEngineer)
     {
-        if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour < 35 || string.IsNullOrEmpty(boEngineer.Email))
+        if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour < 30 || string.IsNullOrEmpty(boEngineer.Email))
         {
             throw new BO.BlIncorrectDetails("The Detals are incorrect");
         }

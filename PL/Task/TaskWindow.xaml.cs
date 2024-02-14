@@ -79,7 +79,7 @@ public partial class TaskWindow : Window
             else
             {
                 s_bl.Task.Update(CurrentTask);
-                MessageBox.Show($"Task with id={CurrentTask.ID} was successfully added!");
+                MessageBox.Show($"Task with id={CurrentTask.ID} was successfully updated!");
             }
         }
         catch (BlAlreadyExistsException ex)

@@ -57,4 +57,3 @@ public partial class EngineerListWindow : Window
         EngineerList = EngineerToList(s_bl?.Engineer.ReadAll()!);
     }
 }
-
