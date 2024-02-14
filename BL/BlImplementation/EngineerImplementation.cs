@@ -1,9 +1,7 @@
 ﻿
 namespace BlImplementation;
-
 using System.Buffers.Text;
 using BlApi;
-using BO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class EngineerImplementation : IEngineer
@@ -19,12 +17,13 @@ internal class EngineerImplementation : IEngineer
             DO.Engineer doEngineer = BOToDO(boEngineer);
             return _dal.Engineer.Create(doEngineer);
         }
-        catch (BlIncorrectDetails ex)
+        catch (BO.BlIncorrectDetails ex)
         {
-            throw ex;
-        }
-        catch {
             throw new BO.BlAlreadyExistsException($"Engineer number {boEngineer.ID} exists");
+        }
+        catch (Exception ex)
+        {
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
     }
     /// <summary>
@@ -40,13 +39,13 @@ internal class EngineerImplementation : IEngineer
             }
             _dal.Engineer.Delete(id);
         }
-        catch(EngineerHaveTask ex)
+        catch(BO.EngineerHaveTask ex)
         {
-            throw ex;
+            throw new BO.BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
-        catch
+        catch (Exception ex)
         {
-            throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
     }
     /// <summary>
@@ -61,15 +60,15 @@ internal class EngineerImplementation : IEngineer
             return DOToBO(myEngineer);
         }
         catch {
-            throw new BlDoesNotExistException($"Engineer id {id} dos't exist");
+            throw new BO.BlDoesNotExistException($"Engineer id {id} dos't exist");
         }
     }
     /// <summary>
     /// The function retrieves all engineers from the database, filtering by level if specified, and returns them as business objects
     /// </summary>
-    public IEnumerable<BO.Engineer> ReadAll(BO.EngineerLevelEnum level = EngineerLevelEnum.None)
+    public IEnumerable<BO.Engineer> ReadAll(BO.EngineerLevelEnum level = BO.EngineerLevelEnum.None)
     {
-        if(level == EngineerLevelEnum.None)
+        if(level == BO.EngineerLevelEnum.None)
         {
             return from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                    select DOToBO(doEngineer);
@@ -87,13 +86,13 @@ internal class EngineerImplementation : IEngineer
         {
             _dal.Engineer.Update(BOToDO(boEngineer));
         }
-        catch (BlIncorrectDetails ex)
+        catch (BO.BlIncorrectDetails ex)
         {
-            throw ex;
+            throw new BO.BlDoesNotExistException($"Engineer id {boEngineer.ID} dos't exist");
         }
-        catch
+        catch (Exception ex)
         {
-            throw new BlDoesNotExistException($"Engineer id {boEngineer.ID} dos't exist");
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
     }
     /// <summary>
@@ -120,7 +119,7 @@ internal class EngineerImplementation : IEngineer
     {
         if (boEngineer.ID <= 0 || string.IsNullOrEmpty(boEngineer.Name) || boEngineer.PriceOfHour < 35 || string.IsNullOrEmpty(boEngineer.Email))
         {
-            throw new BlIncorrectDetails("The Detals are incorrect");
+            throw new BO.BlIncorrectDetails("The Detals are incorrect");
         }
         return new DO.Engineer { ID = boEngineer.ID, Name = boEngineer.Name, Email = boEngineer.Email, EngineerLevel = (DO.EngineerLevelEnum)boEngineer.EngineerLevel, PriceOfHour = boEngineer.PriceOfHour };
     }

@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
+            <Label Content="Filter by engineer level:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,0" Grid.Column="0"/>
 
             <ComboBox Grid.Column="1" SelectedItem="{Binding EngineerLevelEnum, Mode=TwoWay}" 
 					  ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" SelectionChanged="cbEngineerSelector_SelectionChanged"/>

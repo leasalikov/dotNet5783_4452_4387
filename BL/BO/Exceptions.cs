@@ -8,6 +8,11 @@ public class BlDoesNotExistException : Exception
                 : base(message, innerException) { }
 }
 
+public class BlDataBaceOperationFaild : Exception
+{
+    public BlDataBaceOperationFaild(string message) : base(message) { }
+    public BlDataBaceOperationFaild(string message, Exception innerException) : base(message, innerException) { }
+}
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string? message) : base(message) { }

@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="90,-5,0,0" VerticalAlignment="Top" Grid.Column="0"/>
+            <Label Content="Filter by status:" HorizontalAlignment="Left" Margin="90,-5,0,0" VerticalAlignment="Top" Grid.Column="0"/>
             <ComboBox Grid.Column="1" SelectedValue="{Binding Status, Mode=TwoWay}"
                     ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" SelectionChanged="cbTaskSelector_SelectionChanged"/>
         </Grid>

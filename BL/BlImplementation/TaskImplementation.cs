@@ -23,11 +23,11 @@ internal class TaskImplementation : ITask
         }
         catch (BO.BlNullPropertyException ex)
         {
-            throw ex;
-        }
-        catch
-        {
             throw new BO.BlAlreadyExistsException($"Task number {boTask.ID} exists");
+        }
+        catch (Exception ex)
+        {
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
     }
     /// <summary>
@@ -45,12 +45,13 @@ internal class TaskImplementation : ITask
         }
         catch (BO.BlDependesOnIt ex)
         {
-            throw ex;
+            throw new BO.BlDoesNotExistException($"Task number {id} dos't exist");
         }
-        catch
+        catch (Exception ex)
         {
-            throw new BlDoesNotExistException($"Task number {id} dos't exist");
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
+
     }
     /// <summary>
     /// The function fetches an Task by ID from the database, converting it to a business object, or throws an exception if not found.
@@ -64,15 +65,15 @@ internal class TaskImplementation : ITask
         }
         catch
         {
-            throw new BlDoesNotExistException($"Task number {id} dos't exist");
+            throw new BO.BlDoesNotExistException($"Task number {id} dos't exist");
         }
     }
     /// <summary>
     /// The function retrieves all Tasks from the database, filtering by level if specified, and returns them as business objects
     /// </summary>
-    public IEnumerable<BO.Task> ReadAll(BO.Status status = Status.All)
+    public IEnumerable<BO.Task> ReadAll(BO.Status status = BO.Status.All)
     {
-        if (status == Status.All)
+        if (status == BO.Status.All)
         {
             return _dal.Task.ReadAll()
                .Select(doTask => DOToBO(doTask!));
@@ -93,11 +94,11 @@ internal class TaskImplementation : ITask
         }
         catch (BO.BlNullPropertyException ex)
         {
-            throw ex;
+            throw new BO.BlDoesNotExistException($"Task number {boTask.ID} dos't exist");
         }
-        catch
+        catch (Exception ex)
         {
-            throw new BlDoesNotExistException($"Task number {boTask.ID} dos't exist");
+            throw new BO.BlDataBaceOperationFaild($"DataBace operation faild", ex);
         }
     }
     /// <summary>
