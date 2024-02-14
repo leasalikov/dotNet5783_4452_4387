@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <ID>255774250</ID>
-    <Name>Bob</Name>
-    <Email>System.String[] + @gmail.com</Email>
-    <EngineerLevel>AdvancedBeginner</EngineerLevel>
-    <PriceOfHour>60</PriceOfHour>
-  </Engineer>
-  <Engineer>
     <ID>240549157</ID>
     <Name>Charlie</Name>
     <Email>System.String[] + @gmail.com</Email>
@@ -1441,5 +1434,12 @@
     <Email>System.String[] + @gmail.com</Email>
     <EngineerLevel>Novice</EngineerLevel>
     <PriceOfHour>40</PriceOfHour>
+  </Engineer>
+  <Engineer>
+    <ID>255774250</ID>
+    <Name>Bob</Name>
+    <Email>System.String[] + @gmail.com</Email>
+    <EngineerLevel>AdvancedBeginner</EngineerLevel>
+    <PriceOfHour>65</PriceOfHour>
   </Engineer>
 </ArrayOfEngineer>
