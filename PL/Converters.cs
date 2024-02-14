@@ -19,3 +19,17 @@ class ConvertIdToContent : IValueConverter
     }
 }
 
+class ConvertIdToBool : IValueConverter
+{
+    //The Convert function converts a ID value to a bool. If the ID is 0, it returns 'true'; otherwise, it returns 'false'.
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (int)value == 0;
+    }
+    //The ConvertBack function is not implemented and throws a NotImplementedException when called.
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
