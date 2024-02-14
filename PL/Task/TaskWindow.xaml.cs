@@ -45,11 +45,10 @@ public partial class TaskWindow : Window
                 AcualStartNate = new(),
                 EstimatedEndDate = new(),
                 deadline = new(),
-
                 AcualEndNate = new(),
                 Product = "",
                 Remaeks = "",
-                EngineerIdName = null,
+                EngineerIdName = new BO.TasksEngineer { ID = 0, Name = ""},
                 Difficulty = 0
             };
         }

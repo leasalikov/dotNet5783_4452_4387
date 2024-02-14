@@ -47,6 +47,7 @@ public partial class EngineerWindow : Window
                 Name = "",
                 Email = "",
                 EngineerLevel = 0,
+                Task = new BO.TaskIdNickname { ID = 0, Nickname = "" }
             };
         }
         else

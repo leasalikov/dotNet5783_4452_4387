@@ -130,7 +130,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     private DO.Task BOToDO(BO.Task boTask)
     {
-        if (boTask.ID <= 0 || string.IsNullOrEmpty(boTask.Nickname))
+        if (string.IsNullOrEmpty(boTask.Nickname))
         {
             throw new BlIncorrectDetails("ID and Nickname must have valid values");
         }

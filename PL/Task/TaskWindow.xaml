@@ -31,10 +31,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--<Label Content="ID:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  />
-        <TextBox Text="{Binding ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>-->
+        <Label Content="ID:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  />
+        <TextBox Text="{Binding ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
 
         <Label Content="Nickname:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding Nickname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -51,11 +52,11 @@
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
                   Grid.Row="4" HorizontalAlignment="Center" Width="100"/>
 
-        <Label Content="Dependencies list :" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  />
+        <!--<Label Content="Dependencies list :" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  />
         <DatePicker SelectedDate="{Binding TaskList}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center"/>
 
         <Label Content="Related milestone:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding RelatedMilestone}" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center"/>
+        <DatePicker SelectedDate="{Binding RelatedMilestone}" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center"/>-->
 
         <Label Content="Estimated start date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left"  />
         <DatePicker SelectedDate="{Binding EstimatedStartDate}" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center"/>
@@ -80,12 +81,21 @@
         <TextBox Text="{Binding Remaeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                  Grid.Row="13" Grid.Column="1" Width="100" />
 
-        <Label Content="EngineerIdName:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding EngineerIdName}" Grid.Column="1" Grid.Row="14" HorizontalAlignment="Center"/>
+        <!--<Label Content="Engineer ID:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left"  />
+        <TextBox Text="{Binding EngineerIdName.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                 Grid.Row="14"  Grid.Column="1" Width="100"/>-->
+        
+        <Label Content="Engineer ID:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left"  />
+        <TextBox Text="{Binding EngineerIdName.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                 Grid.Row="14"  Grid.Column="1" Width="100"/>
 
-        <Label Content="Difficulty:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Engineer name:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left"  />
+        <TextBox Text="{Binding EngineerIdName.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                 Grid.Row="15"  Grid.Column="1" Width="100"/>
+
+        <Label Content="Difficulty:" Grid.Row="16" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
-                  Grid.Row="15" HorizontalAlignment="Center" Width="100"/>
+                  Grid.Row="16" HorizontalAlignment="Center" Width="100"/>
         <!-- Clicking the button will add or update a task -->
         <Button Grid.Column="1" Grid.Row="6"
         Content="{Binding ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 

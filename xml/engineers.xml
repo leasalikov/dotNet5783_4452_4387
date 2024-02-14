@@ -602,4 +602,11 @@
     <EngineerLevel>Competent</EngineerLevel>
     <PriceOfHour>45</PriceOfHour>
   </Engineer>
+  <Engineer>
+    <ID>326444387</ID>
+    <Name>thipi</Name>
+    <Email>t@T</Email>
+    <EngineerLevel>AdvancedBeginner</EngineerLevel>
+    <PriceOfHour>80</PriceOfHour>
+  </Engineer>
 </ArrayOfEngineer>
