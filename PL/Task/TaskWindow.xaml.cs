@@ -90,10 +90,6 @@ public partial class TaskWindow : Window
         {
             MessageBox.Show(ex.Message);
         }
-        catch
-        {
-            MessageBox.Show("exep");
-        }
 
         this.Close();
     }

@@ -48,8 +48,8 @@
 
         <Label Content="Production Date:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  />
         <DatePicker SelectedDate="{Binding Production}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"
-                    IsEnabled="{Binding ID, Converter={StaticResource ConverIdToBoolKey}}"/>
-
+                                        IsEnabled="False"/>
+        
         <Label Content="Task status:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
                   Grid.Row="4" HorizontalAlignment="Center" Width="100"/>
