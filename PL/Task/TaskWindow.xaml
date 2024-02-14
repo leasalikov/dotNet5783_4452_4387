@@ -48,55 +48,49 @@
 
         <Label Content="Production Date:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  />
         <DatePicker SelectedDate="{Binding Production}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"
-                                        IsEnabled="False"/>
+                                        IsEnabled="{Binding ID, Mode=OneWay, Converter={StaticResource ConverIdToBoolKey}}"/>
         
         <Label Content="Task status:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
                   Grid.Row="4" HorizontalAlignment="Center" Width="100"/>
 
-        <!--<Label Content="Dependencies list :" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding TaskList}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center"/>
+        <Label Content="Estimated start date:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  />
+        <DatePicker SelectedDate="{Binding EstimatedStartDate}" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center"/>
 
-        <Label Content="Related milestone:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding RelatedMilestone}" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center"/>-->
+        <Label Content="Acual start nate:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left"  />
+        <DatePicker SelectedDate="{Binding AcualStartNate}" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Center"/>
 
-        <Label Content="Estimated start date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding EstimatedStartDate}" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center"/>
+        <Label Content="Estimated end date:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left"  />
+        <DatePicker SelectedDate="{Binding EstimatedEndDate}" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Center"/>
 
-        <Label Content="Acual start nate:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding AcualStartNate}" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Center"/>
+        <Label Content="deadline:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left"  />
+        <DatePicker SelectedDate="{Binding deadline}" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"/>
 
-        <Label Content="Estimated end date:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding EstimatedEndDate}" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"/>
+        <Label Content="Acual end nate:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Left"  />
+        <DatePicker SelectedDate="{Binding AcualEndNate}" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Center"/>
 
-        <Label Content="deadline:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding deadline}" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Center"/>
-
-        <Label Content="Acual end nate:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding AcualEndNate}" Grid.Row="11" Grid.Column="2" HorizontalAlignment="Center"/>
-
-        <Label Content="Product:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Product:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                 Grid.Row="12" Grid.Column="1" Width="100" />
+                 Grid.Row="10" Grid.Column="1" Width="100" />
 
-        <Label Content="Remaeks:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Remaeks:" Grid.Row="11" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding Remaeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                 Grid.Row="13" Grid.Column="1" Width="100" />
+                 Grid.Row="11" Grid.Column="1" Width="100" />
 
-        <Label Content="Engineer ID:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Engineer ID:" Grid.Row="12" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding EngineerIdName.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                 Grid.Row="14"  Grid.Column="1" Width="100"/>
+                 Grid.Row="12"  Grid.Column="1" Width="100"/>
 
-        <Label Content="Engineer name:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Engineer name:" Grid.Row="13" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding EngineerIdName.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                 Grid.Row="15"  Grid.Column="1" Width="100"
+                 Grid.Row="13"  Grid.Column="1" Width="100"
                  IsEnabled="False"/>
 
-        <Label Content="Difficulty:" Grid.Row="16" Grid.Column="0" HorizontalAlignment="Left"  />
+        <Label Content="Difficulty:" Grid.Row="14" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
-                  Grid.Row="16" HorizontalAlignment="Center" Width="100"/>
+                  Grid.Row="14" HorizontalAlignment="Center" Width="100"/>
 
-        <Button Grid.Column="1" Grid.Row="17"
+        <Button Grid.Column="1" Grid.Row="15"
         Content="{Binding ID, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
         HorizontalAlignment="Center" Margin="3,0,0,0"  VerticalAlignment="Top" Padding="5" Width="80" Height="40"
         Click="btnAddUpdate_Click"/>
