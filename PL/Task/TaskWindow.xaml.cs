@@ -54,7 +54,14 @@ public partial class TaskWindow : Window
         }
         else
         {
-            CurrentTask = s_bl?.Task.Read(Id);
+            try
+            {
+                CurrentTask = s_bl?.Task.Read(Id)!;
+            }
+            catch (BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }           
         }
     }
     // The function adds or updates a task in the business logic layer. Any error is caught and ignored
