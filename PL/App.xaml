@@ -16,7 +16,17 @@
             <Setter Property="Background" Value="Purple" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Foreground" Value="White"  />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="Foreground" Value="Purple"  />
+        </Style>
+        <!--<Style TargetType="">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="Foreground" Value="Purple"  />
+        </Style>-->
+
 
     </Application.Resources>
 </Application>
