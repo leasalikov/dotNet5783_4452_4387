@@ -35,7 +35,8 @@
         </Grid.RowDefinitions>
 
         <Label Content="ID:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"  />
-        <TextBox Text="{Binding ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="100"/>
+        <TextBox Text="{Binding ID, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Width="100"
+                 IsEnabled="false"/>
 
         <Label Content="Nickname:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding Nickname, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -46,7 +47,8 @@
                  Grid.Row="2"  Grid.Column="1" Width="100"/>
 
         <Label Content="Production Date:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left"  />
-        <DatePicker SelectedDate="{Binding Production}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"/>
+        <DatePicker SelectedDate="{Binding Production}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"
+                    IsEnabled="False"/>
 
         <Label Content="Task status:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
@@ -91,7 +93,9 @@
 
         <Label Content="Engineer name:" Grid.Row="15" Grid.Column="0" HorizontalAlignment="Left"  />
         <TextBox Text="{Binding EngineerIdName.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                 Grid.Row="15"  Grid.Column="1" Width="100"/>
+                 Grid.Row="15"  Grid.Column="1" Width="100"
+                 IsEnabled="False"/>
+        <!--{Binding ID, Converter={StaticResource ConverIdToBoolKey}}-->
 
         <Label Content="Difficulty:" Grid.Row="16" Grid.Column="0" HorizontalAlignment="Left"  />
         <ComboBox ItemsSource="{Binding Source={StaticResource TasksCollectionKey}}" Grid.Column="1" 
