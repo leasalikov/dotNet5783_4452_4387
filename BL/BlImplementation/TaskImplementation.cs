@@ -161,14 +161,14 @@ internal class TaskImplementation : ITask
     /// <exception cref="NotImplementedException"></exception>
     private TasksEngineer findEngineer(int id)
     {
-        //try
-        //{
-            return new BO.TasksEngineer { ID = id, Name = _dal.Engineer.Read(id)!.Name };
-        //}
-        //catch (Exception ex)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        try
+        {
+            return new BO.TasksEngineer { ID = 0, Name = "" };
+    }
+        catch (Exception ex)
+        {
+            throw new BO.BlNullPropertyException("",ex);
+        }
     }
     /// <summary>
     /// The FindIdList function retrieves a list of IDs corresponding to previous tasks associated with a given TaskId from the database.

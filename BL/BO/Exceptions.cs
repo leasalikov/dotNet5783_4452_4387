@@ -13,9 +13,12 @@ public class BlDataBaceOperationFaild : Exception
     public BlDataBaceOperationFaild(string message) : base(message) { }
     public BlDataBaceOperationFaild(string message, Exception innerException) : base(message, innerException) { }
 }
+
+[Serializable]
 public class BlNullPropertyException : Exception
 {
     public BlNullPropertyException(string? message) : base(message) { }
+    public BlNullPropertyException(string? message, Exception innerException) : base(message) { }
 }
 public class BlAlreadyExistsException : Exception
 {
